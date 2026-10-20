@@ -206,7 +206,7 @@
         </div>
         <div class="container footer-bottom">
           <div class="pay" aria-label="Способы оплаты">
-            <span>Visa</span><span>Mastercard</span><span>PayPal</span><span>Apple Pay</span><span>Google Pay</span><span>Наличные</span>
+            <span>Visa</span><span>Mastercard</span><span>Apple Pay</span><span>Google Pay</span><span>Наличные</span>
           </div>
           <div class="legal">
             <a href="info.html#privacy">Политика конфиденциальности</a>
