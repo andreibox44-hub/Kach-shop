@@ -206,7 +206,7 @@
         </div>
         <div class="container footer-bottom">
           <div class="pay" aria-label="Способы оплаты">
-            <span>Visa</span><span>Mastercard</span><span>Apple Pay</span><span>Google Pay</span><span>Наличные</span>
+            <span>Visa</span><span>Mastercard</span><span>Apple Pay</span><span>Google Pay</span>
           </div>
           <div class="legal">
             <a href="info.html#privacy">Политика конфиденциальности</a>
@@ -317,7 +317,7 @@
           <div id="paypal-buttons"></div>
         </div>
         <p class="form-msg err" id="pay-err" hidden></p>
-        <p class="muted small">Если не получается оплатить, ничего страшного: заказ уже у нас, и менеджер свяжется с вами.</p>
+        <p class="muted small">Заказ сохранён. Если оплата не проходит, свяжитесь с нами, и мы поможем.</p>
       </div>`;
     const err = (m) => {
       const el = $("#pay-err");
@@ -601,14 +601,25 @@
           }
         });
       }
-      // Онлайн-оплата: показываем, только если она настроена и у всех товаров есть цена
-      if (auth && auth.enabled && allPriced) {
+      // Оплата только онлайн: проверяем, что она настроена и у всех товаров есть цена
+      const submitBtn = form.querySelector('[type="submit"]');
+      const payOff = (msg) => {
+        const el = $("#pay-unavailable");
+        el.textContent = msg;
+        el.hidden = false;
+        submitBtn.disabled = true;
+      };
+      if (!allPriced) {
+        payOff("У некоторых товаров в корзине нет цены, поэтому оплатить заказ онлайн пока нельзя. Свяжитесь с нами.");
+      } else if (!auth || !auth.enabled) {
+        payOff("Онлайн-оплата сейчас недоступна. Попробуйте позже.");
+      } else {
         auth
           .pay("config")
           .then((cfg) => {
-            if (cfg.stripe) $("#pay-card").hidden = false;
             if (cfg.paypal) $("#pay-paypal").hidden = false;
-            if ((cfg.stripe || cfg.paypal) && cfg.test) $("#pay-test").hidden = false;
+            if (cfg.test) $("#pay-test").hidden = false;
+            if (!cfg.stripe && !cfg.paypal) payOff("Онлайн-оплата сейчас недоступна. Попробуйте позже.");
           })
           .catch((err) => console.warn("payments:", err));
       }
@@ -630,7 +641,7 @@
           } catch (err) {
             console.error(err);
             submit.disabled = false;
-            submit.textContent = "Подтвердить заказ";
+            submit.textContent = "Перейти к оплате";
             toast("Не удалось отправить заказ. Попробуйте ещё раз или позвоните нам.");
             return;
           }
