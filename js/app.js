@@ -174,7 +174,6 @@
           <div class="footer-brand">
             ${logo}
             <p class="footer-note">Профессиональный уход за волосами на натуральных ингредиентах. Природа. Наука. Красота.</p>
-            <p class="footer-made">Сделано в Мексике</p>
           </div>
           <div>
             <h4>Каталог</h4>
@@ -300,7 +299,6 @@
           <div><span>Объём</span><strong>${esc(sizes)}</strong></div>
           ${p.ph ? `<div><span class="pc-ph">pH</span><strong>${esc(p.ph)}</strong></div>` : ""}
           <div class="pc-hair"><span>Для волос</span><strong>${esc(p.hair)}</strong></div>
-          <div class="pc-mx"><strong>Made in Mexico</strong></div>
         </div>
       </figure>`;
   }
@@ -478,7 +476,6 @@
               <div><dt>Для волос</dt><dd>${esc(p.hair)}</dd></div>
               ${p.ph ? `<div><dt>pH</dt><dd>${esc(p.ph)}</dd></div>` : ""}
               <div><dt>Формула</dt><dd>${esc(p.formula)}</dd></div>
-              <div><dt>Производство</dt><dd>Мексика</dd></div>
             </dl>
             <ul class="benefits">${p.benefits.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>
           </div>
