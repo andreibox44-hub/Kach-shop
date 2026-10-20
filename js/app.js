@@ -263,6 +263,7 @@
               <div><dt>Для волос</dt><dd>${esc(p.hair)}</dd></div>
               ${p.ph ? `<div><dt>pH</dt><dd>${esc(p.ph)}</dd></div>` : ""}
               <div><dt>Формула</dt><dd>${esc(p.formula)}</dd></div>
+              <div><dt>Производство</dt><dd>Мексика</dd></div>
             </dl>
             <ul class="benefits">${p.benefits.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>
           </div>
