@@ -9,8 +9,32 @@
     phone: "+7 (000) 000-00-00",
     phoneHref: "+70000000000",
     email: "info@kachhair.com",
-    hours: "Ежедневно 10:00–20:00"
+    hours: "Ежедневно 10:00–20:00",
+    address: "Адрес уточняется",
+    company: "ИП / ООО «Название» · ИНН 0000000000",
+    // Ссылки на соцсети. Пустая строка = значок не показывается.
+    social: {
+      instagram: "https://instagram.com/",
+      telegram: "https://t.me/",
+      whatsapp: "https://wa.me/70000000000",
+      vk: "https://vk.com/"
+    }
   };
+
+  const SOCIAL_ICONS = {
+    instagram: ["Instagram", '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>'],
+    telegram: ["Telegram", '<path d="M21 4 3 11l6 2 2 6 3-4 5 4z"/><path d="m9 13 8-6"/>'],
+    whatsapp: ["WhatsApp", '<path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/><path d="M9 9c0 3 3 6 6 6l1-1.5-2-1-1 1c-1-.4-2.1-1.5-2.5-2.5l1-1-1-2z"/>'],
+    vk: ["ВКонтакте", '<path d="M3 7h3c.5 3 2 5 3.5 5.5V7h3v3c1.5 0 3-1.5 3.5-3h3c-.5 2.5-2.5 4-3.5 4.5 1 .5 3 2 3.8 4.5h-3.3c-.6-1.6-2-3-3.5-3V16h-1C7 16 3.5 12.5 3 7z"/>']
+  };
+  const socialLinks = () =>
+    Object.entries(CONTACTS.social)
+      .filter(([, url]) => url)
+      .map(
+        ([k, url]) =>
+          `<a class="social" href="${url}" target="_blank" rel="noopener" aria-label="${SOCIAL_ICONS[k][0]}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${SOCIAL_ICONS[k][1]}</svg></a>`
+      )
+      .join("");
 
   // ---------- Утилиты ----------
   const $ = (sel, root = document) => root.querySelector(sel);
@@ -133,32 +157,70 @@
     const footer = $("#site-footer");
     if (footer) {
       footer.innerHTML = `
+        <div class="footer-top">
+          <div class="container footer-top-inner">
+            <div>
+              <strong>Следите за новинками KACH</strong>
+              <span>Советы по уходу, новые средства и акции в наших соцсетях.</span>
+            </div>
+            <div class="socials">${socialLinks()}</div>
+          </div>
+        </div>
         <div class="container footer-inner">
-          <div>
+          <div class="footer-brand">
             ${logo}
-            <p class="footer-note">Natura. Scienza. Bellezza.<br>Профессиональный уход за волосами на натуральных ингредиентах.</p>
+            <p class="footer-note">Профессиональный уход за волосами на натуральных ингредиентах. Природа. Наука. Красота.</p>
+            <p class="footer-made">Сделано в Мексике</p>
           </div>
           <div>
             <h4>Каталог</h4>
             ${Object.entries(CATS)
-              .filter(([k]) => k !== "all")
-              .map(([k, v]) => `<a href="catalog.html?cat=${k}">${v}</a>`)
+              .map(([k, v]) => `<a href="catalog.html${k === "all" ? "" : "?cat=" + k}">${k === "all" ? "Все товары" : v}</a>`)
               .join("")}
           </div>
           <div>
-            <h4>Связаться</h4>
-            <a href="tel:${CONTACTS.phoneHref}">${CONTACTS.phone}</a>
+            <h4>Покупателям</h4>
+            <a href="info.html#delivery">Доставка</a>
+            <a href="info.html#payment">Оплата</a>
+            <a href="info.html#returns">Обмен и возврат</a>
+            <a href="info.html#faq">Вопросы и ответы</a>
+            <a href="cart.html">Корзина</a>
+          </div>
+          <div>
+            <h4>Компания</h4>
+            <a href="about.html">О бренде</a>
+            <a href="info.html#pro">Салонам и мастерам</a>
+            <a href="about.html#contacts">Контакты</a>
+          </div>
+          <div>
+            <h4>Контакты</h4>
+            <a href="tel:${CONTACTS.phoneHref}" class="footer-phone">${CONTACTS.phone}</a>
             <a href="mailto:${CONTACTS.email}">${CONTACTS.email}</a>
             <span>${CONTACTS.hours}</span>
+            <span>${CONTACTS.address}</span>
           </div>
         </div>
-        <div class="container copyright">© ${new Date().getFullYear()} KACH Hair Organic Solutions</div>`;
+        <div class="container footer-bottom">
+          <div class="pay" aria-label="Способы оплаты">
+            <span>Visa</span><span>Mastercard</span><span>МИР</span><span>СБП</span><span>Наличные</span>
+          </div>
+          <div class="legal">
+            <a href="info.html#privacy">Политика конфиденциальности</a>
+            <a href="info.html#offer">Публичная оферта</a>
+          </div>
+        </div>
+        <div class="container copyright">
+          <span>© ${new Date().getFullYear()} KACH Hair Organic Solutions. Все права защищены.</span>
+          <span>${CONTACTS.company}</span>
+        </div>`;
     }
     document.querySelectorAll("[data-contact]").forEach((el) => {
       const k = el.dataset.contact;
       if (k === "phone") el.innerHTML = `<a href="tel:${CONTACTS.phoneHref}">${CONTACTS.phone}</a>`;
       if (k === "email") el.innerHTML = `<a href="mailto:${CONTACTS.email}">${CONTACTS.email}</a>`;
       if (k === "hours") el.textContent = CONTACTS.hours;
+      if (k === "address") el.textContent = CONTACTS.address;
+      if (k === "social") el.innerHTML = socialLinks();
     });
   }
 
@@ -411,7 +473,8 @@
       });
     },
 
-    about() {}
+    about() {},
+    info() {}
   };
 
   document.addEventListener("DOMContentLoaded", () => {
