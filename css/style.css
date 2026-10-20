@@ -1,4 +1,5 @@
 /* Фирменные цвета KACH — меняйте здесь */
+[hidden] { display: none !important; }
 :root {
   --bg: #f6f5f1;        /* светлый мрамор */
   --surface: #ffffff;
@@ -379,8 +380,8 @@ select, input, textarea { font: inherit; color: var(--text); background: var(--s
 .order li { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; }
 .order footer { border-top: 1px solid var(--line); padding-top: 10px; }
 .status { font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: #fff3d6; color: #7a5a0c; }
-.status-confirmed, .status-paid, .status-shipped { background: #e3eefc; color: #234e8a; }
-.status-done { background: var(--green-soft); color: var(--green-dark); }
+.status-confirmed, .status-shipped { background: #e3eefc; color: #234e8a; }
+.status-done, .status-paid { background: var(--green-soft); color: var(--green-dark); }
 .status-cancelled { background: #f3e1df; color: #8e2f24; }
 .addr-list { display: grid; gap: 10px; margin-bottom: 8px; }
 .addr { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
@@ -394,3 +395,9 @@ select, input, textarea { font: inherit; color: var(--text); background: var(--s
   .cab-nav a, .cab-nav .logout { white-space: nowrap; border-top: 0; margin: 0; }
   .cab-body { padding: 20px; }
 }
+
+/* Онлайн-оплата */
+.pay-test { font-size: 13px; background: #fff3d6; color: #7a5a0c; padding: 8px 12px; border-radius: 10px; margin: 0 0 10px; }
+.pay-screen { max-width: 460px; margin: 0 auto; }
+.pay-actions { display: grid; gap: 12px; margin: 22px 0 12px; }
+.pay-actions #paypal-buttons:empty { display: none; }

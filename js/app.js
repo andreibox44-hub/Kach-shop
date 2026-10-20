@@ -6,12 +6,12 @@
 
   // Контакты магазина — замените на свои.
   const CONTACTS = {
-    phone: "+7 (000) 000-00-00",
-    phoneHref: "+70000000000",
+    phone: "+40 (000) 000 000",
+    phoneHref: "+40000000000",
     email: "info@kachhair.com",
     hours: "Ежедневно 10:00–20:00",
     address: "Адрес уточняется",
-    company: "ИП / ООО «Название» · ИНН 0000000000",
+    company: "S.R.L. «Название» · CUI RO00000000",
     // Ссылки на соцсети. Пустая строка = значок не показывается.
     social: {
       instagram: "https://instagram.com/",
@@ -38,7 +38,7 @@
 
   // ---------- Утилиты ----------
   const $ = (sel, root = document) => root.querySelector(sel);
-  const money = (n) => n.toLocaleString("ru-RU") + " ₽";
+  const money = (n) => n.toLocaleString("ru-RU", { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 }) + " €";
   const findProduct = (id) => PRODUCTS.find((p) => p.id === id);
   const esc = (s) =>
     String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -206,7 +206,7 @@
         </div>
         <div class="container footer-bottom">
           <div class="pay" aria-label="Способы оплаты">
-            <span>Visa</span><span>Mastercard</span><span>МИР</span><span>СБП</span><span>Наличные</span>
+            <span>Visa</span><span>Mastercard</span><span>PayPal</span><span>Apple Pay</span><span>Google Pay</span><span>Наличные</span>
           </div>
           <div class="legal">
             <a href="info.html#privacy">Политика конфиденциальности</a>
@@ -282,6 +282,107 @@
   });
 
   // ---------- Страницы ----------
+  // ---------- Онлайн-оплата ----------
+  function loadPayPal(clientId) {
+    if (window.paypal) return Promise.resolve(window.paypal);
+    return new Promise((res, rej) => {
+      const sc = document.createElement("script");
+      sc.src = "https://www.paypal.com/sdk/js?client-id=" + encodeURIComponent(clientId) + "&currency=EUR&intent=capture&components=buttons";
+      sc.onload = () => res(window.paypal);
+      sc.onerror = rej;
+      document.head.appendChild(sc);
+    });
+  }
+
+  function paidScreen(root, number) {
+    root.innerHTML = `
+      <div class="empty success">
+        <div class="success-icon">✓</div>
+        <h1>Оплата прошла!</h1>
+        ${number ? `<p>Заказ <strong>${esc(number)}</strong> оплачен.</p>` : ""}
+        <p class="muted">Спасибо! Мы свяжемся с вами, чтобы согласовать доставку.</p>
+        <a class="btn" href="${AUTH() && AUTH().user ? "account.html#orders" : "index.html"}">${AUTH() && AUTH().user ? "Мои заказы" : "На главную"}</a>
+      </div>`;
+  }
+
+  // Экран «оплатите заказ»: кнопка Stripe и/или кнопки PayPal
+  async function showPayScreen(root, { number, token, provider, note }) {
+    const auth = AUTH();
+    root.innerHTML = `
+      <div class="empty pay-screen">
+        <h1>Оплата заказа${number ? " " + esc(number) : ""}</h1>
+        <p class="muted">${note || "Заказ сохранён. Осталось оплатить его."}</p>
+        <div class="pay-actions">
+          <button class="btn btn-block" id="pay-stripe-btn" hidden>Оплатить картой</button>
+          <div id="paypal-buttons"></div>
+        </div>
+        <p class="form-msg err" id="pay-err" hidden></p>
+        <p class="muted small">Если не получается оплатить, ничего страшного: заказ уже у нас, и менеджер свяжется с вами.</p>
+      </div>`;
+    const err = (m) => {
+      const el = $("#pay-err");
+      el.textContent = m;
+      el.hidden = false;
+    };
+    let cfg;
+    try {
+      cfg = await auth.pay("config");
+    } catch (e) {
+      return err("Онлайн-оплата сейчас недоступна.");
+    }
+    if (cfg.stripe && provider !== "paypal") {
+      const b = $("#pay-stripe-btn");
+      b.hidden = false;
+      b.addEventListener("click", async () => {
+        b.disabled = true;
+        b.textContent = "Переходим к оплате…";
+        try {
+          location.href = (await auth.pay("stripe-session", { token })).url;
+        } catch (e) {
+          b.disabled = false;
+          b.textContent = "Оплатить картой";
+          err(e.message === "already paid" ? "Этот заказ уже оплачен." : "Не удалось открыть оплату картой. Попробуйте ещё раз.");
+        }
+      });
+    }
+    if (cfg.paypal && provider !== "card") {
+      try {
+        const pp = await loadPayPal(cfg.paypal);
+        pp.Buttons({
+          style: { layout: "vertical", shape: "pill", label: "pay" },
+          createOrder: async () => (await auth.pay("paypal-create", { token })).id,
+          onApprove: async (d) => {
+            await auth.pay("paypal-capture", { token, paypalOrderId: d.orderID });
+            paidScreen(root, number);
+          },
+          onError: (e) => {
+            console.error(e);
+            err("PayPal не смог провести оплату. Попробуйте ещё раз.");
+          }
+        }).render("#paypal-buttons");
+      } catch (e) {
+        err("Не удалось загрузить PayPal.");
+      }
+    }
+  }
+
+  // Возврат со страницы оплаты Stripe
+  async function paymentReturn(root, qs) {
+    const auth = AUTH();
+    if (!auth || !auth.enabled) return;
+    const token = qs.get("paid") || qs.get("pay");
+    if (qs.get("paid") && qs.get("session")) {
+      root.innerHTML = `<div class="empty"><p class="muted">Проверяем оплату…</p></div>`;
+      try {
+        const r = await auth.pay("stripe-verify", { token, session: qs.get("session") });
+        if (r.paid) return paidScreen(root, "");
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    showPayScreen(root, { token, provider: "", note: "Оплата не завершена. Заказ сохранён, его можно оплатить сейчас." });
+  }
+
   const pages = {
     home() {
       const grid = $("#featured");
@@ -452,6 +553,8 @@
 
     checkout() {
       const root = $("#checkout");
+      const qs = new URLSearchParams(location.search);
+      if (qs.get("paid") || qs.get("pay")) return paymentReturn(root, qs);
       const { items, allPriced, total } = cartTotals();
       if (!items.length) {
         root.innerHTML = `<div class="empty"><p>В корзине нет товаров.</p><a class="btn" href="catalog.html">Перейти в каталог</a></div>`;
@@ -498,6 +601,17 @@
           }
         });
       }
+      // Онлайн-оплата: показываем, только если она настроена и у всех товаров есть цена
+      if (auth && auth.enabled && allPriced) {
+        auth
+          .pay("config")
+          .then((cfg) => {
+            if (cfg.stripe) $("#pay-card").hidden = false;
+            if (cfg.paypal) $("#pay-paypal").hidden = false;
+            if ((cfg.stripe || cfg.paypal) && cfg.test) $("#pay-test").hidden = false;
+          })
+          .catch((err) => console.warn("payments:", err));
+      }
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
         if (!form.reportValidity()) return;
@@ -505,12 +619,14 @@
         const number = "K-" + Date.now().toString().slice(-6);
         const orderItems = items.map(({ product: p, variant: v, qty }) => ({ id: p.id, name: p.name, size: v.size, price: v.price, qty }));
         const submit = form.querySelector('[type="submit"]');
+        const online = data.payment === "card" || data.payment === "paypal";
+        const payToken = crypto.randomUUID ? crypto.randomUUID() : "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (c) => (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16));
         // Отправляем заказ в базу (Supabase), если она подключена
         if (auth && auth.enabled) {
           submit.disabled = true;
           submit.textContent = "Отправляем…";
           try {
-            await auth.saveOrder({ number, customer: data, items: orderItems, total: allPriced ? total : null });
+            await auth.saveOrder({ number, customer: data, items: orderItems, total: allPriced ? total : null, pay_token: payToken });
           } catch (err) {
             console.error(err);
             submit.disabled = false;
@@ -530,6 +646,21 @@
           localStorage.setItem("kach-orders", JSON.stringify(orders));
         } catch (err) {}
         saveCart({});
+        if (online && auth && auth.enabled) {
+          if (data.payment === "card") {
+            submit.textContent = "Переходим к оплате…";
+            try {
+              const { url } = await auth.pay("stripe-session", { token: payToken });
+              location.href = url;
+              return;
+            } catch (err) {
+              console.error(err);
+            }
+          }
+          showPayScreen(root, { number, token: payToken, provider: data.payment });
+          window.scrollTo(0, 0);
+          return;
+        }
         root.innerHTML = `
           <div class="empty success">
             <div class="success-icon">✓</div>

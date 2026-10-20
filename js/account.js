@@ -205,7 +205,7 @@
           const items = Array.isArray(o.items) ? o.items : [];
           return `<article class="order">
             <header><div><strong>Заказ ${esc(o.number)}</strong><span class="muted small"> · ${esc(d)}</span></div>
-            <span class="status status-${esc(o.status)}">${esc(STATUS[o.status] || o.status)}</span></header>
+            <span>${o.payment_status === "paid" ? `<span class="status status-paid">Оплачен</span> ` : ""}<span class="status status-${esc(o.status)}">${esc(STATUS[o.status] || o.status)}</span></span></header>
             <ul>${items.map((i) => `<li><span>${esc(i.name)}, ${esc(i.size)} × ${esc(i.qty)}</span><span>${typeof i.price === "number" ? ui().money(i.price * i.qty) : "по запросу"}</span></li>`).join("")}</ul>
             <footer><span class="muted small">${esc((o.customer && [o.customer.city, o.customer.address].filter(Boolean).join(", ")) || "")}</span>
             <strong>${o.total ? ui().money(Number(o.total)) : "Сумму сообщит менеджер"}</strong></footer>
@@ -231,7 +231,7 @@
       <h2>Личные данные</h2>
       <form id="pf" class="cab-form" novalidate>
         <div class="field"><label for="pf-name">Имя и фамилия</label><input id="pf-name" name="name" value="${esc(pr.name)}" autocomplete="name"></div>
-        <div class="field"><label for="pf-phone">Телефон</label><input id="pf-phone" name="phone" type="tel" value="${esc(pr.phone)}" placeholder="+7 900 000-00-00" autocomplete="tel"></div>
+        <div class="field"><label for="pf-phone">Телефон</label><input id="pf-phone" name="phone" type="tel" value="${esc(pr.phone)}" placeholder="+40 700 000 000" autocomplete="tel"></div>
         <div class="field"><label for="pf-email">Почта</label><input id="pf-email" value="${esc(a.user.email)}" disabled></div>
         <p class="form-msg" id="pf-msg" role="alert"></p>
         <button class="btn" type="submit">Сохранить</button>

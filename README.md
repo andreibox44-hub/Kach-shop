@@ -24,3 +24,10 @@
 ## Важно про заказы
 
 Сейчас заказ сохраняется только в браузере покупателя — вам он **не приходит**. Чтобы получать заказы на почту или в Telegram, нужно подключить сервис форм (например, Formspree) или онлайн-оплату. Это следующий шаг.
+
+## Онлайн-оплата (Stripe и PayPal)
+
+- Серверная часть: `supabase/functions/payments/index.ts` (функция `payments` в Supabase).
+- Ключи хранятся только в Supabase → Edge Functions → Secrets: `STRIPE_SECRET_KEY`, `PAYPAL_CLIENT_ID`, `PAYPAL_SECRET`, `PAYPAL_ENV` (`sandbox` или `live`), по желанию `STRIPE_WEBHOOK_SECRET`.
+- Сумму к оплате сервер считает по таблице `product_prices` (евро). При изменении цен меняйте и `js/products.js`, и эту таблицу.
+- Кнопки «Картой онлайн» и «PayPal» появляются, только если ключи заданы и у всех товаров в корзине есть цена.

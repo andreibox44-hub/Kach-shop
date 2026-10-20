@@ -78,3 +78,31 @@ create policy "orders: create" on public.orders
 drop policy if exists "orders: read own" on public.orders;
 create policy "orders: read own" on public.orders
   for select to authenticated using (user_id = (select auth.uid()));
+
+-- 3. Онлайн-оплата (Stripe, PayPal). Отметку «оплачен» ставит только функция payments.
+alter table public.orders
+  add column if not exists pay_token uuid unique,
+  add column if not exists payment_status text not null default 'unpaid',
+  add column if not exists payment_provider text,
+  add column if not exists payment_ref text,
+  add column if not exists paid_amount numeric,
+  add column if not exists currency text,
+  add column if not exists paid_at timestamptz;
+
+alter policy "orders: create" on public.orders
+  with check (
+    (user_id is null or user_id = (select auth.uid()))
+    and status = 'new' and payment_status = 'unpaid'
+    and payment_provider is null and payment_ref is null and paid_amount is null and paid_at is null
+  );
+
+-- Цены для оплаты (в евро). Должны совпадать с ценами в js/products.js.
+create table if not exists public.product_prices (
+  product_id text not null,
+  size text not null,
+  price numeric(10,2) not null check (price > 0),
+  primary key (product_id, size)
+);
+alter table public.product_prices enable row level security;
+drop policy if exists "prices: read all" on public.product_prices;
+create policy "prices: read all" on public.product_prices for select to anon, authenticated using (true);

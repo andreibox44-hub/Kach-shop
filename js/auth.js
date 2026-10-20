@@ -130,6 +130,18 @@
       if (error) throw error;
       return data || [];
     },
+    // Онлайн-оплата (функция payments в Supabase)
+    async pay(action, body = {}) {
+      const { data, error } = await sb.functions.invoke("payments", { body: { action, ...body } });
+      if (error) {
+        let msg = error.message;
+        try {
+          msg = (await error.context.json()).error || msg;
+        } catch (e) {}
+        throw new Error(msg);
+      }
+      return data;
+    },
     async saveOrder(order) {
       const { error } = await sb.from("orders").insert({ ...order, user_id: user ? user.id : null });
       if (error) throw error;
