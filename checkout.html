@@ -8,7 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌿%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=202610202010">
+  <link rel="stylesheet" href="css/style.css?v=202610202019">
 </head>
 <body data-page="checkout">
   <header id="site-header"></header>
@@ -31,11 +31,8 @@
               <legend>Доставка</legend>
               <label class="radio"><input type="radio" name="delivery" value="courier" checked><span><strong>Курьером</strong><br><span class="muted small">До двери</span></span></label>
               <label class="radio"><input type="radio" name="delivery" value="post"><span><strong>Почтой</strong><br><span class="muted small">В ваше почтовое отделение</span></span></label>
-              <div class="field-row">
-                <div class="field"><label for="city">Город *</label><input id="city" name="city" required autocomplete="address-level2"></div>
-                <div class="field"><label for="zip">Индекс *</label><input id="zip" name="zip" required inputmode="numeric" autocomplete="postal-code"></div>
-              </div>
-              <div class="field"><label for="address">Адрес *</label><input id="address" name="address" required placeholder="Улица, дом, квартира" autocomplete="street-address"></div>
+              <div class="field"><label for="country">Страна доставки *</label><select id="country" name="country" required autocomplete="country"></select></div>
+              <div id="addr-fields"></div>
             </fieldset>
             <fieldset>
               <legend>Оплата</legend>
@@ -54,10 +51,11 @@
     </section>
   </main>
   <footer id="site-footer"></footer>
-  <script src="js/products.js?v=202610202010"></script>
-  <script src="js/vendor/supabase.js?v=202610202010"></script>
-  <script src="js/supabase-config.js?v=202610202010"></script>
-  <script src="js/auth.js?v=202610202010"></script>
-  <script src="js/app.js?v=202610202010"></script>
+  <script src="js/products.js?v=202610202019"></script>
+  <script src="js/countries.js?v=202610202019"></script>
+  <script src="js/vendor/supabase.js?v=202610202019"></script>
+  <script src="js/supabase-config.js?v=202610202019"></script>
+  <script src="js/auth.js?v=202610202019"></script>
+  <script src="js/app.js?v=202610202019"></script>
 </body>
 </html>

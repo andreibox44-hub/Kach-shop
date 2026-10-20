@@ -593,6 +593,13 @@
 
       const form = $("#checkout-form");
       const auth = AUTH();
+      // Страна и адрес в формате выбранной страны
+      const ADDR = window.KACH_ADDR;
+      const bindAddr = (values) =>
+        ADDR.bind($("#country"), $("#addr-fields"), values, "", (c) => {
+          $("#phone").placeholder = c.phone;
+        });
+      bindAddr({});
       // Подставляем данные из личного кабинета
       if (auth) {
         auth.ready.then(() => {
@@ -612,9 +619,9 @@
           setIf("email", u.email);
           const addr = pr && pr.addresses && pr.addresses[0];
           if (addr) {
-            setIf("city", addr.city);
-            setIf("zip", addr.zip);
-            setIf("address", addr.address);
+            const fresh = $("#country").cloneNode(false);
+            $("#country").replaceWith(fresh);
+            bindAddr(addr);
           }
         });
       }

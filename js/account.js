@@ -207,7 +207,7 @@
             <header><div><strong>Заказ ${esc(o.number)}</strong><span class="muted small"> · ${esc(d)}</span></div>
             <span>${o.payment_status === "paid" ? `<span class="status status-paid">Оплачен</span> ` : ""}<span class="status status-${esc(o.status)}">${esc(STATUS[o.status] || o.status)}</span></span></header>
             <ul>${items.map((i) => `<li><span>${esc(i.name)}, ${esc(i.size)} × ${esc(i.qty)}</span><span>${typeof i.price === "number" ? ui().money(i.price * i.qty) : "по запросу"}</span></li>`).join("")}</ul>
-            <footer><span class="muted small">${esc((o.customer && [o.customer.city, o.customer.address].filter(Boolean).join(", ")) || "")}</span>
+            <footer><span class="muted small">${esc((o.customer && (window.KACH_ADDR ? window.KACH_ADDR.format(o.customer) : [o.customer.city, o.customer.address].filter(Boolean).join(", "))) || "")}</span>
             <strong>${o.total ? ui().money(Number(o.total)) : "Сумму сообщит менеджер"}</strong></footer>
           </article>`;
         })
@@ -271,7 +271,7 @@
               .map(
                 (ad, i) => `<div class="addr">
                   <div><strong>${esc(ad.title || "Адрес " + (i + 1))}</strong>${i === 0 ? ' <span class="pill">Основной</span>' : ""}
-                  <p class="muted small">${esc([ad.zip, ad.city, ad.address].filter(Boolean).join(", "))}</p></div>
+                  <p class="muted small">${esc(window.KACH_ADDR ? window.KACH_ADDR.format(ad) : [ad.zip, ad.city, ad.address].filter(Boolean).join(", "))}</p></div>
                   <div class="addr-actions">
                     ${i > 0 ? `<button class="link" data-main="${i}">Сделать основным</button>` : ""}
                     <button class="link danger" data-del="${i}">Удалить</button>
@@ -283,11 +283,8 @@
       <form id="ad" class="cab-form" novalidate>
         <h3>Добавить адрес</h3>
         <div class="field"><label for="ad-title">Название</label><input id="ad-title" name="title" placeholder="Дом, работа, салон"></div>
-        <div class="field-row">
-          <div class="field"><label for="ad-city">Город *</label><input id="ad-city" name="city" required autocomplete="address-level2"></div>
-          <div class="field"><label for="ad-zip">Индекс</label><input id="ad-zip" name="zip" inputmode="numeric" autocomplete="postal-code"></div>
-        </div>
-        <div class="field"><label for="ad-address">Улица, дом, квартира *</label><input id="ad-address" name="address" required autocomplete="street-address"></div>
+        <div class="field"><label for="ad-country">Страна *</label><select id="ad-country" name="country" required autocomplete="country"></select></div>
+        <div id="ad-fields"></div>
         <p class="form-msg" id="ad-msg" role="alert"></p>
         <button class="btn" type="submit">Добавить адрес</button>
       </form>`;
@@ -302,12 +299,15 @@
       })
     );
     const f = $("#ad");
+    window.KACH_ADDR.bind($("#ad-country"), $("#ad-fields"), {}, "ad-");
     f.addEventListener("submit", (e) => {
       e.preventDefault();
       if (!f.reportValidity()) return;
       const d = Object.fromEntries(new FormData(f));
       run(f.querySelector('[type="submit"]'), $("#ad-msg"), async () => {
-        await save([...list, { title: d.title.trim(), city: d.city.trim(), zip: d.zip.trim(), address: d.address.trim() }]);
+        const item = { title: (d.title || "").trim() };
+        ["country", "region", "city", "zip", "address", "address2"].forEach((k) => (item[k] = (d[k] || "").trim()));
+        await save([...list, item]);
         ui().toast("Адрес сохранён");
       });
     });
