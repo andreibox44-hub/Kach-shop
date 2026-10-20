@@ -17,21 +17,21 @@ alter table public.profiles enable row level security;
 
 drop policy if exists "profiles: read own" on public.profiles;
 create policy "profiles: read own" on public.profiles
-  for select using (auth.uid() = id);
+  for select to authenticated using ((select auth.uid()) = id);
 
 drop policy if exists "profiles: insert own" on public.profiles;
 create policy "profiles: insert own" on public.profiles
-  for insert with check (auth.uid() = id);
+  for insert to authenticated with check ((select auth.uid()) = id);
 
 drop policy if exists "profiles: update own" on public.profiles;
 create policy "profiles: update own" on public.profiles
-  for update using (auth.uid() = id) with check (auth.uid() = id);
+  for update to authenticated using ((select auth.uid()) = id) with check ((select auth.uid()) = id);
 
 -- Профиль создаётся автоматически при регистрации (по почте или через Google)
 create or replace function public.handle_new_user()
 returns trigger
 language plpgsql
-security definer set search_path = public
+security definer set search_path = ''
 as $$
 begin
   insert into public.profiles (id, name, email)
@@ -44,6 +44,8 @@ begin
   return new;
 end;
 $$;
+
+revoke execute on function public.handle_new_user() from public, anon, authenticated;
 
 drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created
@@ -62,15 +64,17 @@ create table if not exists public.orders (
   created_at timestamptz not null default now()
 );
 
+create index if not exists orders_user_id_idx on public.orders (user_id);
+
 alter table public.orders enable row level security;
 
 -- Оформить заказ может любой посетитель: гость (user_id пустой) или вошедший покупатель (только на себя)
 drop policy if exists "orders: create" on public.orders;
 create policy "orders: create" on public.orders
   for insert to anon, authenticated
-  with check (user_id is null or user_id = auth.uid());
+  with check (user_id is null or user_id = (select auth.uid()));
 
 -- Покупатель видит только свои заказы
 drop policy if exists "orders: read own" on public.orders;
 create policy "orders: read own" on public.orders
-  for select to authenticated using (user_id = auth.uid());
+  for select to authenticated using (user_id = (select auth.uid()));
