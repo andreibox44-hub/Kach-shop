@@ -3,9 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kach — органические шампуни</title>
-  <meta name="description" content="Органические шампуни Kach без сульфатов, парабенов и силиконов. Доставка по всей России.">
+  <title>Kach — натуральные шампуни</title>
+  <meta name="description" content="Натуральные шампуни Kach без сульфатов, парабенов и силиконов. Доставка по всей России.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌿%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;600;700&display=swap">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-page="home">
@@ -14,28 +16,53 @@
     <section class="hero">
       <div class="container hero-inner">
         <div>
-          <p class="eyebrow">100% натуральный состав</p>
-          <h1>Органические шампуни для здоровых волос</h1>
-          <p class="lead">Мягкие формулы на растительных экстрактах и маслах. Без сульфатов, парабенов и силиконов — только то, что нужно вашим волосам.</p>
+          <p class="eyebrow">Травы · масла · ничего лишнего</p>
+          <h1>Натуральные шампуни из трав и растительных масел</h1>
+          <p class="lead">Мы варим шампуни небольшими партиями на отварах трав и маслах холодного отжима. Мягкая моющая основа из кокоса и сахара бережёт кожу головы и волосы.</p>
           <div class="hero-actions">
             <a href="catalog.html" class="btn">Выбрать шампунь</a>
-            <a href="about.html" class="btn btn-outline">О бренде</a>
+            <a href="#inside" class="btn btn-outline">Что в составе</a>
+          </div>
+          <div class="badges">
+            <span class="badge-round">🌿 до 100% натуральных ингредиентов</span>
+            <span class="badge-round">🐰 Не тестируется на животных</span>
+            <span class="badge-round">🌱 Подходит веганам</span>
           </div>
         </div>
-        <div class="hero-art">
-          <svg viewBox="0 0 200 200" aria-hidden="true"><rect x="85" y="18" width="30" height="22" rx="4" fill="#3f6b3a"/><rect x="80" y="38" width="40" height="10" rx="3" fill="#3f6b3a" opacity=".8"/><path d="M70 60 Q70 48 82 48 H118 Q130 48 130 60 V172 Q130 182 120 182 H80 Q70 182 70 172 Z" fill="#a8c69f"/><path d="M76 62 Q76 54 84 54 H90 V176 H82 Q76 176 76 170 Z" fill="rgba(255,255,255,.3)"/><rect x="74" y="95" width="52" height="56" rx="4" fill="#fffdf7"/><text x="100" y="118" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="#3f6b3a">kach</text><path d="M92 132 q8 -12 16 0 q-8 8 -16 0z" fill="#3f6b3a" opacity=".7"/></svg>
-          <svg viewBox="0 0 200 200" aria-hidden="true"><rect x="85" y="18" width="30" height="22" rx="4" fill="#9a6a2f"/><rect x="80" y="38" width="40" height="10" rx="3" fill="#9a6a2f" opacity=".8"/><path d="M70 60 Q70 48 82 48 H118 Q130 48 130 60 V172 Q130 182 120 182 H80 Q70 182 70 172 Z" fill="#e8c79a"/><path d="M76 62 Q76 54 84 54 H90 V176 H82 Q76 176 76 170 Z" fill="rgba(255,255,255,.3)"/><rect x="74" y="95" width="52" height="56" rx="4" fill="#fffdf7"/><text x="100" y="118" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="#9a6a2f">kach</text><path d="M92 132 q8 -12 16 0 q-8 8 -16 0z" fill="#9a6a2f" opacity=".7"/></svg>
-          <svg viewBox="0 0 200 200" aria-hidden="true"><rect x="85" y="18" width="30" height="22" rx="4" fill="#6f5a99"/><rect x="80" y="38" width="40" height="10" rx="3" fill="#6f5a99" opacity=".8"/><path d="M70 60 Q70 48 82 48 H118 Q130 48 130 60 V172 Q130 182 120 182 H80 Q70 182 70 172 Z" fill="#b9a7d6"/><path d="M76 62 Q76 54 84 54 H90 V176 H82 Q76 176 76 170 Z" fill="rgba(255,255,255,.3)"/><rect x="74" y="95" width="52" height="56" rx="4" fill="#fffdf7"/><text x="100" y="118" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="#6f5a99">kach</text><path d="M92 132 q8 -12 16 0 q-8 8 -16 0z" fill="#6f5a99" opacity=".7"/></svg>
+        <div class="hero-art" id="hero-art"></div>
+      </div>
+    </section>
+
+    <section class="section" id="inside">
+      <div class="container">
+        <div class="section-head">
+          <h2>Что внутри</h2>
+          <p>Каждый шампунь начинается с растения. Вот из чего мы их делаем.</p>
         </div>
+        <div class="ingredients" id="ingredients"></div>
       </div>
     </section>
 
     <section class="section">
-      <div class="container features">
-        <div class="feature"><div class="icon">🌿</div><h3>Органика</h3><p>Экстракты трав и холодного отжима масла.</p></div>
-        <div class="feature"><div class="icon">🚫</div><h3>Без SLS</h3><p>Никаких сульфатов, парабенов и силиконов.</p></div>
-        <div class="feature"><div class="icon">🐰</div><h3>Cruelty free</h3><p>Не тестируем на животных.</p></div>
-        <div class="feature"><div class="icon">♻️</div><h3>Эко-упаковка</h3><p>Перерабатываемые флаконы и твёрдые шампуни.</p></div>
+      <div class="container compare">
+        <div class="panel yes">
+          <h3>Что есть в наших шампунях</h3>
+          <ul>
+            <li>Отвары и настои трав вместо простой воды</li>
+            <li>Масла холодного отжима: аргана, ши, кедр, лаванда</li>
+            <li>Мягкие моющие компоненты из кокоса и сахара</li>
+            <li>Растительный глицерин, алоэ вера и пантенол</li>
+          </ul>
+        </div>
+        <div class="panel no">
+          <h3>Чего нет</h3>
+          <ul>
+            <li>Сульфатов SLS и SLES</li>
+            <li>Парабенов и силиконов</li>
+            <li>Синтетических отдушек и красителей</li>
+            <li>Минеральных масел и ПЭГ</li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -44,6 +71,21 @@
         <h2>Популярное</h2>
         <div class="grid" id="featured"></div>
         <p class="center" style="margin-top:32px"><a href="catalog.html" class="btn btn-outline">Весь каталог</a></p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Как мы делаем шампунь</h2>
+          <p>От сбора трав до флакона проходит около трёх недель.</p>
+        </div>
+        <div class="steps">
+          <div class="step"><h3>Собираем травы</h3><p>Крапиву, ромашку и мяту закупаем у небольших хозяйств в сезон цветения.</p></div>
+          <div class="step"><h3>Готовим отвары</h3><p>Травы настаиваем на мягкой воде. Отвар становится основой шампуня.</p></div>
+          <div class="step"><h3>Варим малыми партиями</h3><p>Не больше 200 флаконов за раз, чтобы следить за качеством каждого.</p></div>
+          <div class="step"><h3>Разливаем в стекло</h3><p>Используем флаконы из тёмного стекла: они защищают масла от света.</p></div>
+        </div>
       </div>
     </section>
 
@@ -59,6 +101,7 @@
   </main>
   <footer id="site-footer"></footer>
   <script src="js/products.js"></script>
+  <script src="js/art.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

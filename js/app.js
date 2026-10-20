@@ -12,27 +12,8 @@
   const esc = (s) =>
     String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-  // Картинка флакона, рисуется кодом — не нужны файлы изображений.
-  function bottleSvg(p) {
-    if (p.id === "tverdiy") {
-      return `<svg viewBox="0 0 200 200" class="bottle" aria-hidden="true">
-        <ellipse cx="100" cy="150" rx="70" ry="14" fill="rgba(0,0,0,.08)"/>
-        <rect x="35" y="85" width="130" height="60" rx="30" fill="${p.color}"/>
-        <rect x="35" y="85" width="130" height="22" rx="11" fill="rgba(255,255,255,.35)"/>
-        <text x="100" y="125" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="${p.accent}">kach</text>
-      </svg>`;
-    }
-    return `<svg viewBox="0 0 200 200" class="bottle" aria-hidden="true">
-      <ellipse cx="100" cy="185" rx="45" ry="8" fill="rgba(0,0,0,.08)"/>
-      <rect x="85" y="18" width="30" height="22" rx="4" fill="${p.accent}"/>
-      <rect x="80" y="38" width="40" height="10" rx="3" fill="${p.accent}" opacity=".8"/>
-      <path d="M70 60 Q70 48 82 48 H118 Q130 48 130 60 V172 Q130 182 120 182 H80 Q70 182 70 172 Z" fill="${p.color}"/>
-      <path d="M76 62 Q76 54 84 54 H90 V176 H82 Q76 176 76 170 Z" fill="rgba(255,255,255,.3)"/>
-      <rect x="74" y="95" width="52" height="56" rx="4" fill="#fffdf7"/>
-      <text x="100" y="118" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="${p.accent}">kach</text>
-      <path d="M92 132 q8 -12 16 0 q-8 8 -16 0z" fill="${p.accent}" opacity=".7"/>
-    </svg>`;
-  }
+  // Иллюстрация товара (см. js/art.js)
+  const bottleSvg = (p) => window.KACH_ART.product(p);
 
   // ---------- Корзина (хранится в браузере) ----------
   function getCart() {
@@ -98,14 +79,14 @@
 
   // ---------- Шапка и подвал ----------
   function renderChrome() {
-    const page = document.body.dataset.page;
+    const page = (document.querySelector("[data-page]") || document.body).dataset.page;
     const link = (href, label, key) =>
       `<a href="${href}"${page === key ? ' aria-current="page"' : ""}>${label}</a>`;
     const header = $("#site-header");
     if (header) {
       header.innerHTML = `
         <div class="container header-inner">
-          <a href="index.html" class="logo">kach<span>organic</span></a>
+          <a href="index.html" class="logo">kach<span>natural</span></a>
           <button class="menu-toggle" aria-label="Меню" aria-expanded="false">☰</button>
           <nav class="nav">
             ${link("index.html", "Главная", "home")}
@@ -129,8 +110,8 @@
       footer.innerHTML = `
         <div class="container footer-inner">
           <div>
-            <a href="index.html" class="logo">kach<span>organic</span></a>
-            <p class="muted">Органические шампуни ручной работы.<br>Без сульфатов, парабенов и силиконов.</p>
+            <a href="index.html" class="logo">kach<span>natural</span></a>
+            <p class="muted">Натуральные шампуни из трав и растительных масел.<br>Варим небольшими партиями.</p>
           </div>
           <div>
             <h4>Магазин</h4>
@@ -153,7 +134,7 @@
   function productCard(p) {
     return `
       <article class="card">
-        <a href="product.html?id=${p.id}" class="card-image" style="--tint:${p.color}33">
+        <a href="product.html?id=${p.id}" class="card-image" style="--tint:${p.tint}1a">
           ${p.tag ? `<span class="badge">${esc(p.tag)}</span>` : ""}
           ${bottleSvg(p)}
         </a>
@@ -161,6 +142,7 @@
           <p class="card-type">${esc(p.type)}</p>
           <h3><a href="product.html?id=${p.id}">${esc(p.name)}</a></h3>
           <p class="muted small">${esc(p.short)}</p>
+          <p class="card-natural small">🌿 ${p.natural}% натуральных ингредиентов</p>
           <div class="card-footer">
             <span class="price">${money(p.price)}</span>
             <button class="btn btn-small" data-add="${p.id}">В корзину</button>
@@ -179,6 +161,34 @@
     home() {
       const grid = $("#featured");
       if (grid) grid.innerHTML = PRODUCTS.slice(0, 3).map(productCard).join("");
+      const art = $("#hero-art");
+      if (art) {
+        const pick = (id) => findProduct(id);
+        art.innerHTML =
+          `<svg class="hero-herbs" viewBox="0 0 200 200" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+             <g transform="translate(-60 10)">${window.KACH_ART.herb("lavender", "#8a77ad")}</g>
+             <g transform="translate(40 0)">${window.KACH_ART.herb("nettle", "#5f7f45")}</g>
+           </svg>` +
+          [pick("krapiva"), pick("argan"), pick("lavanda")].map((p) => window.KACH_ART.product({ ...p, herb: "" })).join("");
+      }
+      const ing = $("#ingredients");
+      if (ing) {
+        const list = [
+          ["lavender", "#7d6aa3", "Лаванда", "Успокаивает кожу головы и снимает зуд."],
+          ["nettle", "#4f6f3a", "Крапива", "Укрепляет корни и уменьшает жирность."],
+          ["chamomile", "#b8901f", "Ромашка", "Смягчает и подходит даже детям."],
+          ["mint", "#3f7f6c", "Мята", "Освежает и охлаждает кожу головы."],
+          ["argan", "#a36a2c", "Аргановое масло", "Питает сухие и ломкие волосы."],
+          ["pine", "#3d5a3f", "Кедр и пихта", "Очищают и дарят лесной аромат."]
+        ];
+        ing.innerHTML = list
+          .map(([h, c, name, text]) => `
+            <div class="ingredient">
+              <svg viewBox="20 20 180 180" aria-hidden="true">${window.KACH_ART.herb(h, c)}</svg>
+              <div><h3>${name}</h3><p>${text}</p></div>
+            </div>`)
+          .join("");
+      }
     },
 
     catalog() {
@@ -222,12 +232,18 @@
       root.innerHTML = `
         <nav class="breadcrumbs muted small"><a href="catalog.html">Каталог</a> / ${esc(p.name)}</nav>
         <div class="product-layout">
-          <div class="product-image" style="--tint:${p.color}33">${bottleSvg(p)}</div>
+          <div class="product-image" style="--tint:${p.tint}1a">${bottleSvg(p)}</div>
           <div class="product-info">
             <p class="card-type">${esc(p.type)}</p>
             <h1>${esc(p.name)}</h1>
             <p class="price big">${money(p.price)} <span class="muted small">/ ${esc(p.volume)}</span></p>
             <p>${esc(p.description)}</p>
+            <div class="natural-meter">
+              <div class="row small"><span>Натуральные ингредиенты</span><strong>${p.natural}%</strong></div>
+              <div class="meter"><span style="width:${p.natural}%"></span></div>
+            </div>
+            <div class="keys">${p.keys.map((k) => `<span class="key">🌿 ${esc(k)}</span>`).join("")}</div>
+            <p class="muted small">Откуда сырьё: ${esc(p.origin)}</p>
             <div class="buy-row">
               <div class="qty">
                 <button type="button" data-step="-1" aria-label="Меньше">−</button>
@@ -237,11 +253,12 @@
               <button class="btn" id="buy">Добавить в корзину</button>
             </div>
             <ul class="perks small">
-              <li>🌿 Натуральный состав</li>
-              <li>🐰 Не тестируется на животных</li>
+              <li>✓ Без сульфатов, парабенов и силиконов</li>
+              <li>✓ Без синтетических отдушек и красителей</li>
+              <li>✓ Не тестируется на животных, подходит веганам</li>
               <li>🚚 Бесплатная доставка от ${money(FREE_DELIVERY_FROM)}</li>
             </ul>
-            <details open><summary>Состав</summary><p>${esc(p.ingredients)}</p></details>
+            <details open><summary>Полный состав</summary><p>${esc(p.ingredients)}</p></details>
             <details><summary>Способ применения</summary><p>${esc(p.usage)}</p></details>
           </div>
         </div>
@@ -274,7 +291,7 @@
                 .map(
                   ({ product: p, qty }) => `
                 <div class="cart-row">
-                  <a href="product.html?id=${p.id}" class="cart-thumb" style="--tint:${p.color}33">${bottleSvg(p)}</a>
+                  <a href="product.html?id=${p.id}" class="cart-thumb" style="--tint:${p.tint}1a">${bottleSvg(p)}</a>
                   <div class="cart-name">
                     <a href="product.html?id=${p.id}"><strong>${esc(p.name)}</strong></a>
                     <span class="muted small">${esc(p.volume)} · ${money(p.price)}</span>
@@ -363,7 +380,7 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     renderChrome();
-    const page = document.body.dataset.page;
+    const page = (document.querySelector("[data-page]") || document.body).dataset.page;
     if (pages[page]) pages[page]();
     updateCartCount();
   });
