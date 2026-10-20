@@ -1,9 +1,16 @@
 // Общая логика сайта: шапка, подвал, корзина, рендер страниц.
 (function () {
   const PRODUCTS = window.KACH_PRODUCTS;
-  const CART_KEY = "kach-cart";
-  const FREE_DELIVERY_FROM = 3000;
-  const DELIVERY_PRICE = 300;
+  const CATS = window.KACH_CATEGORIES;
+  const CART_KEY = "kach-cart-v2";
+
+  // Контакты магазина — замените на свои.
+  const CONTACTS = {
+    phone: "+7 (000) 000-00-00",
+    phoneHref: "+70000000000",
+    email: "info@kachhair.com",
+    hours: "Ежедневно 10:00–20:00"
+  };
 
   // ---------- Утилиты ----------
   const $ = (sel, root = document) => root.querySelector(sel);
@@ -11,9 +18,16 @@
   const findProduct = (id) => PRODUCTS.find((p) => p.id === id);
   const esc = (s) =>
     String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const img = (p) => `images/products/${p.id}.jpg`;
+  const poster = (p) => `images/posters/${p.id}.jpg`;
+  const pageName = () => (document.querySelector("[data-page]") || document.body).dataset.page;
 
-  // Иллюстрация товара (см. js/art.js)
-  const bottleSvg = (p) => window.KACH_ART.product(p);
+  function priceLabel(p) {
+    const prices = p.variants.map((v) => v.price).filter((x) => typeof x === "number");
+    if (!prices.length) return "Цена по запросу";
+    const min = Math.min(...prices);
+    return (prices.length < p.variants.length || new Set(prices).size > 1 ? "от " : "") + money(min);
+  }
 
   // ---------- Корзина (хранится в браузере) ----------
   function getCart() {
@@ -30,29 +44,39 @@
     } catch (e) {}
     updateCartCount();
   }
-  function addToCart(id, qty = 1) {
+  const keyOf = (id, size) => id + "|" + size;
+  function addToCart(id, size, qty = 1) {
+    const p = findProduct(id);
+    if (!p) return;
+    const v = p.variants.find((x) => x.size === size) || p.variants[0];
     const cart = getCart();
-    cart[id] = (cart[id] || 0) + qty;
+    const k = keyOf(id, v.size);
+    cart[k] = Math.min(99, (cart[k] || 0) + qty);
     saveCart(cart);
     toast("Добавлено в корзину");
   }
-  function setQty(id, qty) {
+  function setQty(k, qty) {
     const cart = getCart();
-    if (qty <= 0) delete cart[id];
-    else cart[id] = Math.min(qty, 99);
+    if (qty <= 0) delete cart[k];
+    else cart[k] = Math.min(qty, 99);
     saveCart(cart);
   }
   function cartItems() {
     const cart = getCart();
     return Object.keys(cart)
-      .map((id) => ({ product: findProduct(id), qty: cart[id] }))
-      .filter((i) => i.product && i.qty > 0);
+      .map((k) => {
+        const [id, size] = k.split("|");
+        const product = findProduct(id);
+        const variant = product && product.variants.find((v) => v.size === size);
+        return { key: k, product, variant, qty: cart[k] };
+      })
+      .filter((i) => i.product && i.variant && i.qty > 0);
   }
   function cartTotals() {
     const items = cartItems();
-    const subtotal = items.reduce((s, i) => s + i.product.price * i.qty, 0);
-    const delivery = subtotal === 0 || subtotal >= FREE_DELIVERY_FROM ? 0 : DELIVERY_PRICE;
-    return { items, subtotal, delivery, total: subtotal + delivery };
+    const allPriced = items.every((i) => typeof i.variant.price === "number");
+    const total = items.reduce((s, i) => s + (i.variant.price || 0) * i.qty, 0);
+    return { items, allPriced, total };
   }
   function updateCartCount() {
     const count = cartItems().reduce((s, i) => s + i.qty, 0);
@@ -78,20 +102,21 @@
   }
 
   // ---------- Шапка и подвал ----------
+  const logo = `<a href="index.html" class="logo" aria-label="KACH — на главную"><span class="logo-word">KACH</span><span class="logo-sub">Hair Organic Solutions</span></a>`;
+
   function renderChrome() {
-    const page = (document.querySelector("[data-page]") || document.body).dataset.page;
-    const link = (href, label, key) =>
-      `<a href="${href}"${page === key ? ' aria-current="page"' : ""}>${label}</a>`;
+    const page = pageName();
+    const link = (href, label, key) => `<a href="${href}"${page === key ? ' aria-current="page"' : ""}>${label}</a>`;
     const header = $("#site-header");
     if (header) {
       header.innerHTML = `
         <div class="container header-inner">
-          <a href="index.html" class="logo">kach<span>natural</span></a>
+          ${logo}
           <button class="menu-toggle" aria-label="Меню" aria-expanded="false">☰</button>
           <nav class="nav">
             ${link("index.html", "Главная", "home")}
             ${link("catalog.html", "Каталог", "catalog")}
-            ${link("about.html", "О нас", "about")}
+            ${link("about.html", "О бренде", "about")}
             ${link("about.html#contacts", "Контакты", "")}
           </nav>
           <a href="cart.html" class="cart-link" aria-label="Корзина">
@@ -110,41 +135,48 @@
       footer.innerHTML = `
         <div class="container footer-inner">
           <div>
-            <a href="index.html" class="logo">kach<span>natural</span></a>
-            <p class="muted">Натуральные шампуни из трав и растительных масел.<br>Варим небольшими партиями.</p>
+            ${logo}
+            <p class="footer-note">Natura. Scienza. Bellezza.<br>Профессиональный уход за волосами на натуральных ингредиентах.</p>
           </div>
           <div>
-            <h4>Магазин</h4>
-            <a href="catalog.html">Каталог</a>
-            <a href="cart.html">Корзина</a>
-            <a href="about.html#delivery">Доставка и оплата</a>
+            <h4>Каталог</h4>
+            ${Object.entries(CATS)
+              .filter(([k]) => k !== "all")
+              .map(([k, v]) => `<a href="catalog.html?cat=${k}">${v}</a>`)
+              .join("")}
           </div>
           <div>
             <h4>Связаться</h4>
-            <a href="tel:+70000000000">+7 (000) 000-00-00</a>
-            <a href="mailto:hello@kach.shop">hello@kach.shop</a>
-            <span class="muted">Ежедневно 10:00–20:00</span>
+            <a href="tel:${CONTACTS.phoneHref}">${CONTACTS.phone}</a>
+            <a href="mailto:${CONTACTS.email}">${CONTACTS.email}</a>
+            <span>${CONTACTS.hours}</span>
           </div>
         </div>
-        <div class="container copyright muted">© ${new Date().getFullYear()} Kach. Все права защищены.</div>`;
+        <div class="container copyright">© ${new Date().getFullYear()} KACH Hair Organic Solutions</div>`;
     }
+    document.querySelectorAll("[data-contact]").forEach((el) => {
+      const k = el.dataset.contact;
+      if (k === "phone") el.innerHTML = `<a href="tel:${CONTACTS.phoneHref}">${CONTACTS.phone}</a>`;
+      if (k === "email") el.innerHTML = `<a href="mailto:${CONTACTS.email}">${CONTACTS.email}</a>`;
+      if (k === "hours") el.textContent = CONTACTS.hours;
+    });
   }
 
   // ---------- Карточка товара ----------
   function productCard(p) {
     return `
       <article class="card">
-        <a href="product.html?id=${p.id}" class="card-image" style="--tint:${p.tint}1a">
+        <a href="product.html?id=${p.id}" class="card-image">
           ${p.tag ? `<span class="badge">${esc(p.tag)}</span>` : ""}
-          ${bottleSvg(p)}
+          <img src="${img(p)}" alt="${esc(p.name)}" loading="lazy" width="560" height="700">
         </a>
         <div class="card-body">
-          <p class="card-type">${esc(p.type)}</p>
+          <p class="card-type">${esc(CATS[p.category])}</p>
           <h3><a href="product.html?id=${p.id}">${esc(p.name)}</a></h3>
-          <p class="muted small">${esc(p.short)}</p>
-          <p class="card-natural small">🌿 ${p.natural}% натуральных ингредиентов</p>
+          <p class="card-sub">${esc(p.subtitle)}</p>
+          <p class="card-sizes">${p.variants.map((v) => esc(v.size)).join(" · ")}${p.ph ? ` · pH ${esc(p.ph)}` : ""}</p>
           <div class="card-footer">
-            <span class="price">${money(p.price)}</span>
+            <span class="price">${priceLabel(p)}</span>
             <button class="btn btn-small" data-add="${p.id}">В корзину</button>
           </div>
         </div>
@@ -153,63 +185,33 @@
 
   document.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-add]");
-    if (btn) addToCart(btn.dataset.add);
+    if (btn) {
+      const p = findProduct(btn.dataset.add);
+      if (p) addToCart(p.id, p.variants[0].size);
+    }
   });
 
   // ---------- Страницы ----------
   const pages = {
     home() {
       const grid = $("#featured");
-      if (grid) grid.innerHTML = PRODUCTS.slice(0, 3).map(productCard).join("");
-      const art = $("#hero-art");
-      if (art) {
-        const pick = (id) => findProduct(id);
-        art.innerHTML =
-          `<svg class="hero-herbs" viewBox="0 0 200 200" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
-             <g transform="translate(-60 10)">${window.KACH_ART.herb("lavender", "#8a77ad")}</g>
-             <g transform="translate(40 0)">${window.KACH_ART.herb("nettle", "#5f7f45")}</g>
-           </svg>` +
-          [pick("krapiva"), pick("argan"), pick("lavanda")].map((p) => window.KACH_ART.product({ ...p, herb: "" })).join("");
-      }
-      const ing = $("#ingredients");
-      if (ing) {
-        const list = [
-          ["lavender", "#7d6aa3", "Лаванда", "Успокаивает кожу головы и снимает зуд."],
-          ["nettle", "#4f6f3a", "Крапива", "Укрепляет корни и уменьшает жирность."],
-          ["chamomile", "#b8901f", "Ромашка", "Смягчает и подходит даже детям."],
-          ["mint", "#3f7f6c", "Мята", "Освежает и охлаждает кожу головы."],
-          ["argan", "#a36a2c", "Аргановое масло", "Питает сухие и ломкие волосы."],
-          ["pine", "#3d5a3f", "Кедр и пихта", "Очищают и дарят лесной аромат."]
-        ];
-        ing.innerHTML = list
-          .map(([h, c, name, text]) => `
-            <div class="ingredient">
-              <svg viewBox="20 20 180 180" aria-hidden="true">${window.KACH_ART.herb(h, c)}</svg>
-              <div><h3>${name}</h3><p>${text}</p></div>
-            </div>`)
-          .join("");
-      }
+      if (grid) grid.innerHTML = ["only1one", "shampoo-rh", "siero-ssn", "aminoplasma-ap"].map((id) => productCard(findProduct(id))).join("");
     },
 
     catalog() {
       const grid = $("#catalog-grid");
       const filters = $("#filters");
-      const sort = $("#sort");
-      let current = new URLSearchParams(location.search).get("type") || "all";
-      if (!window.KACH_HAIR_TYPES[current]) current = "all";
+      let current = new URLSearchParams(location.search).get("cat") || "all";
+      if (!CATS[current]) current = "all";
 
-      filters.innerHTML = Object.entries(window.KACH_HAIR_TYPES)
+      filters.innerHTML = Object.entries(CATS)
         .map(([key, label]) => `<button class="chip" data-filter="${key}">${label}</button>`)
         .join("");
 
       function draw() {
         filters.querySelectorAll(".chip").forEach((c) => c.classList.toggle("active", c.dataset.filter === current));
-        let list = PRODUCTS.filter((p) => current === "all" || p.hair === current);
-        if (sort.value === "cheap") list = [...list].sort((a, b) => a.price - b.price);
-        if (sort.value === "expensive") list = [...list].sort((a, b) => b.price - a.price);
-        grid.innerHTML = list.length
-          ? list.map(productCard).join("")
-          : `<p class="muted">В этой категории пока нет товаров.</p>`;
+        const list = PRODUCTS.filter((p) => current === "all" || p.category === current);
+        grid.innerHTML = list.map(productCard).join("");
       }
       filters.addEventListener("click", (e) => {
         const chip = e.target.closest("[data-filter]");
@@ -217,7 +219,6 @@
         current = chip.dataset.filter;
         draw();
       });
-      sort.addEventListener("change", draw);
       draw();
     },
 
@@ -228,22 +229,28 @@
         root.innerHTML = `<div class="empty"><h1>Товар не найден</h1><p><a class="btn" href="catalog.html">Перейти в каталог</a></p></div>`;
         return;
       }
-      document.title = `${p.name} — Kach`;
+      document.title = `${p.name} — KACH`;
+      let size = p.variants[0].size;
+      const priceOf = (s) => {
+        const v = p.variants.find((x) => x.size === s);
+        return typeof v.price === "number" ? money(v.price) : "Цена по запросу";
+      };
       root.innerHTML = `
-        <nav class="breadcrumbs muted small"><a href="catalog.html">Каталог</a> / ${esc(p.name)}</nav>
+        <nav class="breadcrumbs"><a href="catalog.html">Каталог</a> / <a href="catalog.html?cat=${p.category}">${esc(CATS[p.category])}</a> / ${esc(p.name)}</nav>
         <div class="product-layout">
-          <div class="product-image" style="--tint:${p.tint}1a">${bottleSvg(p)}</div>
+          <div class="product-image"><img src="${img(p)}" alt="${esc(p.name)}" width="560" height="700"></div>
           <div class="product-info">
-            <p class="card-type">${esc(p.type)}</p>
+            <p class="card-type">${esc(CATS[p.category])}</p>
             <h1>${esc(p.name)}</h1>
-            <p class="price big">${money(p.price)} <span class="muted small">/ ${esc(p.volume)}</span></p>
-            <p>${esc(p.description)}</p>
-            <div class="natural-meter">
-              <div class="row small"><span>Натуральные ингредиенты</span><strong>${p.natural}%</strong></div>
-              <div class="meter"><span style="width:${p.natural}%"></span></div>
-            </div>
-            <div class="keys">${p.keys.map((k) => `<span class="key">🌿 ${esc(k)}</span>`).join("")}</div>
-            <p class="muted small">Откуда сырьё: ${esc(p.origin)}</p>
+            <p class="product-sub">${esc(p.subtitle)}</p>
+            <p class="price big" id="price">${priceOf(size)}</p>
+            ${
+              p.variants.length > 1
+                ? `<div class="sizes" role="radiogroup" aria-label="Объём">${p.variants
+                    .map((v, i) => `<button class="chip${i === 0 ? " active" : ""}" data-size="${esc(v.size)}" role="radio" aria-checked="${i === 0}">${esc(v.size)}</button>`)
+                    .join("")}</div>`
+                : `<p class="muted">${esc(p.variants[0].size)}</p>`
+            }
             <div class="buy-row">
               <div class="qty">
                 <button type="button" data-step="-1" aria-label="Меньше">−</button>
@@ -252,67 +259,91 @@
               </div>
               <button class="btn" id="buy">Добавить в корзину</button>
             </div>
-            <ul class="perks small">
-              <li>✓ Без сульфатов, парабенов и силиконов</li>
-              <li>✓ Без синтетических отдушек и красителей</li>
-              <li>✓ Не тестируется на животных, подходит веганам</li>
-              <li>🚚 Бесплатная доставка от ${money(FREE_DELIVERY_FROM)}</li>
-            </ul>
-            <details open><summary>Полный состав</summary><p>${esc(p.ingredients)}</p></details>
-            <details><summary>Способ применения</summary><p>${esc(p.usage)}</p></details>
+            <dl class="specs">
+              <div><dt>Для волос</dt><dd>${esc(p.hair)}</dd></div>
+              ${p.ph ? `<div><dt>pH</dt><dd>${esc(p.ph)}</dd></div>` : ""}
+              <div><dt>Формула</dt><dd>${esc(p.formula)}</dd></div>
+            </dl>
+            <ul class="benefits">${p.benefits.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>
           </div>
         </div>
+        <section class="product-details">
+          <div class="details-text">
+            <h2>Описание</h2>
+            ${p.description.map((t) => `<p>${esc(t)}</p>`).join("")}
+            <h3>Основные активные ингредиенты</h3>
+            <div class="keys">${p.actives.map((k) => `<span class="key">${esc(k)}</span>`).join("")}</div>
+          </div>
+          <figure class="poster">
+            <a href="${poster(p)}" target="_blank" rel="noopener"><img src="${poster(p)}" alt="Плакат ${esc(p.name)}" loading="lazy"></a>
+            <figcaption>Оригинальный плакат бренда. Нажмите, чтобы открыть крупно.</figcaption>
+          </figure>
+        </section>
         <section class="section">
-          <h2>Вам может понравиться</h2>
-          <div class="grid">${PRODUCTS.filter((x) => x.id !== p.id).slice(0, 3).map(productCard).join("")}</div>
+          <h2>С этим товаром смотрят</h2>
+          <div class="grid">${PRODUCTS.filter((x) => x.id !== p.id && x.category === p.category)
+            .concat(PRODUCTS.filter((x) => x.id !== p.id && x.category !== p.category))
+            .slice(0, 4)
+            .map(productCard)
+            .join("")}</div>
         </section>`;
+      root.querySelectorAll("[data-size]").forEach((b) =>
+        b.addEventListener("click", () => {
+          size = b.dataset.size;
+          root.querySelectorAll("[data-size]").forEach((x) => {
+            x.classList.toggle("active", x === b);
+            x.setAttribute("aria-checked", x === b);
+          });
+          $("#price").textContent = priceOf(size);
+        })
+      );
       const qty = $("#qty");
       root.querySelectorAll("[data-step]").forEach((b) =>
         b.addEventListener("click", () => {
           qty.value = Math.min(99, Math.max(1, (parseInt(qty.value, 10) || 1) + Number(b.dataset.step)));
         })
       );
-      $("#buy").addEventListener("click", () => addToCart(p.id, Math.min(99, Math.max(1, parseInt(qty.value, 10) || 1))));
+      $("#buy").addEventListener("click", () => addToCart(p.id, size, Math.min(99, Math.max(1, parseInt(qty.value, 10) || 1))));
     },
 
     cart() {
       const root = $("#cart");
       function draw() {
-        const { items, subtotal, delivery, total } = cartTotals();
+        const { items, allPriced, total } = cartTotals();
         if (!items.length) {
           root.innerHTML = `<div class="empty"><p>Ваша корзина пуста.</p><a class="btn" href="catalog.html">Перейти в каталог</a></div>`;
           return;
         }
-        const left = FREE_DELIVERY_FROM - subtotal;
         root.innerHTML = `
           <div class="cart-layout">
             <div class="cart-list">
               ${items
                 .map(
-                  ({ product: p, qty }) => `
+                  ({ key, product: p, variant: v, qty }) => `
                 <div class="cart-row">
-                  <a href="product.html?id=${p.id}" class="cart-thumb" style="--tint:${p.tint}1a">${bottleSvg(p)}</a>
+                  <a href="product.html?id=${p.id}" class="cart-thumb"><img src="${img(p)}" alt=""></a>
                   <div class="cart-name">
                     <a href="product.html?id=${p.id}"><strong>${esc(p.name)}</strong></a>
-                    <span class="muted small">${esc(p.volume)} · ${money(p.price)}</span>
+                    <span class="muted small">${esc(v.size)} · ${typeof v.price === "number" ? money(v.price) : "цена по запросу"}</span>
                   </div>
                   <div class="qty">
-                    <button data-id="${p.id}" data-delta="-1" aria-label="Меньше">−</button>
+                    <button data-key="${esc(key)}" data-delta="-1" aria-label="Меньше">−</button>
                     <span>${qty}</span>
-                    <button data-id="${p.id}" data-delta="1" aria-label="Больше">+</button>
+                    <button data-key="${esc(key)}" data-delta="1" aria-label="Больше">+</button>
                   </div>
-                  <strong class="cart-sum">${money(p.price * qty)}</strong>
-                  <button class="remove" data-remove="${p.id}" aria-label="Удалить">×</button>
+                  <strong class="cart-sum">${typeof v.price === "number" ? money(v.price * qty) : "—"}</strong>
+                  <button class="remove" data-remove="${esc(key)}" aria-label="Удалить">×</button>
                 </div>`
                 )
                 .join("")}
             </div>
             <aside class="summary">
               <h3>Итого</h3>
-              <div class="row"><span>Товары</span><span>${money(subtotal)}</span></div>
-              <div class="row"><span>Доставка</span><span>${delivery ? money(delivery) : "бесплатно"}</span></div>
-              ${left > 0 ? `<p class="muted small">Добавьте товаров ещё на ${money(left)} — и доставка будет бесплатной.</p>` : ""}
-              <div class="row total"><span>К оплате</span><span>${money(total)}</span></div>
+              ${
+                allPriced
+                  ? `<div class="row total"><span>К оплате</span><span>${money(total)}</span></div>`
+                  : `<p class="muted small">Точную стоимость заказа и доставки менеджер сообщит после оформления.</p>`
+              }
               <a href="checkout.html" class="btn btn-block">Оформить заказ</a>
             </aside>
           </div>`;
@@ -320,7 +351,7 @@
       root.addEventListener("click", (e) => {
         const d = e.target.closest("[data-delta]");
         const r = e.target.closest("[data-remove]");
-        if (d) setQty(d.dataset.id, (getCart()[d.dataset.id] || 0) + Number(d.dataset.delta));
+        if (d) setQty(d.dataset.key, (getCart()[d.dataset.key] || 0) + Number(d.dataset.delta));
         if (r) setQty(r.dataset.remove, 0);
         if (d || r) draw();
       });
@@ -329,16 +360,24 @@
 
     checkout() {
       const root = $("#checkout");
-      const { items, subtotal, delivery, total } = cartTotals();
+      const { items, allPriced, total } = cartTotals();
       if (!items.length) {
         root.innerHTML = `<div class="empty"><p>В корзине нет товаров.</p><a class="btn" href="catalog.html">Перейти в каталог</a></div>`;
         return;
       }
       $("#order-summary").innerHTML = `
         <h3>Ваш заказ</h3>
-        ${items.map(({ product: p, qty }) => `<div class="row"><span>${esc(p.name)} × ${qty}</span><span>${money(p.price * qty)}</span></div>`).join("")}
-        <div class="row"><span>Доставка</span><span>${delivery ? money(delivery) : "бесплатно"}</span></div>
-        <div class="row total"><span>К оплате</span><span>${money(total)}</span></div>`;
+        ${items
+          .map(
+            ({ product: p, variant: v, qty }) =>
+              `<div class="row"><span>${esc(p.name)}, ${esc(v.size)} × ${qty}</span><span>${typeof v.price === "number" ? money(v.price * qty) : "—"}</span></div>`
+          )
+          .join("")}
+        ${
+          allPriced
+            ? `<div class="row total"><span>К оплате</span><span>${money(total)}</span></div>`
+            : `<p class="muted small">Стоимость заказа и доставки сообщит менеджер.</p>`
+        }`;
 
       const form = $("#checkout-form");
       form.addEventListener("submit", (e) => {
@@ -346,20 +385,16 @@
         if (!form.reportValidity()) return;
         const data = Object.fromEntries(new FormData(form));
         const number = "K-" + Date.now().toString().slice(-6);
-        const order = {
-          number,
-          date: new Date().toISOString(),
-          customer: data,
-          items: items.map(({ product: p, qty }) => ({ id: p.id, name: p.name, price: p.price, qty })),
-          subtotal,
-          delivery,
-          total
-        };
-        // Сохраняем заказ в браузере. Чтобы заказы приходили вам на почту,
-        // подключите сервис форм (см. README.md).
+        // Заказ пока сохраняется только в браузере покупателя.
+        // Чтобы заказы приходили вам, подключите сервис форм (см. README.md).
         try {
           const orders = JSON.parse(localStorage.getItem("kach-orders") || "[]");
-          orders.push(order);
+          orders.push({
+            number,
+            date: new Date().toISOString(),
+            customer: data,
+            items: items.map(({ product: p, variant: v, qty }) => ({ id: p.id, name: p.name, size: v.size, price: v.price, qty }))
+          });
           localStorage.setItem("kach-orders", JSON.stringify(orders));
         } catch (err) {}
         saveCart({});
@@ -368,7 +403,7 @@
             <div class="success-icon">✓</div>
             <h1>Спасибо за заказ!</h1>
             <p>Номер заказа: <strong>${number}</strong></p>
-            <p class="muted">Мы свяжемся с вами по телефону ${esc(data.phone)} в течение рабочего дня, чтобы подтвердить заказ и способ оплаты.</p>
+            <p class="muted">Мы свяжемся с вами по телефону ${esc(data.phone)}, чтобы подтвердить заказ, стоимость и доставку.</p>
             <a class="btn" href="index.html">На главную</a>
           </div>`;
         window.scrollTo(0, 0);
@@ -380,7 +415,7 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     renderChrome();
-    const page = (document.querySelector("[data-page]") || document.body).dataset.page;
+    const page = pageName();
     if (pages[page]) pages[page]();
     updateCartCount();
   });
