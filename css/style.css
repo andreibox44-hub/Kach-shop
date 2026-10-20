@@ -204,10 +204,10 @@ select, input, textarea { font: inherit; color: var(--text); background: var(--s
 @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; gap: 24px; } }
 
 /* Тёмная полоса */
-.band { background: var(--ink); color: #fff; }
+.band { background: var(--green-dark); color: #fff; }
 .band .container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding-top: 26px; padding-bottom: 26px; }
-.band div > div { font-size: 13px; text-transform: uppercase; letter-spacing: 1.2px; display: flex; gap: 10px; align-items: center; }
-.band div > div::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: #4c9a3a; }
+.band .container > div { font-size: 13px; text-transform: uppercase; letter-spacing: 1.2px; display: flex; gap: 12px; align-items: center; }
+.band svg { flex: none; width: 34px; height: 34px; color: #8cc47a; }
 @media (max-width: 860px) { .band .container { grid-template-columns: 1fr 1fr; } }
 
 /* Баннер */
@@ -232,3 +232,39 @@ select, input, textarea { font: inherit; color: var(--text); background: var(--s
 .toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); background: var(--ink); color: #fff; padding: 12px 22px; border-radius: 999px; opacity: 0; pointer-events: none; transition: .25s; z-index: 50; white-space: nowrap; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+
+/* Главная по плакату бренда */
+.brand-hero { padding: 40px 0 48px; background: var(--surface); }
+.brand-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 48px; align-items: start; }
+.brand-art { border-radius: 24px; overflow: hidden; position: sticky; top: 96px; }
+.brand-art img { width: 100%; height: auto; }
+.brand-text { position: relative; text-align: left; min-width: 0; }
+.brand-text p { margin: 0 0 14px; }
+.brand-text strong { color: var(--green); }
+.brand-text hr { border: 0; border-top: 2px solid var(--green); width: 36px; margin: 18px 0; }
+.world { position: absolute; right: 0; top: 0; width: 42%; opacity: .7; pointer-events: none; }
+.big-logo { display: flex; flex-direction: column; line-height: 1; margin-bottom: 22px; position: relative; }
+.big-logo .logo-word { font-size: clamp(56px, 9vw, 104px); letter-spacing: 8px; color: #5d6360; }
+.big-logo .logo-word::before { width: 34px; height: 22px; left: 0; top: -12px; }
+.big-logo .logo-sub { font-size: clamp(13px, 1.8vw, 20px); letter-spacing: 2.5px; margin-top: 6px; }
+.brand-kicker { font-size: 18px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin: 0 0 2px !important; }
+.brand-script { font-family: var(--serif); font-style: italic; font-size: clamp(26px, 3.4vw, 36px); color: var(--green); margin: 0 0 8px !important; }
+.leaf-rule { width: 60px; height: 2px; background: var(--green); margin: 4px 0 22px; position: relative; }
+.leaf-rule::after { content: ""; position: absolute; right: -14px; top: -6px; width: 12px; height: 8px; background: var(--green); border-radius: 0 100% 0 100%; }
+.brand-text .btn { margin-top: 10px; }
+.philosophy { padding: 40px 0; background: var(--bg); }
+.phil-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 32px; align-items: center; }
+.phil-title { font-family: var(--sans); font-size: 18px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--green); margin: 0 0 16px; }
+.philosophy .pillars { border: 0; }
+.philosophy .pillar svg { width: 44px; height: 44px; padding: 8px; border: 1.4px solid var(--green); border-radius: 50%; }
+.motto-box { text-align: center; border-left: 1px solid var(--line); padding-left: 24px; }
+.motto-head { font-size: 20px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin: 0 0 8px; }
+.motto-box .motto { margin: 0; }
+@media (max-width: 960px) {
+  .brand-grid, .phil-grid { grid-template-columns: 1fr; gap: 28px; }
+  .brand-art { position: static; max-width: 520px; }
+  .motto-box { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 24px; }
+}
+@media (max-width: 560px) { .world { display: none; } .big-logo .logo-word { letter-spacing: 5px; } }
+@media (max-width: 560px) { .band .container { grid-template-columns: 1fr; } }
+[data-page="home"] #site-footer { margin-top: 0; }
