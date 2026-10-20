@@ -316,7 +316,21 @@
       })
     );
     const f = $("#ad");
-    window.KACH_ADDR.bind($("#ad-country"), $("#ad-fields"), {}, "ad-");
+    // Черновик нового адреса сохраняется в браузере, чтобы не пропадал при обновлении страницы
+    const AD_KEY = "kach-address-draft";
+    let adDraft = {};
+    try {
+      adDraft = JSON.parse(localStorage.getItem(AD_KEY) || "{}") || {};
+    } catch (e) {}
+    window.KACH_ADDR.bind($("#ad-country"), $("#ad-fields"), adDraft, "ad-");
+    if (adDraft.title) $("#ad-title").value = adDraft.title;
+    const saveAdDraft = () => {
+      try {
+        localStorage.setItem(AD_KEY, JSON.stringify(Object.fromEntries(new FormData(f))));
+      } catch (e) {}
+    };
+    f.addEventListener("input", saveAdDraft);
+    f.addEventListener("change", saveAdDraft);
     f.addEventListener("submit", (e) => {
       e.preventDefault();
       if (!f.reportValidity()) return;
@@ -324,7 +338,18 @@
       run(f.querySelector('[type="submit"]'), $("#ad-msg"), async () => {
         const item = { title: (d.title || "").trim() };
         ["country", "region", "city", "zip", "address", "address2"].forEach((k) => (item[k] = (d[k] || "").trim()));
-        await save([...list, item]);
+        const keep = localStorage.getItem(AD_KEY);
+        try {
+          localStorage.setItem(AD_KEY, JSON.stringify({ country: item.country }));
+        } catch (e) {}
+        try {
+          await save([...list, item]);
+        } catch (err) {
+          try {
+            if (keep) localStorage.setItem(AD_KEY, keep);
+          } catch (e) {}
+          throw err;
+        }
         ui().toast("Адрес сохранён");
       });
     });
