@@ -431,3 +431,5 @@ select { font: inherit; }
 .field-hint { margin-top: -2px; }
 .cab-form select { width: 100%; }
 @media (max-width: 560px) { #addr-fields .field-row { grid-template-columns: 1fr; } }
+.cab-count { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; margin-left: 8px; border-radius: 999px; background: var(--green); color: #fff; font-size: 12px; font-weight: 700; line-height: 1; vertical-align: 1px; }
+.cab-nav a.active .cab-count { background: var(--green-dark); }

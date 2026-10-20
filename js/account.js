@@ -158,6 +158,19 @@
     return TABS.some(([k]) => k === h) ? h : "orders";
   };
 
+  // Счётчики у разделов кабинета
+  function setCount(key, n) {
+    const el = root && root.querySelector(`[data-count="${key}"]`);
+    if (!el) return;
+    el.textContent = n;
+    el.hidden = !n;
+  }
+  function updateCounts() {
+    const a = auth();
+    setCount("favorites", a.favorites().filter((id) => ui().findProduct(id)).length);
+    setCount("addresses", ((a.profile && a.profile.addresses) || []).length);
+  }
+
   function renderCabinet() {
     const a = auth();
     const pr = a.profile || {};
@@ -170,7 +183,7 @@
       </div>
       <div class="cab-layout">
         <nav class="cab-nav" aria-label="Разделы кабинета">
-          ${TABS.map(([k, v]) => `<a href="#${k}" class="${k === tab ? "active" : ""}" ${k === tab ? 'aria-current="page"' : ""}>${v}</a>`).join("")}
+          ${TABS.map(([k, v]) => `<a href="#${k}" class="${k === tab ? "active" : ""}" ${k === tab ? 'aria-current="page"' : ""}>${v}<span class="cab-count" data-count="${k}" hidden></span></a>`).join("")}
           <button class="link logout" id="logout">Выйти</button>
         </nav>
         <section class="cab-body" id="cab-body"></section>
@@ -180,6 +193,10 @@
       ui().toast("Вы вышли из кабинета");
     });
     ({ orders, favorites, profile: profileTab, addresses })[tab]($("#cab-body"));
+    updateCounts();
+    a.orders()
+      .then((list) => setCount("orders", list.length))
+      .catch(() => {});
     const act = root.querySelector(".cab-nav a.active");
     if (act && act.scrollIntoView && window.innerWidth < 860) act.scrollIntoView({ block: "nearest", inline: "center" });
   }
@@ -352,6 +369,10 @@
         if (key !== render.last) {
           render.last = key;
           render();
+        } else if (key) {
+          updateCounts();
+          // В «Избранном» сразу убираем снятые товары
+          if (currentTab() === "favorites" && $("#cab-body")) favorites($("#cab-body"));
         }
       });
       render.last = auth().user ? auth().user.id : "";
