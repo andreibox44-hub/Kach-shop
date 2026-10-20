@@ -143,6 +143,10 @@
             ${link("about.html", "О бренде", "about")}
             ${link("about.html#contacts", "Контакты", "")}
           </nav>
+          <a href="account.html" class="account-link" aria-label="Личный кабинет" data-account-link>
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+            <span class="account-initial" hidden></span>
+          </a>
           <a href="cart.html" class="cart-link" aria-label="Корзина">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
             <span class="cart-count" data-cart-count hidden>0</span>
@@ -224,6 +228,21 @@
     });
   }
 
+  // ---------- Избранное ----------
+  const AUTH = () => window.KACH_AUTH;
+  const isFav = (id) => (AUTH() ? AUTH().favorites().includes(id) : false);
+  const favButton = (id, extra = "") =>
+    `<button class="fav${isFav(id) ? " on" : ""}${extra}" data-fav="${id}" aria-pressed="${isFav(id)}" aria-label="В избранное">${HEART}</button>`;
+  const HEART = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
+  function refreshFavs() {
+    document.querySelectorAll("[data-fav]").forEach((b) => {
+      const on = isFav(b.dataset.fav);
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-pressed", on);
+    });
+  }
+  window.KACH_UI = { productCard: (p) => productCard(p), money, esc, img, findProduct, CATS, toast };
+
   // ---------- Карточка товара ----------
   function productCard(p) {
     return `
@@ -232,6 +251,7 @@
           ${p.tag ? `<span class="badge">${esc(p.tag)}</span>` : ""}
           <img src="${img(p)}" alt="${esc(p.name)}" loading="lazy" width="560" height="700">
         </a>
+        ${favButton(p.id)}
         <div class="card-body">
           <p class="card-type">${esc(CATS[p.category])}</p>
           <h3><a href="product.html?id=${p.id}">${esc(p.name)}</a></h3>
@@ -247,6 +267,14 @@
 
   document.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-add]");
+    const fav = e.target.closest("[data-fav]");
+    if (fav && AUTH()) {
+      e.preventDefault();
+      AUTH()
+        .toggleFavorite(fav.dataset.fav)
+        .then((on) => toast(on ? "Добавлено в избранное" : "Удалено из избранного"))
+        .catch((err) => toast(AUTH().errorText(err)));
+    }
     if (btn) {
       const p = findProduct(btn.dataset.add);
       if (p) addToCart(p.id, p.variants[0].size);
@@ -320,6 +348,7 @@
                 <button type="button" data-step="1" aria-label="Больше">+</button>
               </div>
               <button class="btn" id="buy">Добавить в корзину</button>
+              ${favButton(p.id, " fav-big")}
             </div>
             <dl class="specs">
               <div><dt>Для волос</dt><dd>${esc(p.hair)}</dd></div>
@@ -443,20 +472,60 @@
         }`;
 
       const form = $("#checkout-form");
-      form.addEventListener("submit", (e) => {
+      const auth = AUTH();
+      // Подставляем данные из личного кабинета
+      if (auth) {
+        auth.ready.then(() => {
+          const pr = auth.profile;
+          const u = auth.user;
+          if (!u) {
+            const hint = $("#login-hint");
+            if (hint && auth.enabled) hint.hidden = false;
+            return;
+          }
+          const setIf = (id, v) => {
+            const el = $("#" + id);
+            if (el && !el.value && v) el.value = v;
+          };
+          setIf("name", pr && pr.name);
+          setIf("phone", pr && pr.phone);
+          setIf("email", u.email);
+          const addr = pr && pr.addresses && pr.addresses[0];
+          if (addr) {
+            setIf("city", addr.city);
+            setIf("zip", addr.zip);
+            setIf("address", addr.address);
+          }
+        });
+      }
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
         if (!form.reportValidity()) return;
         const data = Object.fromEntries(new FormData(form));
         const number = "K-" + Date.now().toString().slice(-6);
-        // Заказ пока сохраняется только в браузере покупателя.
-        // Чтобы заказы приходили вам, подключите сервис форм (см. README.md).
+        const orderItems = items.map(({ product: p, variant: v, qty }) => ({ id: p.id, name: p.name, size: v.size, price: v.price, qty }));
+        const submit = form.querySelector('[type="submit"]');
+        // Отправляем заказ в базу (Supabase), если она подключена
+        if (auth && auth.enabled) {
+          submit.disabled = true;
+          submit.textContent = "Отправляем…";
+          try {
+            await auth.saveOrder({ number, customer: data, items: orderItems, total: allPriced ? total : null });
+          } catch (err) {
+            console.error(err);
+            submit.disabled = false;
+            submit.textContent = "Подтвердить заказ";
+            toast("Не удалось отправить заказ. Попробуйте ещё раз или позвоните нам.");
+            return;
+          }
+        }
         try {
           const orders = JSON.parse(localStorage.getItem("kach-orders") || "[]");
           orders.push({
             number,
             date: new Date().toISOString(),
             customer: data,
-            items: items.map(({ product: p, variant: v, qty }) => ({ id: p.id, name: p.name, size: v.size, price: v.price, qty }))
+            items: orderItems
           });
           localStorage.setItem("kach-orders", JSON.stringify(orders));
         } catch (err) {}
@@ -467,14 +536,15 @@
             <h1>Спасибо за заказ!</h1>
             <p>Номер заказа: <strong>${number}</strong></p>
             <p class="muted">Мы свяжемся с вами по телефону ${esc(data.phone)}, чтобы подтвердить заказ, стоимость и доставку.</p>
-            <a class="btn" href="index.html">На главную</a>
+            <a class="btn" href="${auth && auth.user ? "account.html#orders" : "index.html"}">${auth && auth.user ? "Мои заказы" : "На главную"}</a>
           </div>`;
         window.scrollTo(0, 0);
       });
     },
 
     about() {},
-    info() {}
+    info() {},
+    account() {}
   };
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -482,6 +552,20 @@
     const page = pageName();
     if (pages[page]) pages[page]();
     updateCartCount();
+    const auth = AUTH();
+    if (auth) {
+      auth.onChange((u, pr) => {
+        refreshFavs();
+        document.querySelectorAll("[data-account-link]").forEach((a) => {
+          const ini = a.querySelector(".account-initial");
+          const name = (pr && pr.name) || (u && u.email) || "";
+          ini.hidden = !u;
+          ini.textContent = u ? name.trim().charAt(0).toUpperCase() : "";
+          a.classList.toggle("logged", !!u);
+          a.setAttribute("aria-label", u ? "Личный кабинет: " + name : "Войти в личный кабинет");
+        });
+      });
+    }
   });
   window.addEventListener("storage", updateCartCount);
 })();

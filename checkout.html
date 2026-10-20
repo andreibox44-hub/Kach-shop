@@ -20,6 +20,7 @@
           <form class="form" id="checkout-form" novalidate>
             <fieldset>
               <legend>Контактные данные</legend>
+              <p class="login-hint" id="login-hint" hidden>Есть аккаунт? <a href="account.html">Войдите</a>, чтобы данные подставились сами и заказ сохранился в истории.</p>
               <div class="field"><label for="name">Имя и фамилия *</label><input id="name" name="name" required autocomplete="name"></div>
               <div class="field-row">
                 <div class="field"><label for="phone">Телефон *</label><input id="phone" name="phone" type="tel" required minlength="10" placeholder="+7 900 000-00-00" autocomplete="tel"></div>
@@ -53,6 +54,9 @@
   </main>
   <footer id="site-footer"></footer>
   <script src="js/products.js"></script>
+  <script src="js/vendor/supabase.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
