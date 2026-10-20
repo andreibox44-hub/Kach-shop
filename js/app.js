@@ -599,7 +599,29 @@
         ADDR.bind($("#country"), $("#addr-fields"), values, "", (c) => {
           $("#phone").placeholder = c.phone;
         });
-      bindAddr({});
+      // Черновик формы: всё введённое хранится в этом браузере и не пропадает при обновлении страницы
+      const DRAFT_KEY = "kach-checkout-draft";
+      let draft = {};
+      try {
+        draft = JSON.parse(localStorage.getItem(DRAFT_KEY) || "{}") || {};
+      } catch (e) {}
+      bindAddr(draft);
+      ["name", "phone", "email", "comment"].forEach((k) => {
+        const el = $("#" + k);
+        if (el && draft[k]) el.value = draft[k];
+      });
+      ["delivery", "payment"].forEach((k) => {
+        const el = draft[k] && form.querySelector(`input[name="${k}"][value="${draft[k]}"]`);
+        if (el && !el.closest("[hidden]")) el.checked = true;
+      });
+      const saveDraft = () => {
+        try {
+          const d = Object.fromEntries(new FormData(form));
+          localStorage.setItem(DRAFT_KEY, JSON.stringify(d));
+        } catch (e) {}
+      };
+      form.addEventListener("input", saveDraft);
+      form.addEventListener("change", saveDraft);
       // Подставляем данные из личного кабинета
       if (auth) {
         auth.ready.then(() => {
@@ -618,7 +640,7 @@
           setIf("phone", pr && pr.phone);
           setIf("email", u.email);
           const addr = pr && pr.addresses && pr.addresses[0];
-          if (addr) {
+          if (addr && !draft.country) {
             const fresh = $("#country").cloneNode(false);
             $("#country").replaceWith(fresh);
             bindAddr(addr);
@@ -681,6 +703,12 @@
           localStorage.setItem("kach-orders", JSON.stringify(orders));
         } catch (err) {}
         saveCart({});
+        // Контакты и адрес остаются на следующий раз, комментарий — нет
+        try {
+          const d = JSON.parse(localStorage.getItem(DRAFT_KEY) || "{}");
+          delete d.comment;
+          localStorage.setItem(DRAFT_KEY, JSON.stringify(d));
+        } catch (e) {}
         if (online && auth && auth.enabled) {
           if (data.payment === "card") {
             submit.textContent = "Переходим к оплате…";
