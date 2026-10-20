@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Оформление заказа — Kach</title>
+  <meta name="description" content="Оформление заказа в магазине Kach.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌿%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="checkout">
+  <header id="site-header"></header>
+  <main>
+    <section class="section">
+      <div class="container" id="checkout">
+        <h1>Оформление заказа</h1>
+        <div class="checkout-layout">
+          <form class="form" id="checkout-form" novalidate>
+            <fieldset>
+              <legend>Контактные данные</legend>
+              <div class="field"><label for="name">Имя и фамилия *</label><input id="name" name="name" required autocomplete="name"></div>
+              <div class="field-row">
+                <div class="field"><label for="phone">Телефон *</label><input id="phone" name="phone" type="tel" required minlength="10" placeholder="+7 900 000-00-00" autocomplete="tel"></div>
+                <div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email"></div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Доставка</legend>
+              <label class="radio"><input type="radio" name="delivery" value="courier" checked><span><strong>Курьером</strong><br><span class="muted small">2–3 дня, до двери</span></span></label>
+              <label class="radio"><input type="radio" name="delivery" value="pickup-point"><span><strong>В пункт выдачи</strong><br><span class="muted small">3–5 дней, СДЭК или Boxberry</span></span></label>
+              <label class="radio"><input type="radio" name="delivery" value="post"><span><strong>Почтой России</strong><br><span class="muted small">5–10 дней, по всей стране</span></span></label>
+              <div class="field-row">
+                <div class="field"><label for="city">Город *</label><input id="city" name="city" required autocomplete="address-level2"></div>
+                <div class="field"><label for="zip">Индекс</label><input id="zip" name="zip" inputmode="numeric" autocomplete="postal-code"></div>
+              </div>
+              <div class="field"><label for="address">Адрес *</label><input id="address" name="address" required placeholder="Улица, дом, квартира" autocomplete="street-address"></div>
+            </fieldset>
+            <fieldset>
+              <legend>Оплата</legend>
+              <label class="radio"><input type="radio" name="payment" value="cash" checked><span><strong>При получении</strong><br><span class="muted small">Наличными или картой</span></span></label>
+              <label class="radio"><input type="radio" name="payment" value="transfer"><span><strong>Переводом</strong><br><span class="muted small">Пришлём реквизиты после подтверждения заказа</span></span></label>
+            </fieldset>
+            <div class="field"><label for="comment">Комментарий к заказу</label><textarea id="comment" name="comment" rows="3"></textarea></div>
+            <label class="small muted"><input type="checkbox" required> Я согласен(на) на обработку персональных данных *</label>
+            <button class="btn btn-block" type="submit">Подтвердить заказ</button>
+          </form>
+          <aside class="summary" id="order-summary"></aside>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
