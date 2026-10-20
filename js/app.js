@@ -282,6 +282,29 @@
   });
 
   // ---------- Страницы ----------
+  // Плакат товара в стиле бренда, текст на языке сайта (вместо итальянской картинки)
+  const LEAF = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14Zm0 0 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  function posterCard(p) {
+    const sizes = p.variants.map((v) => v.size).join(" · ");
+    return `
+      <figure class="poster-card" aria-label="Плакат ${esc(p.name)}">
+        <div class="pc-photo"><img src="${img(p)}" alt="${esc(p.name)}" loading="lazy"></div>
+        <div class="pc-body">
+          <div class="pc-logo">KACH<small>HAIR ORGANIC SOLUTIONS</small></div>
+          <h3 class="pc-name">${esc(p.name)}</h3>
+          <div class="pc-sub">${esc(p.subtitle)}</div>
+          <p class="pc-short">${esc(p.short)}</p>
+          <ul class="pc-ben">${p.benefits.map((b) => `<li>${LEAF}<span>${esc(b)}</span></li>`).join("")}</ul>
+        </div>
+        <div class="pc-bar">
+          <div><span>Объём</span><strong>${esc(sizes)}</strong></div>
+          ${p.ph ? `<div><span class="pc-ph">pH</span><strong>${esc(p.ph)}</strong></div>` : ""}
+          <div class="pc-hair"><span>Для волос</span><strong>${esc(p.hair)}</strong></div>
+          <div class="pc-mx"><strong>Made in Mexico</strong></div>
+        </div>
+      </figure>`;
+  }
+
   // ---------- Онлайн-оплата ----------
   function loadPayPal(clientId) {
     if (window.paypal) return Promise.resolve(window.paypal);
@@ -467,10 +490,7 @@
             <h3>Основные активные ингредиенты</h3>
             <div class="keys">${p.actives.map((k) => `<span class="key">${esc(k)}</span>`).join("")}</div>
           </div>
-          <figure class="poster">
-            <a href="${poster(p)}" target="_blank" rel="noopener"><img src="${poster(p)}" alt="Плакат ${esc(p.name)}" loading="lazy"></a>
-            <figcaption>Оригинальный плакат бренда. Нажмите, чтобы открыть крупно.</figcaption>
-          </figure>
+          ${posterCard(p)}
         </section>
         <section class="section">
           <h2>С этим товаром смотрят</h2>
