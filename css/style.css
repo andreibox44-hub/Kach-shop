@@ -238,7 +238,8 @@ select, input, textarea { font: inherit; color: var(--text); background: var(--s
 .footer-inner .footer-phone { color: #fff !important; font-weight: 700; font-size: 17px; }
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; border-top: 1px solid #2a2e29; padding-top: 20px; padding-bottom: 16px; }
 .pay { display: flex; gap: 8px; flex-wrap: wrap; }
-.pay span { border: 1px solid #3a3f39; border-radius: 6px; padding: 3px 10px; font-size: 12px; font-weight: 700; color: #d9dcd5; letter-spacing: .5px; }
+.pay-badge { display: inline-flex; align-items: center; justify-content: center; width: 54px; height: 34px; padding: 6px 8px; background: #fff; border-radius: 6px; }
+.pay-badge svg { width: 100%; height: 100%; display: block; }
 .legal { display: flex; gap: 20px; flex-wrap: wrap; }
 .legal a { color: #9aa197; font-size: 13px; }
 .legal a:hover { color: #fff; }
@@ -433,3 +434,5 @@ select { font: inherit; }
 @media (max-width: 560px) { #addr-fields .field-row { grid-template-columns: 1fr; } }
 .cab-count { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; margin-left: 8px; border-radius: 999px; background: var(--green); color: #fff; font-size: 12px; font-weight: 700; line-height: 1; vertical-align: 1px; }
 .cab-nav a.active .cab-count { background: var(--green-dark); }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
