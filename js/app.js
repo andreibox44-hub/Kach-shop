@@ -220,6 +220,7 @@
           <span>${CONTACTS.company}</span>
         </div>`;
     }
+    document.querySelectorAll("[data-pay-badges]").forEach((el) => (el.innerHTML = PAY_BADGES));
     document.querySelectorAll("[data-contact]").forEach((el) => {
       const k = el.dataset.contact;
       if (k === "phone") el.innerHTML = `<a href="tel:${CONTACTS.phoneHref}">${CONTACTS.phone}</a>`;

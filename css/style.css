@@ -239,6 +239,8 @@ select, input, textarea { font: inherit; color: var(--text); background: var(--s
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; border-top: 1px solid #2a2e29; padding-top: 20px; padding-bottom: 16px; }
 .pay { display: flex; gap: 8px; flex-wrap: wrap; }
 .pay-badge { display: inline-flex; align-items: center; justify-content: center; width: 54px; height: 34px; padding: 6px 8px; background: #fff; border-radius: 6px; }
+.pay-inline { margin: 8px 0 4px; }
+.pay-inline .pay-badge { width: 46px; height: 30px; padding: 5px 7px; border: 1px solid #e3e3dc; }
 .pay-badge svg { width: 100%; height: 100%; display: block; }
 .legal { display: flex; gap: 20px; flex-wrap: wrap; }
 .legal a { color: #9aa197; font-size: 13px; }
