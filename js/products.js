@@ -103,7 +103,7 @@ window.KACH_PRODUCTS = [
     subtitle: "Щелочной шампунь глубокой очистки",
     category: "shampoo",
     tag: "",
-    variants: [{ size: "80 мл", price: 30 }, { size: "1000 мл", price: 30 }],
+    variants: [{ size: "1000 мл", price: 39 }],
     ph: "8.5–9.0",
     hair: "Все типы волос",
     formula: "Натуральная формула",
