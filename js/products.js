@@ -234,7 +234,7 @@ window.KACH_PRODUCTS = [
     subtitle: "Профессиональный набор для ухода за волосами",
     category: "pro",
     tag: "Набор",
-    variants: [{ size: "Набор", price: 30 }],
+    variants: [{ size: "Набор", price: 349 }],
     ph: "",
     hair: "Все типы волос",
     formula: "Без парабенов, сульфатов и формальдегида",
