@@ -176,7 +176,7 @@ window.KACH_PRODUCTS = [
     subtitle: "Сыворотка: блеск, шелковистость, питание",
     category: "care",
     tag: "",
-    variants: [{ size: "100 мл", price: 30 }, { size: "250 мл", price: 30 }],
+    variants: [{ size: "100 мл", price: 49 }, { size: "250 мл", price: 99 }],
     ph: "",
     hair: "Нормальные и жёсткие, густые волосы",
     formula: "Без парабенов и сульфатов",
