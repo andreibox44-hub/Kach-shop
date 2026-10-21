@@ -158,7 +158,7 @@ window.KACH_PRODUCTS = [
     subtitle: "Интенсивная реконструкция волос",
     category: "care",
     tag: "",
-    variants: [{ size: "200 мл", price: 30 }],
+    variants: [{ size: "200 мл", price: 69 }],
     ph: "4.0–5.0",
     hair: "Все типы волос",
     formula: "Чистый концентрат аминокислот и кератина",
