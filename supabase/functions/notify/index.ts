@@ -12,7 +12,7 @@ const json = (body: unknown, status = 200) => new Response(JSON.stringify(body),
 const COUNTRY: Record<string, string> = { RO: "Румыния", IT: "Италия", DE: "Германия", FR: "Франция" };
 const DELIVERY: Record<string, string> = { courier: "Курьером", post: "Почтой" };
 const esc = (s: unknown) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-const money = (n: number) => (Math.round(n * 100) / 100).toLocaleString("ru-RU", { maximumFractionDigits: 2 }) + " €";
+const money = (n: number) => Number(n).toFixed(2).replace(/\B(?=(\d{3})+\.)/g, " ") + " €";
 
 async function tg(method: string, body: Record<string, unknown> = {}) {
   const token = env("TELEGRAM_BOT_TOKEN");

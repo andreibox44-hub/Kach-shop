@@ -41,7 +41,8 @@
 
   // ---------- Утилиты ----------
   const $ = (sel, root = document) => root.querySelector(sel);
-  const money = (n) => n.toLocaleString("ru-RU", { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 }) + " €";
+  // Цена в формате 23.00 € (тысячи через пробел: 1 047.00 €)
+  const money = (n) => Number(n).toFixed(2).replace(/\B(?=(\d{3})+\.)/g, " ") + " €";
   const findProduct = (id) => PRODUCTS.find((p) => p.id === id);
   const esc = (s) =>
     String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
