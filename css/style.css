@@ -441,3 +441,7 @@ select { font: inherit; }
 
 .price.sold-out { color: #8a8f87; font-size: 14px; font-weight: 600; }
 #buy[disabled] { cursor: not-allowed; }
+.vat-note { font-size: 12px; color: #8a8f87; margin: 4px 0 0; }
+.vat-center { text-align: center; margin-top: 24px; }
+#price + .vat-note { margin: -16px 0 14px; }
+.summary .vat-note { margin: 2px 0 14px; text-align: right; }

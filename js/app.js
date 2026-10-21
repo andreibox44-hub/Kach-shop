@@ -466,6 +466,7 @@
             <h1>${esc(p.name)}</h1>
             <p class="product-sub">${esc(p.subtitle)}</p>
             <p class="price big" id="price">${priceOf(size)}</p>
+            ${p.soldOut ? "" : `<p class="vat-note">Цена с НДС</p>`}
             ${
               p.variants.length > 1
                 ? `<div class="sizes" role="radiogroup" aria-label="Объём">${p.variants
@@ -561,7 +562,7 @@
               <h3>Итого</h3>
               ${
                 allPriced
-                  ? `<div class="row total"><span>К оплате</span><span>${money(total)}</span></div>`
+                  ? `<div class="row total"><span>К оплате</span><span>${money(total)}</span></div><p class="vat-note">Цены включают НДС</p>`
                   : `<p class="muted small">Точную стоимость заказа и доставки менеджер сообщит после оформления.</p>`
               }
               <a href="checkout.html" class="btn btn-block">Оформить заказ</a>
@@ -597,7 +598,7 @@
           .join("")}
         ${
           allPriced
-            ? `<div class="row total"><span>К оплате</span><span>${money(total)}</span></div>`
+            ? `<div class="row total"><span>К оплате</span><span>${money(total)}</span></div><p class="vat-note">Цены включают НДС</p>`
             : `<p class="muted small">Стоимость заказа и доставки сообщит менеджер.</p>`
         }`;
 
