@@ -6,12 +6,12 @@
 
   // Контакты магазина — замените на свои.
   const CONTACTS = {
-    phone: "+40 (000) 000 000",
-    phoneHref: "+40000000000",
-    email: "info@kachhair.com",
+    phone: "+39 389 040 5737",
+    phoneHref: "+393890405737",
+    email: "supearius@gmail.com",
     hours: "Ежедневно 10:00–20:00",
-    address: "Адрес уточняется",
-    company: "S.R.L. «Название» · CUI RO00000000",
+    address: "Str. Adrian Adamiu nr. 8, 710013 Botoșani, România",
+    company: "FIRMA DE COMERT ROMAVA SRL · CUI RO35249323 · J07/458/2015",
     // Ссылки на соцсети. Пустая строка = значок не показывается.
     social: {
       instagram: "https://instagram.com/",
