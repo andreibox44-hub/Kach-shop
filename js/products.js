@@ -84,7 +84,7 @@ window.KACH_PRODUCTS = [
     subtitle: "Кислотный шампунь глубокой очистки",
     category: "shampoo",
     tag: "",
-    variants: [{ size: "80 мл", price: 30 }, { size: "1000 мл", price: 30 }],
+    variants: [{ size: "80 мл", price: 10 }, { size: "450 мл", price: 39 }],
     ph: "3.5–4.5",
     hair: "Волосы после химических процедур",
     formula: "Натуральная формула · без SLES и парабенов",
