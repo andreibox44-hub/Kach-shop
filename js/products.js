@@ -27,7 +27,7 @@ window.KACH_PRODUCTS = [
     subtitle: "Шампунь быстрого восстановления",
     category: "shampoo",
     tag: "",
-    variants: [{ size: "250 мл", price: 30 }, { size: "450 мл", price: 30 }],
+    variants: [{ size: "250 мл", price: 23 }, { size: "450 мл", price: 32 }],
     ph: "5.5",
     hair: "Нормальные, тонкие волосы и волосы, повреждённые химическими процедурами",
     formula: "30% восстановление · 70% увлажнение",
