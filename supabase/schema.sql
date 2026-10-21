@@ -106,3 +106,43 @@ create table if not exists public.product_prices (
 alter table public.product_prices enable row level security;
 drop policy if exists "prices: read all" on public.product_prices;
 create policy "prices: read all" on public.product_prices for select to anon, authenticated using (true);
+
+-- =====================================================================
+-- 4. Уведомления о заказах в Telegram (функция notify)
+-- =====================================================================
+alter table public.orders add column if not exists notified_new_at timestamptz,
+  add column if not exists notified_paid_at timestamptz,
+  add column if not exists tg_message_id bigint;
+
+-- Настройки, доступные только серверу (RLS без политик)
+create table if not exists public.app_settings (key text primary key, value text not null);
+alter table public.app_settings enable row level security;
+-- ID группы: insert into public.app_settings values ('telegram_chat_id', '-100...');
+
+-- Покупатель не может сам поставить отметки «уведомлено»
+create or replace function public.orders_reset_notify() returns trigger language plpgsql as $$
+begin
+  new.notified_new_at := null;
+  new.notified_paid_at := null;
+  new.tg_message_id := null;
+  return new;
+end $$;
+
+create or replace function public.orders_notify() returns trigger language plpgsql security definer set search_path = public, extensions as $$
+begin
+  perform net.http_post(
+    url := 'https://xwyiyozgpttnqezxqlwk.supabase.co/functions/v1/notify',
+    body := jsonb_build_object('id', new.id),
+    headers := '{"Content-Type":"application/json"}'::jsonb
+  );
+  return null;
+end $$;
+revoke execute on function public.orders_notify() from public, anon, authenticated;
+
+create trigger orders_reset_notify before insert on public.orders
+  for each row execute function public.orders_reset_notify();
+create trigger orders_notify_new after insert on public.orders
+  for each row execute function public.orders_notify();
+create trigger orders_notify_paid after update of payment_status on public.orders
+  for each row when (new.payment_status = 'paid' and old.payment_status is distinct from 'paid')
+  execute function public.orders_notify();
