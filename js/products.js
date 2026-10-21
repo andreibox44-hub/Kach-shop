@@ -122,7 +122,7 @@ window.KACH_PRODUCTS = [
     subtitle: "Кондиционер быстрого увлажнения",
     category: "conditioner",
     tag: "",
-    variants: [{ size: "250 мл", price: 30 }, { size: "450 мл", price: 30 }],
+    variants: [{ size: "250 мл", price: 23 }, { size: "450 мл", price: 32 }],
     ph: "4.5",
     hair: "Нормальные, жёсткие волосы и волосы, повреждённые химическими процедурами",
     formula: "30% восстановление · 70% увлажнение",
