@@ -46,7 +46,7 @@
   const findProduct = (id) => PRODUCTS.find((p) => p.id === id);
   const esc = (s) =>
     String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const img = (p) => `images/products/${p.id}.jpg?v=5`;
+  const img = (p) => `images/products/${p.id}.jpg?v=6`;
   const poster = (p) => `images/posters/${p.id}.jpg`;
   const pageName = () => (document.querySelector("[data-page]") || document.body).dataset.page;
 
