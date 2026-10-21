@@ -438,3 +438,6 @@ select { font: inherit; }
 .cab-nav a.active .cab-count { background: var(--green-dark); }
 
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.price.sold-out { color: #8a8f87; font-size: 14px; font-weight: 600; }
+#buy[disabled] { cursor: not-allowed; }

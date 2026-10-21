@@ -195,6 +195,7 @@ window.KACH_PRODUCTS = [
     subtitle: "Крем для объёма: блеск и питание",
     category: "care",
     tag: "",
+    soldOut: true, // нет в наличии: убрать строку, когда товар появится
     variants: [{ size: "100 мл", price: 30 }],
     ph: "",
     hair: "Нормальные и тонкие волосы",

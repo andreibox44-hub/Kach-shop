@@ -75,6 +75,7 @@
   function addToCart(id, size, qty = 1) {
     const p = findProduct(id);
     if (!p) return;
+    if (p.soldOut) return toast("Этого товара сейчас нет в наличии");
     const v = p.variants.find((x) => x.size === size) || p.variants[0];
     const cart = getCart();
     const k = keyOf(id, v.size);
@@ -97,7 +98,7 @@
         const variant = product && product.variants.find((v) => v.size === size);
         return { key: k, product, variant, qty: cart[k] };
       })
-      .filter((i) => i.product && i.variant && i.qty > 0);
+      .filter((i) => i.product && i.variant && i.qty > 0 && !i.product.soldOut);
   }
   function cartTotals() {
     const items = cartItems();
@@ -261,8 +262,12 @@
           <p class="card-sub">${esc(p.subtitle)}</p>
           <p class="card-sizes">${p.variants.map((v) => esc(v.size)).join(" · ")}${p.ph ? ` · pH ${esc(p.ph)}` : ""}</p>
           <div class="card-footer">
-            <span class="price">${priceLabel(p)}</span>
-            <button class="btn btn-small" data-add="${p.id}">В корзину</button>
+            ${
+              p.soldOut
+                ? `<span class="price sold-out">Нет в наличии</span>`
+                : `<span class="price">${priceLabel(p)}</span>
+            <button class="btn btn-small" data-add="${p.id}">В корзину</button>`
+            }
           </div>
         </div>
       </article>`;
@@ -448,6 +453,7 @@
       document.title = `${p.name} — KACH`;
       let size = p.variants[0].size;
       const priceOf = (s) => {
+        if (p.soldOut) return "Нет в наличии";
         const v = p.variants.find((x) => x.size === s);
         return typeof v.price === "number" ? money(v.price) : "Цена по запросу";
       };
@@ -473,7 +479,7 @@
                 <input type="number" id="qty" value="1" min="1" max="99" aria-label="Количество">
                 <button type="button" data-step="1" aria-label="Больше">+</button>
               </div>
-              <button class="btn" id="buy">Добавить в корзину</button>
+              <button class="btn" id="buy"${p.soldOut ? " disabled" : ""}>${p.soldOut ? "Нет в наличии" : "Добавить в корзину"}</button>
               ${favButton(p.id, " fav-big")}
             </div>
             <dl class="specs">
