@@ -46,7 +46,7 @@ window.KACH_PRODUCTS = [
     subtitle: "Разглаживающий шампунь против пушистости",
     category: "shampoo",
     tag: "Хит",
-    variants: [{ size: "80 мл", price: 30 }, { size: "400 мл", price: 30 }],
+    variants: [{ size: "80 мл", price: 29 }, { size: "400 мл", price: 149 }],
     ph: "0.5–1.5",
     hair: "Волнистые, пушистые и кудрявые волосы",
     formula: "Без SLS, SLES, парабенов, силиконов, ГМО и формальдегида",
