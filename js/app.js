@@ -166,15 +166,6 @@
     const footer = $("#site-footer");
     if (footer) {
       footer.innerHTML = `
-        <div class="footer-top">
-          <div class="container footer-top-inner">
-            <div>
-              <strong>Следите за новинками KACH</strong>
-              <span>Советы по уходу, новые средства и акции в наших соцсетях.</span>
-            </div>
-            <div class="socials">${socialLinks()}</div>
-          </div>
-        </div>
         <div class="container footer-inner">
           <div class="footer-brand">
             ${logo}
