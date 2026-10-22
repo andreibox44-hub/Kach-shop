@@ -8,7 +8,7 @@
 // Суммы считаются только здесь, по таблице product_prices, — цене из браузера мы не верим.
 import { createClient } from "npm:@supabase/supabase-js@2.45.4";
 
-const env = (k: string, d = "") => Deno.env.get(k) ?? d;
+const env = (k: string, d = "") => (Deno.env.get(k) ?? d).trim();
 const CURRENCY = "eur";
 const SITE = env("SITE_URL", "https://andreibox44-hub.github.io/Kach-shop").replace(/\/$/, "");
 const db = createClient(env("SUPABASE_URL"), env("SUPABASE_SERVICE_ROLE_KEY"), { auth: { persistSession: false } });
@@ -217,8 +217,19 @@ Deno.serve(async (req) => {
         return json({
           currency: CURRENCY.toUpperCase(),
           stripe: !!env("STRIPE_SECRET_KEY"),
+          stripeMode: (() => {
+            const k = env("STRIPE_SECRET_KEY");
+            if (!k) return null;
+            if (/^(sk|rk)_live_/.test(k)) return "live";
+            if (/^(sk|rk)_test_/.test(k)) return "test";
+            if (/^pk_/.test(k)) return "publishable-key";
+            return "unknown";
+          })(),
           paypal: env("PAYPAL_CLIENT_ID") && env("PAYPAL_SECRET") ? env("PAYPAL_CLIENT_ID") : null,
-          test: env("STRIPE_SECRET_KEY").startsWith("sk_test") || env("PAYPAL_ENV", "sandbox") !== "live"
+          // тестовый режим: Stripe-ключ sk_test_ (PayPal учитываем, только если он подключён)
+          test:
+            /^(sk|rk)_test_/.test(env("STRIPE_SECRET_KEY")) ||
+            (!!env("PAYPAL_CLIENT_ID") && env("PAYPAL_ENV", "sandbox") !== "live")
         });
       case "stripe-session":
         return json(await stripeSession(b.token));
