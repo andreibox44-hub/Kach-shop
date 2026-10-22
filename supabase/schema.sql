@@ -146,3 +146,37 @@ create trigger orders_notify_new after insert on public.orders
 create trigger orders_notify_paid after update of payment_status on public.orders
   for each row when (new.payment_status = 'paid' and old.payment_status is distinct from 'paid')
   execute function public.orders_notify();
+
+-- =====================================================================
+-- 5. Выручка по неделям (страница revenue.html, только для владельца)
+-- =====================================================================
+-- Кто видит: app_settings 'admin_emails' (почты через запятую, почта должна быть подтверждена).
+-- С какой даты считать: app_settings 'revenue_from' (до этого были тестовые оплаты).
+create or replace function public.admin_paid_orders(p_from timestamptz, p_to timestamptz)
+returns table (number text, paid_at timestamptz, paid_amount numeric, currency text, items jsonb)
+language plpgsql stable security definer set search_path = ''
+as $$
+declare
+  v_email text;
+  v_from timestamptz;
+begin
+  select lower(u.email) into v_email from auth.users u
+   where u.id = auth.uid() and u.email_confirmed_at is not null;
+  if v_email is null or not exists (
+    select 1 from public.app_settings s
+     where s.key = 'admin_emails'
+       and v_email = any (string_to_array(lower(replace(s.value, ' ', '')), ','))
+  ) then
+    raise exception 'not admin' using errcode = '42501';
+  end if;
+  select greatest(p_from, coalesce((select s.value::timestamptz from public.app_settings s where s.key = 'revenue_from'), '-infinity'::timestamptz))
+    into v_from;
+  return query
+    select o.number, o.paid_at, o.paid_amount, o.currency, o.items
+      from public.orders o
+     where o.payment_status = 'paid' and o.paid_at >= v_from and o.paid_at < p_to
+     order by o.paid_at;
+end $$;
+revoke execute on function public.admin_paid_orders(timestamptz, timestamptz) from public, anon;
+grant execute on function public.admin_paid_orders(timestamptz, timestamptz) to authenticated;
+-- insert into public.app_settings values ('admin_emails', 'you@example.com'), ('revenue_from', '2026-10-22T00:00:00+03:00');
