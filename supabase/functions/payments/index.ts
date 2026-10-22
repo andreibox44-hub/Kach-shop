@@ -223,7 +223,8 @@ Deno.serve(async (req) => {
             if (/^(sk|rk)_live_/.test(k)) return "live";
             if (/^(sk|rk)_test_/.test(k)) return "test";
             if (/^pk_/.test(k)) return "publishable-key";
-            return "unknown";
+            // безопасная подсказка: длина и признаки формата, без самого ключа
+            return { kind: "unknown", len: k.length, start: k.slice(0, 2), live: k.includes("_live_"), dots: /\.\.\.|…/.test(k), space: /\s/.test(k), quote: /["'«»]/.test(k), eq: k.includes("=") };
           })(),
           paypal: env("PAYPAL_CLIENT_ID") && env("PAYPAL_SECRET") ? env("PAYPAL_CLIENT_ID") : null,
           // тестовый режим: Stripe-ключ sk_test_ (PayPal учитываем, только если он подключён)
