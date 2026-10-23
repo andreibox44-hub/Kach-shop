@@ -234,7 +234,7 @@ window.KACH_PRODUCTS = [
     subtitle: "Интенсивное увлажнение волос, ампулы",
     category: "pro",
     tag: "",
-    variants: [{ size: "20 мл", price: 22 }],
+    variants: [{ size: "20 мл", price: 25 }],
     ph: "5.0–5.5",
     hair: "Все типы волос",
     formula: "Гиалуроновая кислота, керамиды и масла",
