@@ -56,6 +56,62 @@
   const poster = (p) => `images/posters/${p.id}.jpg`;
   const pageName = () => (document.querySelector("[data-page]") || document.body).dataset.page;
 
+  // Size for addresses: "250 мл" -> "250ml", "Набор" -> "kit"
+  const sizeSlug = (s) => (String(s) === "Набор" ? "kit" : String(s).replace(/\D/g, "") + "ml");
+
+  // Product data for Google (schema.org): name, photo, price of each size, stock,
+  // free delivery to RO/IT/DE/FR and the 14-day return policy.
+  function addProductSchema(p) {
+    const SITE = "https://kachhair.com";
+    const lang = I18N.lang;
+    const url = (v) =>
+      `${SITE}/product.html?id=${p.id}` + (p.variants.length > 1 ? `&size=${sizeSlug(v.size)}` : "") + (lang !== "en" ? `&lang=${lang}` : "");
+    const countries = ["RO", "IT", "DE", "FR"];
+    const shipping = {
+      "@type": "OfferShippingDetails",
+      shippingRate: { "@type": "MonetaryAmount", value: 0, currency: "EUR" },
+      shippingDestination: countries.map((c) => ({ "@type": "DefinedRegion", addressCountry: c }))
+    };
+    const returns = {
+      "@type": "MerchantReturnPolicy",
+      applicableCountry: countries,
+      returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+      merchantReturnDays: 14,
+      returnMethod: "https://schema.org/ReturnByMail",
+      returnFees: "https://schema.org/ReturnShippingFees"
+    };
+    const offers = p.variants
+      .filter((v) => typeof v.price === "number")
+      .map((v) => ({
+        "@type": "Offer",
+        sku: p.variants.length > 1 ? `${p.id}-${sizeSlug(v.size)}` : p.id,
+        name: `${p.name} ${sizeLabel(v.size)}`,
+        url: url(v),
+        price: v.price.toFixed(2),
+        priceCurrency: "EUR",
+        availability: p.soldOut ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
+        itemCondition: "https://schema.org/NewCondition",
+        seller: { "@type": "Organization", name: "KACH Hair Organic Solutions" },
+        shippingDetails: shipping,
+        hasMerchantReturnPolicy: returns
+      }));
+    const data = {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: p.name,
+      description: [p.short].concat(p.description).join(" "),
+      image: [`${SITE}/images/products/${p.id}.jpg`],
+      sku: p.id,
+      brand: { "@type": "Brand", name: "KACH" },
+      category: CATS[p.category],
+      offers
+    };
+    const el = document.createElement("script");
+    el.type = "application/ld+json";
+    el.textContent = JSON.stringify(data);
+    document.head.appendChild(el);
+  }
+
   function priceLabel(p) {
     const prices = p.variants.map((v) => v.price).filter((x) => typeof x === "number");
     if (!prices.length) return t("Price on request");
@@ -469,7 +525,11 @@
         return;
       }
       document.title = `${p.name} — KACH`;
-      let size = p.variants[0].size;
+      // ?size=250ml opens the page with that size selected (links from Google Shopping)
+      const wanted = new URLSearchParams(location.search).get("size");
+      const pick = p.variants.find((v) => sizeSlug(v.size) === wanted);
+      let size = (pick || p.variants[0]).size;
+      addProductSchema(p);
       const priceOf = (s) => {
         if (p.soldOut) return t("Out of stock");
         const v = p.variants.find((x) => x.size === s);
@@ -484,11 +544,11 @@
             <h1>${esc(p.name)}</h1>
             <p class="product-sub">${esc(p.subtitle)}</p>
             <p class="price big" id="price">${priceOf(size)}</p>
-            ${p.soldOut ? "" : `<p class="vat-note">${t("Price incl. VAT")}</p>`}
+            ${p.soldOut ? "" : `<p class="vat-note">${t("Price incl. VAT")} · ${t("Free delivery")}</p>`}
             ${
               p.variants.length > 1
                 ? `<div class="sizes" role="radiogroup" aria-label="${t("Size")}">${p.variants
-                    .map((v, i) => `<button class="chip${i === 0 ? " active" : ""}" data-size="${esc(v.size)}" role="radio" aria-checked="${i === 0}">${esc(sizeLabel(v.size))}</button>`)
+                    .map((v) => `<button class="chip${v.size === size ? " active" : ""}" data-size="${esc(v.size)}" role="radio" aria-checked="${v.size === size}">${esc(sizeLabel(v.size))}</button>`)
                     .join("")}</div>`
                 : `<p class="muted">${esc(sizeLabel(p.variants[0].size))}</p>`
             }
