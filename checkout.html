@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Оформление заказа — KACH</title>
-  <meta name="description" content="Оформление заказа в магазине KACH.">
+  <title data-i18n="meta.checkout.title">Checkout — KACH</title>
+  <meta name="description" data-i18n-content="meta.checkout.desc" content="Place your order in the KACH shop.">
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/icon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/icon-192.png">
@@ -12,42 +12,43 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=85325">
+  <link rel="stylesheet" href="css/style.css?v=86000">
+  <script src="js/i18n.js?v=86000"></script>
 </head>
 <body data-page="checkout">
   <header id="site-header"></header>
   <main>
     <section class="section">
       <div class="container" id="checkout">
-        <h1>Оформление заказа</h1>
+        <h1 data-i18n="Checkout">Checkout</h1>
         <div class="checkout-layout">
           <form class="form" id="checkout-form" novalidate>
             <fieldset>
-              <legend>Контактные данные</legend>
-              <p class="login-hint" id="login-hint" hidden>Есть аккаунт? <a href="account.html">Войдите</a>, чтобы данные подставились сами и заказ сохранился в истории.</p>
-              <div class="field"><label for="name">Имя и фамилия *</label><input id="name" name="name" required autocomplete="name"></div>
+              <legend data-i18n="Contact details">Contact details</legend>
+              <p class="login-hint" id="login-hint" hidden data-i18n="co.loginHint">Have an account? <a href="account.html">Sign in</a> so your details are filled in automatically and the order is saved in your history.</p>
+              <div class="field"><label for="name" data-i18n="co.name">Full name *</label><input id="name" name="name" required autocomplete="name"></div>
               <div class="field-row">
-                <div class="field"><label for="phone">Телефон *</label><input id="phone" name="phone" type="tel" required minlength="10" placeholder="+40 700 000 000" autocomplete="tel"></div>
+                <div class="field"><label for="phone" data-i18n="co.phone">Phone *</label><input id="phone" name="phone" type="tel" required minlength="10" placeholder="+40 700 000 000" autocomplete="tel"></div>
                 <div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email"></div>
               </div>
             </fieldset>
             <fieldset>
-              <legend>Доставка</legend>
-              <label class="radio"><input type="radio" name="delivery" value="courier" checked><span><strong>Курьером</strong><br><span class="muted small">До двери</span></span></label>
-              <label class="radio"><input type="radio" name="delivery" value="post"><span><strong>Почтой</strong><br><span class="muted small">В ваше почтовое отделение</span></span></label>
-              <div class="field"><label for="country">Страна доставки *</label><select id="country" name="country" required autocomplete="country"></select></div>
+              <legend data-i18n="Delivery">Delivery</legend>
+              <label class="radio"><input type="radio" name="delivery" value="courier" checked><span><strong data-i18n="By courier">By courier</strong><br><span class="muted small" data-i18n="To your door">To your door</span></span></label>
+              <label class="radio"><input type="radio" name="delivery" value="post"><span><strong data-i18n="By post">By post</strong><br><span class="muted small" data-i18n="To your post office">To your post office</span></span></label>
+              <div class="field"><label for="country" data-i18n="co.country">Delivery country *</label><select id="country" name="country" required autocomplete="country"></select></div>
               <div id="addr-fields"></div>
             </fieldset>
             <fieldset>
-              <legend>Оплата</legend>
-              <p class="pay-test" id="pay-test" hidden>Оплата работает в тестовом режиме: деньги не списываются.</p>
-              <label class="radio" id="pay-card"><input type="radio" name="payment" value="card" checked><span><strong>Картой онлайн</strong><br><span class="pay pay-inline" data-pay-badges></span><span class="muted small">Безопасная оплата через Stripe</span></span></label>
-              <label class="radio" id="pay-paypal" hidden><input type="radio" name="payment" value="paypal"><span><strong>PayPal</strong><br><span class="muted small">Через аккаунт PayPal или картой</span></span></label>
+              <legend data-i18n="Payment">Payment</legend>
+              <p class="pay-test" id="pay-test" hidden data-i18n="co.payTest">Payments are in test mode: no money is charged.</p>
+              <label class="radio" id="pay-card"><input type="radio" name="payment" value="card" checked><span><strong data-i18n="Card online">Card online</strong><br><span class="pay pay-inline" data-pay-badges></span><span class="muted small" data-i18n="Secure payment via Stripe">Secure payment via Stripe</span></span></label>
+              <label class="radio" id="pay-paypal" hidden><input type="radio" name="payment" value="paypal"><span><strong>PayPal</strong><br><span class="muted small" data-i18n="co.paypal">With your PayPal account or by card</span></span></label>
               <p class="form-msg err" id="pay-unavailable" hidden></p>
             </fieldset>
-            <div class="field"><label for="comment">Комментарий к заказу</label><textarea id="comment" name="comment" rows="3"></textarea></div>
-            <label class="small muted"><input type="checkbox" required> Я согласен(на) на обработку <a href="info.html#privacy">персональных данных</a> *</label>
-            <button class="btn btn-block" type="submit">Перейти к оплате</button>
+            <div class="field"><label for="comment" data-i18n="Order comment">Order comment</label><textarea id="comment" name="comment" rows="3"></textarea></div>
+            <label class="small muted"><input type="checkbox" required> <span data-i18n="co.consent">I agree to the processing of my <a href="info.html#privacy">personal data</a> *</span></label>
+            <button class="btn btn-block" type="submit" data-i18n="Proceed to payment">Proceed to payment</button>
           </form>
           <aside class="summary" id="order-summary"></aside>
         </div>
@@ -55,11 +56,11 @@
     </section>
   </main>
   <footer id="site-footer"></footer>
-  <script src="js/products.js?v=85325"></script>
-  <script src="js/countries.js?v=85325"></script>
-  <script src="js/vendor/supabase.js?v=85325"></script>
-  <script src="js/supabase-config.js?v=85325"></script>
-  <script src="js/auth.js?v=85325"></script>
-  <script src="js/app.js?v=85325"></script>
+  <script src="js/products.js?v=86000"></script>
+  <script src="js/countries.js?v=86000"></script>
+  <script src="js/vendor/supabase.js?v=86000"></script>
+  <script src="js/supabase-config.js?v=86000"></script>
+  <script src="js/auth.js?v=86000"></script>
+  <script src="js/app.js?v=86000"></script>
 </body>
 </html>

@@ -1,12 +1,15 @@
 // Страны доставки и формат адреса для каждой страны.
 // Чтобы добавить страну, скопируйте один из блоков ниже и поменяйте подписи и проверки.
 (function () {
+  const I = window.KACH_I18N;
+  const t = I ? I.t : (x, v) => (v ? x.replace(/\{(\w+)\}/g, (m, k) => v[k]) : x);
   const RO_COUNTIES = ["Alba", "Arad", "Argeș", "Bacău", "Bihor", "Bistrița-Năsăud", "Botoșani", "Brașov", "Brăila", "București", "Buzău", "Caraș-Severin", "Călărași", "Cluj", "Constanța", "Covasna", "Dâmbovița", "Dolj", "Galați", "Giurgiu", "Gorj", "Harghita", "Hunedoara", "Ialomița", "Iași", "Ilfov", "Maramureș", "Mehedinți", "Mureș", "Neamț", "Olt", "Prahova", "Satu Mare", "Sălaj", "Sibiu", "Suceava", "Teleorman", "Timiș", "Tulcea", "Vaslui", "Vâlcea", "Vrancea"];
 
   // rows: строки формы; в одной строке может быть одно или два поля
   const COUNTRIES = {
     RO: {
-      name: "Румыния",
+      name: "Romania",
+      lang: "ro",
       phone: "+40 712 345 678",
       rows: [
         ["region"],
@@ -15,15 +18,16 @@
         ["address2"]
       ],
       fields: {
-        region: { label: "Уезд (județ)", options: RO_COUNTIES, required: true },
-        city: { label: "Населённый пункт (localitate)", placeholder: "Cluj-Napoca", required: true },
-        zip: { label: "Индекс (cod poștal)", placeholder: "400001", pattern: "\\d{6}", hint: "6 цифр", required: true },
-        address: { label: "Улица и номер дома (strada, nr.)", placeholder: "Str. Mihai Eminescu, nr. 10", required: true },
-        address2: { label: "Блок, подъезд, этаж, квартира", placeholder: "Bl. A2, sc. 1, et. 3, ap. 12" }
+        region: { label: "County", local: "județ", options: RO_COUNTIES, required: true },
+        city: { label: "Town or village", local: "localitate", placeholder: "Cluj-Napoca", required: true },
+        zip: { label: "Postcode", local: "cod poștal", placeholder: "400001", pattern: "\\d{6}", hint: "6 digits", required: true },
+        address: { label: "Street and number", local: "strada, nr.", placeholder: "Str. Mihai Eminescu, nr. 10", required: true },
+        address2: { label: "Block, entrance, floor, flat", local: "bloc, scară, etaj, apartament", placeholder: "Bl. A2, sc. 1, et. 3, ap. 12" }
       }
     },
     IT: {
-      name: "Италия",
+      name: "Italy",
+      lang: "it",
       phone: "+39 312 345 6789",
       rows: [
         ["address"],
@@ -32,15 +36,16 @@
         ["region"]
       ],
       fields: {
-        address: { label: "Улица и номер дома (via, n. civico)", placeholder: "Via Roma 10", required: true },
-        address2: { label: "Подъезд, этаж, квартира (scala, piano, interno)", placeholder: "Scala B, piano 2, int. 5" },
-        zip: { label: "Индекс (CAP)", placeholder: "20121", pattern: "\\d{5}", hint: "5 цифр", required: true },
-        city: { label: "Город (città)", placeholder: "Milano", required: true },
-        region: { label: "Провинция (sigla)", placeholder: "MI", pattern: "[A-Za-z]{2}", hint: "2 буквы, например MI, RM, TO", required: true, upper: true, maxlength: 2 }
+        address: { label: "Street and number", local: "via, n. civico", placeholder: "Via Roma 10", required: true },
+        address2: { label: "Staircase, floor, flat", local: "scala, piano, interno", placeholder: "Scala B, piano 2, int. 5" },
+        zip: { label: "Postcode", local: "CAP", placeholder: "20121", pattern: "\\d{5}", hint: "5 digits", required: true },
+        city: { label: "City", local: "città", placeholder: "Milano", required: true },
+        region: { label: "Province code", local: "sigla", placeholder: "MI", pattern: "[A-Za-z]{2}", hint: "2 letters, e.g. MI, RM, TO", required: true, upper: true, maxlength: 2 }
       }
     },
     DE: {
-      name: "Германия",
+      name: "Germany",
+      lang: "de",
       phone: "+49 151 23456789",
       rows: [
         ["address"],
@@ -48,14 +53,15 @@
         ["zip", "city"]
       ],
       fields: {
-        address: { label: "Улица и номер дома (Straße, Hausnummer)", placeholder: "Hauptstraße 5", required: true },
-        address2: { label: "Дополнительно (c/o, квартира)", placeholder: "c/o Müller, Wohnung 3" },
-        zip: { label: "Индекс (PLZ)", placeholder: "10115", pattern: "\\d{5}", hint: "5 цифр", required: true },
-        city: { label: "Город (Ort)", placeholder: "Berlin", required: true }
+        address: { label: "Street and number", local: "Straße, Hausnummer", placeholder: "Hauptstraße 5", required: true },
+        address2: { label: "Additional address info", local: "Adresszusatz", placeholder: "c/o Müller, Wohnung 3" },
+        zip: { label: "Postcode", local: "PLZ", placeholder: "10115", pattern: "\\d{5}", hint: "5 digits", required: true },
+        city: { label: "City", local: "Ort", placeholder: "Berlin", required: true }
       }
     },
     FR: {
-      name: "Франция",
+      name: "France",
+      lang: "fr",
       phone: "+33 6 12 34 56 78",
       rows: [
         ["address"],
@@ -63,10 +69,10 @@
         ["zip", "city"]
       ],
       fields: {
-        address: { label: "Номер дома и улица (numéro et rue)", placeholder: "12 rue de la Paix", required: true },
-        address2: { label: "Здание, подъезд, этаж (bâtiment, étage)", placeholder: "Bât. B, 3e étage" },
-        zip: { label: "Индекс (code postal)", placeholder: "75002", pattern: "\\d{5}", hint: "5 цифр", required: true },
-        city: { label: "Город (ville)", placeholder: "Paris", required: true }
+        address: { label: "Number and street", local: "numéro et rue", placeholder: "12 rue de la Paix", required: true },
+        address2: { label: "Building, floor", local: "bâtiment, étage", placeholder: "Bât. B, 3e étage" },
+        zip: { label: "Postcode", local: "code postal", placeholder: "75002", pattern: "\\d{5}", hint: "5 digits", required: true },
+        city: { label: "City", local: "ville", placeholder: "Paris", required: true }
       }
     }
   };
@@ -86,16 +92,18 @@
 
   function countryOptions(selected) {
     return Object.entries(COUNTRIES)
-      .map(([code, c]) => `<option value="${code}"${code === selected ? " selected" : ""}>${esc(c.name)}</option>`)
+      .map(([code, c]) => `<option value="${code}"${code === selected ? " selected" : ""}>${esc(t(c.name))}</option>`)
       .join("");
   }
 
-  function fieldHtml(key, f, value, prefix) {
+  function fieldHtml(key, f, value, prefix, c) {
     const id = prefix + key;
-    const label = `<label for="${id}">${esc(f.label)}${f.required ? " *" : ""}</label>`;
+    // Подпись на языке сайта + местное название в скобках, если язык сайта не совпадает с языком страны
+    const local = f.local && !(I && I.lang === c.lang) ? ` (${f.local})` : "";
+    const label = `<label for="${id}">${esc(t(f.label))}${esc(local)}${f.required ? " *" : ""}</label>`;
     if (f.options) {
       return `<div class="field">${label}<select id="${id}" name="${key}"${f.required ? " required" : ""} autocomplete="${AUTOCOMPLETE[key]}">
-        <option value="">Выберите…</option>
+        <option value="">${esc(t("Select…"))}</option>
         ${f.options.map((o) => `<option${o === value ? " selected" : ""}>${esc(o)}</option>`).join("")}
       </select></div>`;
     }
@@ -105,7 +113,7 @@
       `value="${esc(value)}"`,
       `autocomplete="${AUTOCOMPLETE[key]}"`,
       f.placeholder ? `placeholder="${esc(f.placeholder)}"` : "",
-      f.pattern ? `pattern="${f.pattern}" title="${esc(f.hint || "")}"` : "",
+      f.pattern ? `pattern="${f.pattern}" title="${esc(f.hint ? t(f.hint) : "")}"` : "",
       f.pattern && /^\\d/.test(f.pattern) ? `inputmode="numeric"` : "",
       f.maxlength ? `maxlength="${f.maxlength}"` : "",
       f.upper ? `style="text-transform:uppercase"` : "",
@@ -115,7 +123,7 @@
       .join(" ");
     const list = key === "city" ? ` list="${id}-list"` : "";
     const dl = key === "city" ? `<datalist id="${id}-list"></datalist>` : "";
-    return `<div class="field">${label}<input ${attrs}${list}>${dl}${f.hint ? `<span class="field-hint">${esc(f.hint)}</span>` : ""}</div>`;
+    return `<div class="field">${label}<input ${attrs}${list}>${dl}${f.hint ? `<span class="field-hint">${esc(t(f.hint))}</span>` : ""}</div>`;
   }
 
   // Рисует поля адреса выбранной страны в box; уже введённое сохраняется при смене страны
@@ -123,7 +131,7 @@
     const c = COUNTRIES[code] || COUNTRIES[DEFAULT];
     box.innerHTML = c.rows
       .map((row) => {
-        const html = row.map((k) => fieldHtml(k, c.fields[k], values[k] || "", prefix)).join("");
+        const html = row.map((k) => fieldHtml(k, c.fields[k], values[k] || "", prefix, c)).join("");
         return row.length > 1 ? `<div class="field-row">${html}</div>` : html;
       })
       .join("");
@@ -183,8 +191,8 @@
     if (!a) return "";
     const c = COUNTRIES[a.country];
     const cityLine = [a.zip, a.city].filter(Boolean).join(" ") + (a.region ? ` (${a.region})` : "");
-    return [a.address, a.address2, cityLine.trim(), c ? c.name : ""].filter(Boolean).join(", ");
+    return [a.address, a.address2, cityLine.trim(), c ? t(c.name) : ""].filter(Boolean).join(", ");
   }
 
-  window.KACH_ADDR = { COUNTRIES, CITIES, DEFAULT, render, bind, readValues, format, names: () => Object.values(COUNTRIES).map((c) => c.name) };
+  window.KACH_ADDR = { COUNTRIES, CITIES, DEFAULT, render, bind, readValues, format, names: () => Object.values(COUNTRIES).map((c) => t(c.name)) };
 })();

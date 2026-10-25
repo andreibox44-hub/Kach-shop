@@ -445,3 +445,16 @@ select { font: inherit; }
 .vat-center { text-align: center; margin-top: 24px; }
 #price + .vat-note { margin: -16px 0 14px; }
 .summary .vat-note { margin: 2px 0 14px; text-align: right; }
+
+/* Выбор языка */
+.i18n-wait body { opacity: 0; }
+.lang-switch { position: relative; display: flex; align-items: center; gap: 4px; color: var(--muted); cursor: pointer; }
+.lang-switch svg { flex: none; pointer-events: none; }
+.lang-switch select { appearance: none; -webkit-appearance: none; background: transparent; border: 0; font: inherit; font-weight: 700; font-size: 13px; letter-spacing: .5px; color: var(--text); padding: 6px 2px; cursor: pointer; }
+.lang-switch select:focus-visible { outline: 2px solid var(--green); border-radius: 4px; }
+.lang-switch:hover, .lang-switch:hover select { color: var(--green); }
+@media (max-width: 980px) and (min-width: 761px) { .header-inner { gap: 16px; } .nav { gap: 16px; } .nav a { font-size: 14px; } }
+@media (max-width: 760px) { .lang-switch { order: 3; } .account-link { order: 4; } .cart-link { order: 5; } }
+.footer-langs { display: flex; flex-wrap: wrap; gap: 6px 18px; padding-bottom: 14px; font-size: 13px; }
+.footer-langs a { color: #9aa197; text-decoration: none; }
+.footer-langs a:hover, .footer-langs a[aria-current] { color: #fff; }

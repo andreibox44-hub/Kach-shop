@@ -1,12 +1,18 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Каталог — KACH</title>
-  <meta name="description" content="Каталог KACH Hair Organic Solutions: шампуни, кондиционеры, уход и процедуры BHX.">
+  <title data-i18n="meta.catalog.title">Catalog — KACH</title>
+  <meta name="description" data-i18n-content="meta.catalog.desc" content="KACH Hair Organic Solutions catalog: shampoos, conditioners, care and BHX treatments.">
   <link rel="canonical" href="https://kachhair.com/catalog.html">
   <meta property="og:url" content="https://kachhair.com/catalog.html">
+  <link rel="alternate" hreflang="en" href="https://kachhair.com/catalog.html">
+  <link rel="alternate" hreflang="de" href="https://kachhair.com/catalog.html?lang=de">
+  <link rel="alternate" hreflang="it" href="https://kachhair.com/catalog.html?lang=it">
+  <link rel="alternate" hreflang="ro" href="https://kachhair.com/catalog.html?lang=ro">
+  <link rel="alternate" hreflang="fr" href="https://kachhair.com/catalog.html?lang=fr">
+  <link rel="alternate" hreflang="x-default" href="https://kachhair.com/catalog.html">
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/icon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/icon-192.png">
@@ -14,26 +20,27 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=85325">
+  <link rel="stylesheet" href="css/style.css?v=86000">
+  <script src="js/i18n.js?v=86000"></script>
 </head>
 <body data-page="catalog">
   <header id="site-header"></header>
   <main>
     <section class="section">
       <div class="container">
-        <h1>Каталог</h1>
-        <div class="chips" id="filters" aria-label="Категории"></div>
+        <h1 data-i18n="Catalog">Catalog</h1>
+        <div class="chips" id="filters" data-i18n-aria="Categories" aria-label="Categories"></div>
         <div class="grid" id="catalog-grid"></div>
-        <p class="vat-note vat-center">Все цены указаны в евро с учётом НДС</p>
+        <p class="vat-note vat-center" data-i18n="All prices are in euros and include VAT">All prices are in euros and include VAT</p>
       </div>
     </section>
   </main>
   <footer id="site-footer"></footer>
-  <script src="js/products.js?v=85325"></script>
-  <script src="js/countries.js?v=85325"></script>
-  <script src="js/vendor/supabase.js?v=85325"></script>
-  <script src="js/supabase-config.js?v=85325"></script>
-  <script src="js/auth.js?v=85325"></script>
-  <script src="js/app.js?v=85325"></script>
+  <script src="js/products.js?v=86000"></script>
+  <script src="js/countries.js?v=86000"></script>
+  <script src="js/vendor/supabase.js?v=86000"></script>
+  <script src="js/supabase-config.js?v=86000"></script>
+  <script src="js/auth.js?v=86000"></script>
+  <script src="js/app.js?v=86000"></script>
 </body>
 </html>

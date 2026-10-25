@@ -1,5 +1,9 @@
 // Общая логика сайта: шапка, подвал, корзина, рендер страниц.
+// Все тексты на английском; перевод — через t() из js/i18n.js и файлов js/lang/*.js.
 (function () {
+  const I18N = window.KACH_I18N;
+  const t = I18N.t;
+  const sizeLabel = I18N.size;
   const PRODUCTS = window.KACH_PRODUCTS;
   const CATS = window.KACH_CATEGORIES;
   const CART_KEY = "kach-cart-v2";
@@ -12,7 +16,9 @@
     phone: "+39 389 040 5737",
     phoneHref: "+393890405737",
     email: "supearius@gmail.com",
-    hours: "Ежедневно 10:00–20:00",
+    get hours() {
+      return t("Daily 10:00–20:00");
+    },
     address: "Str. Adrian Adamiu nr. 8, 710013 Botoșani, România",
     company: "FIRMA DE COMERT ROMAVA SRL · CUI RO35249323 · J07/458/2015",
     // Ссылки на соцсети. Пустая строка = значок не показывается.
@@ -28,7 +34,7 @@
     instagram: ["Instagram", '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>'],
     telegram: ["Telegram", '<path d="M21 4 3 11l6 2 2 6 3-4 5 4z"/><path d="m9 13 8-6"/>'],
     whatsapp: ["WhatsApp", '<path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/><path d="M9 9c0 3 3 6 6 6l1-1.5-2-1-1 1c-1-.4-2.1-1.5-2.5-2.5l1-1-1-2z"/>'],
-    vk: ["ВКонтакте", '<path d="M3 7h3c.5 3 2 5 3.5 5.5V7h3v3c1.5 0 3-1.5 3.5-3h3c-.5 2.5-2.5 4-3.5 4.5 1 .5 3 2 3.8 4.5h-3.3c-.6-1.6-2-3-3.5-3V16h-1C7 16 3.5 12.5 3 7z"/>']
+    vk: ["VK", '<path d="M3 7h3c.5 3 2 5 3.5 5.5V7h3v3c1.5 0 3-1.5 3.5-3h3c-.5 2.5-2.5 4-3.5 4.5 1 .5 3 2 3.8 4.5h-3.3c-.6-1.6-2-3-3.5-3V16h-1C7 16 3.5 12.5 3 7z"/>']
   };
   const socialLinks = () =>
     Object.entries(CONTACTS.social)
@@ -52,9 +58,9 @@
 
   function priceLabel(p) {
     const prices = p.variants.map((v) => v.price).filter((x) => typeof x === "number");
-    if (!prices.length) return "Цена по запросу";
+    if (!prices.length) return t("Price on request");
     const min = Math.min(...prices);
-    return (prices.length < p.variants.length || new Set(prices).size > 1 ? "от " : "") + money(min);
+    return (prices.length < p.variants.length || new Set(prices).size > 1 ? t("from") + " " : "") + money(min);
   }
 
   // ---------- Корзина (хранится в браузере) ----------
@@ -76,13 +82,13 @@
   function addToCart(id, size, qty = 1) {
     const p = findProduct(id);
     if (!p) return;
-    if (p.soldOut) return toast("Этого товара сейчас нет в наличии");
+    if (p.soldOut) return toast(t("This product is currently out of stock"));
     const v = p.variants.find((x) => x.size === size) || p.variants[0];
     const cart = getCart();
     const k = keyOf(id, v.size);
     cart[k] = Math.min(99, (cart[k] || 0) + qty);
     saveCart(cart);
-    toast("Добавлено в корзину");
+    toast(t("Added to cart"));
   }
   function setQty(k, qty) {
     const cart = getCart();
@@ -131,7 +137,19 @@
   }
 
   // ---------- Шапка и подвал ----------
-  const logo = `<a href="index.html" class="logo" aria-label="KACH — на главную"><span class="logo-word">KACH</span><span class="logo-sub">Hair Organic Solutions</span></a>`;
+  const logo = `<a href="index.html" class="logo" aria-label="${t("KACH — home page")}"><span class="logo-word">KACH</span><span class="logo-sub">Hair Organic Solutions</span></a>`;
+
+  // Выбор языка в шапке
+  const langSwitch = () => `
+          <label class="lang-switch">
+            <span class="sr-only">Language</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg>
+            <select data-lang-select aria-label="Language">
+              ${Object.keys(I18N.LANGS)
+                .map((code) => `<option value="${code}"${code === I18N.lang ? " selected" : ""} title="${I18N.LANGS[code]}">${code.toUpperCase()}</option>`)
+                .join("")}
+            </select>
+          </label>`;
 
   function renderChrome() {
     const page = pageName();
@@ -141,22 +159,25 @@
       header.innerHTML = `
         <div class="container header-inner">
           ${logo}
-          <button class="menu-toggle" aria-label="Меню" aria-expanded="false">☰</button>
+          <button class="menu-toggle" aria-label="${t("Menu")}" aria-expanded="false">☰</button>
           <nav class="nav">
-            ${link("index.html", "Главная", "home")}
-            ${link("catalog.html", "Каталог", "catalog")}
-            ${link("about.html", "О бренде", "about")}
-            ${link("about.html#contacts", "Контакты", "")}
+            ${link("index.html", t("Home"), "home")}
+            ${link("catalog.html", t("Catalog"), "catalog")}
+            ${link("about.html", t("About the brand"), "about")}
+            ${link("about.html#contacts", t("Contacts"), "")}
           </nav>
-          <a href="account.html" class="account-link" aria-label="Личный кабинет" data-account-link>
+          <a href="account.html" class="account-link" aria-label="${t("My account")}" data-account-link>
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
             <span class="account-initial" hidden></span>
           </a>
-          <a href="cart.html" class="cart-link" aria-label="Корзина">
+          ${langSwitch()}
+          <a href="cart.html" class="cart-link" aria-label="${t("Cart")}">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>
             <span class="cart-count" data-cart-count hidden>0</span>
           </a>
         </div>`;
+      const ls = $("[data-lang-select]", header);
+      ls.addEventListener("change", () => I18N.setLang(ls.value));
       const toggle = $(".menu-toggle", header);
       toggle.addEventListener("click", () => {
         const open = header.classList.toggle("open");
@@ -169,30 +190,30 @@
         <div class="container footer-inner">
           <div class="footer-brand">
             ${logo}
-            <p class="footer-note">Профессиональный уход за волосами на натуральных ингредиентах. Природа. Наука. Красота.</p>
+            <p class="footer-note">${t("Professional hair care with natural ingredients. Nature. Science. Beauty.")}</p>
           </div>
           <div>
-            <h4>Каталог</h4>
+            <h4>${t("Catalog")}</h4>
             ${Object.entries(CATS)
-              .map(([k, v]) => `<a href="catalog.html${k === "all" ? "" : "?cat=" + k}">${k === "all" ? "Все товары" : v}</a>`)
+              .map(([k, v]) => `<a href="catalog.html${k === "all" ? "" : "?cat=" + k}">${k === "all" ? t("All products") : v}</a>`)
               .join("")}
           </div>
           <div>
-            <h4>Покупателям</h4>
-            <a href="info.html#delivery">Доставка</a>
-            <a href="info.html#payment">Оплата</a>
-            <a href="info.html#returns">Обмен и возврат</a>
-            <a href="info.html#faq">Вопросы и ответы</a>
-            <a href="cart.html">Корзина</a>
+            <h4>${t("Customer info")}</h4>
+            <a href="info.html#delivery">${t("Delivery")}</a>
+            <a href="info.html#payment">${t("Payment")}</a>
+            <a href="info.html#returns">${t("Returns and exchanges")}</a>
+            <a href="info.html#faq">${t("FAQ")}</a>
+            <a href="cart.html">${t("Cart")}</a>
           </div>
           <div>
-            <h4>Компания</h4>
-            <a href="about.html">О бренде</a>
-            <a href="info.html#pro">Салонам и мастерам</a>
-            <a href="about.html#contacts">Контакты</a>
+            <h4>${t("Company")}</h4>
+            <a href="about.html">${t("About the brand")}</a>
+            <a href="info.html#pro">${t("For salons and stylists")}</a>
+            <a href="about.html#contacts">${t("Contacts")}</a>
           </div>
           <div>
-            <h4>Контакты</h4>
+            <h4>${t("Contacts")}</h4>
             <a href="tel:${CONTACTS.phoneHref}" class="footer-phone">${CONTACTS.phone}</a>
             <a href="mailto:${CONTACTS.email}">${CONTACTS.email}</a>
             <span>${CONTACTS.hours}</span>
@@ -200,16 +221,21 @@
           </div>
         </div>
         <div class="container footer-bottom">
-          <div class="pay" aria-label="Способы оплаты">
+          <div class="pay" aria-label="${t("Payment methods")}">
             ${PAY_BADGES}
           </div>
           <div class="legal">
-            <a href="info.html#privacy">Политика конфиденциальности</a>
-            <a href="info.html#offer">Публичная оферта</a>
+            <a href="info.html#privacy">${t("Privacy policy")}</a>
+            <a href="info.html#offer">${t("Terms of sale")}</a>
           </div>
         </div>
+        <div class="container footer-langs" aria-label="Language">
+          ${Object.entries(I18N.LANGS)
+            .map(([code, name]) => `<a href="${I18N.urlFor(code)}" hreflang="${code}" lang="${code}"${code === I18N.lang ? ' aria-current="true"' : ""} data-lang="${code}">${name}</a>`)
+            .join("")}
+        </div>
         <div class="container copyright">
-          <span>© ${new Date().getFullYear()} KACH Hair Organic Solutions. Все права защищены.</span>
+          <span>© ${new Date().getFullYear()} KACH Hair Organic Solutions. ${t("All rights reserved.")}</span>
           <span>${CONTACTS.company}</span>
         </div>`;
     }
@@ -228,7 +254,7 @@
   const AUTH = () => window.KACH_AUTH;
   const isFav = (id) => (AUTH() ? AUTH().favorites().includes(id) : false);
   const favButton = (id, extra = "") =>
-    `<button class="fav${isFav(id) ? " on" : ""}${extra}" data-fav="${id}" aria-pressed="${isFav(id)}" aria-label="В избранное">${HEART}</button>`;
+    `<button class="fav${isFav(id) ? " on" : ""}${extra}" data-fav="${id}" aria-pressed="${isFav(id)}" aria-label="${t("Add to favourites")}">${HEART}</button>`;
   const HEART = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
   function refreshFavs() {
     document.querySelectorAll("[data-fav]").forEach((b) => {
@@ -237,14 +263,14 @@
       b.setAttribute("aria-pressed", on);
     });
   }
-  window.KACH_UI = { productCard: (p) => productCard(p), money, esc, img, findProduct, CATS, toast };
+  window.KACH_UI = { productCard: (p) => productCard(p), money, esc, img, findProduct, CATS, toast, t, sizeLabel };
 
   // ---------- Карточка товара ----------
   function productCard(p) {
     return `
       <article class="card">
         <a href="product.html?id=${p.id}" class="card-image">
-          ${p.tag ? `<span class="badge">${esc(p.tag)}</span>` : ""}
+          ${p.tag ? `<span class="badge">${esc(t(p.tag))}</span>` : ""}
           <img src="${img(p)}" alt="${esc(p.name)}" loading="lazy" width="560" height="700">
         </a>
         ${favButton(p.id)}
@@ -252,13 +278,13 @@
           <p class="card-type">${esc(CATS[p.category])}</p>
           <h3><a href="product.html?id=${p.id}">${esc(p.name)}</a></h3>
           <p class="card-sub">${esc(p.subtitle)}</p>
-          <p class="card-sizes">${p.variants.map((v) => esc(v.size)).join(" · ")}${p.ph ? ` · pH ${esc(p.ph)}` : ""}</p>
+          <p class="card-sizes">${p.variants.map((v) => esc(sizeLabel(v.size))).join(" · ")}${p.ph ? ` · pH ${esc(p.ph)}` : ""}</p>
           <div class="card-footer">
             ${
               p.soldOut
-                ? `<span class="price sold-out">Нет в наличии</span>`
+                ? `<span class="price sold-out">${t("Out of stock")}</span>`
                 : `<span class="price">${priceLabel(p)}</span>
-            <button class="btn btn-small" data-add="${p.id}">В корзину</button>`
+            <button class="btn btn-small" data-add="${p.id}">${t("Add to cart")}</button>`
             }
           </div>
         </div>
@@ -272,7 +298,7 @@
       e.preventDefault();
       AUTH()
         .toggleFavorite(fav.dataset.fav)
-        .then((on) => toast(on ? "Добавлено в избранное" : "Удалено из избранного"))
+        .then((on) => toast(on ? t("Added to favourites") : t("Removed from favourites")))
         .catch((err) => toast(AUTH().errorText(err)));
     }
     if (btn) {
@@ -285,9 +311,9 @@
   // Плакат товара в стиле бренда, текст на языке сайта (вместо итальянской картинки)
   const LEAF = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14Zm0 0 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
   function posterCard(p) {
-    const sizes = p.variants.map((v) => v.size).join(" · ");
+    const sizes = p.variants.map((v) => sizeLabel(v.size)).join(" · ");
     return `
-      <figure class="poster-card" aria-label="Плакат ${esc(p.name)}">
+      <figure class="poster-card" aria-label="${esc(t("Poster"))} ${esc(p.name)}">
         <div class="pc-photo"><img src="${img(p)}" alt="${esc(p.name)}" loading="lazy"></div>
         <div class="pc-body">
           <div class="pc-logo">KACH<small>HAIR ORGANIC SOLUTIONS</small></div>
@@ -297,9 +323,9 @@
           <ul class="pc-ben">${p.benefits.map((b) => `<li>${LEAF}<span>${esc(b)}</span></li>`).join("")}</ul>
         </div>
         <div class="pc-bar">
-          <div><span>Объём</span><strong>${esc(sizes)}</strong></div>
+          <div><span>${t("Size")}</span><strong>${esc(sizes)}</strong></div>
           ${p.ph ? `<div><span class="pc-ph">pH</span><strong>${esc(p.ph)}</strong></div>` : ""}
-          <div class="pc-hair"><span>Для волос</span><strong>${esc(p.hair)}</strong></div>
+          <div class="pc-hair"><span>${t("For hair")}</span><strong>${esc(p.hair)}</strong></div>
         </div>
       </figure>`;
   }
@@ -320,10 +346,10 @@
     root.innerHTML = `
       <div class="empty success">
         <div class="success-icon">✓</div>
-        <h1>Оплата прошла!</h1>
-        ${number ? `<p>Заказ <strong>${esc(number)}</strong> оплачен.</p>` : ""}
-        <p class="muted">Спасибо! Мы свяжемся с вами, чтобы согласовать доставку.</p>
-        <a class="btn" href="${AUTH() && AUTH().user ? "account.html#orders" : "index.html"}">${AUTH() && AUTH().user ? "Мои заказы" : "На главную"}</a>
+        <h1>${t("Payment successful!")}</h1>
+        ${number ? `<p>${t("Order {n} has been paid.", { n: `<strong>${esc(number)}</strong>` })}</p>` : ""}
+        <p class="muted">${t("Thank you! We will contact you to arrange delivery.")}</p>
+        <a class="btn" href="${AUTH() && AUTH().user ? "account.html#orders" : "index.html"}">${AUTH() && AUTH().user ? t("My orders") : t("Back to home")}</a>
       </div>`;
   }
 
@@ -332,14 +358,14 @@
     const auth = AUTH();
     root.innerHTML = `
       <div class="empty pay-screen">
-        <h1>Оплата заказа${number ? " " + esc(number) : ""}</h1>
-        <p class="muted">${note || "Заказ сохранён. Осталось оплатить его."}</p>
+        <h1>${number ? t("Payment for order {n}", { n: esc(number) }) : t("Order payment")}</h1>
+        <p class="muted">${note || t("Your order has been saved. All that is left is to pay for it.")}</p>
         <div class="pay-actions">
-          <button class="btn btn-block" id="pay-stripe-btn" hidden>Оплатить картой</button>
+          <button class="btn btn-block" id="pay-stripe-btn" hidden>${t("Pay by card")}</button>
           <div id="paypal-buttons"></div>
         </div>
         <p class="form-msg err" id="pay-err" hidden></p>
-        <p class="muted small">Заказ сохранён. Если оплата не проходит, свяжитесь с нами, и мы поможем.</p>
+        <p class="muted small">${t("Your order has been saved. If the payment does not go through, contact us and we will help.")}</p>
       </div>`;
     const err = (m) => {
       const el = $("#pay-err");
@@ -350,20 +376,20 @@
     try {
       cfg = await auth.pay("config");
     } catch (e) {
-      return err("Онлайн-оплата сейчас недоступна.");
+      return err(t("Online payment is currently unavailable."));
     }
     if (cfg.stripe && provider !== "paypal") {
       const b = $("#pay-stripe-btn");
       b.hidden = false;
       b.addEventListener("click", async () => {
         b.disabled = true;
-        b.textContent = "Переходим к оплате…";
+        b.textContent = t("Opening payment…");
         try {
-          location.href = (await auth.pay("stripe-session", { token })).url;
+          location.href = (await auth.pay("stripe-session", { token, lang: I18N.lang })).url;
         } catch (e) {
           b.disabled = false;
-          b.textContent = "Оплатить картой";
-          err(e.message === "already paid" ? "Этот заказ уже оплачен." : "Не удалось открыть оплату картой. Попробуйте ещё раз.");
+          b.textContent = t("Pay by card");
+          err(e.message === "already paid" ? t("This order has already been paid.") : t("Could not open card payment. Please try again."));
         }
       });
     }
@@ -379,11 +405,11 @@
           },
           onError: (e) => {
             console.error(e);
-            err("PayPal не смог провести оплату. Попробуйте ещё раз.");
+            err(t("PayPal could not process the payment. Please try again."));
           }
         }).render("#paypal-buttons");
       } catch (e) {
-        err("Не удалось загрузить PayPal.");
+        err(t("Could not load PayPal."));
       }
     }
   }
@@ -394,7 +420,7 @@
     if (!auth || !auth.enabled) return;
     const token = qs.get("paid") || qs.get("pay");
     if (qs.get("paid") && qs.get("session")) {
-      root.innerHTML = `<div class="empty"><p class="muted">Проверяем оплату…</p></div>`;
+      root.innerHTML = `<div class="empty"><p class="muted">${t("Checking payment…")}</p></div>`;
       try {
         const r = await auth.pay("stripe-verify", { token, session: qs.get("session") });
         if (r.paid) return paidScreen(root, "");
@@ -402,7 +428,7 @@
         console.error(e);
       }
     }
-    showPayScreen(root, { token, provider: "", note: "Оплата не завершена. Заказ сохранён, его можно оплатить сейчас." });
+    showPayScreen(root, { token, provider: "", note: t("The payment was not completed. Your order has been saved and you can pay for it now.") });
   }
 
   const pages = {
@@ -439,18 +465,18 @@
       const root = $("#product");
       const p = findProduct(new URLSearchParams(location.search).get("id"));
       if (!p) {
-        root.innerHTML = `<div class="empty"><h1>Товар не найден</h1><p><a class="btn" href="catalog.html">Перейти в каталог</a></p></div>`;
+        root.innerHTML = `<div class="empty"><h1>${t("Product not found")}</h1><p><a class="btn" href="catalog.html">${t("Go to catalog")}</a></p></div>`;
         return;
       }
       document.title = `${p.name} — KACH`;
       let size = p.variants[0].size;
       const priceOf = (s) => {
-        if (p.soldOut) return "Нет в наличии";
+        if (p.soldOut) return t("Out of stock");
         const v = p.variants.find((x) => x.size === s);
-        return typeof v.price === "number" ? money(v.price) : "Цена по запросу";
+        return typeof v.price === "number" ? money(v.price) : t("Price on request");
       };
       root.innerHTML = `
-        <nav class="breadcrumbs"><a href="catalog.html">Каталог</a> / <a href="catalog.html?cat=${p.category}">${esc(CATS[p.category])}</a> / ${esc(p.name)}</nav>
+        <nav class="breadcrumbs"><a href="catalog.html">${t("Catalog")}</a> / <a href="catalog.html?cat=${p.category}">${esc(CATS[p.category])}</a> / ${esc(p.name)}</nav>
         <div class="product-layout">
           <div class="product-image"><img src="${img(p)}" alt="${esc(p.name)}" width="560" height="700"></div>
           <div class="product-info">
@@ -458,42 +484,42 @@
             <h1>${esc(p.name)}</h1>
             <p class="product-sub">${esc(p.subtitle)}</p>
             <p class="price big" id="price">${priceOf(size)}</p>
-            ${p.soldOut ? "" : `<p class="vat-note">Цена с НДС</p>`}
+            ${p.soldOut ? "" : `<p class="vat-note">${t("Price incl. VAT")}</p>`}
             ${
               p.variants.length > 1
-                ? `<div class="sizes" role="radiogroup" aria-label="Объём">${p.variants
-                    .map((v, i) => `<button class="chip${i === 0 ? " active" : ""}" data-size="${esc(v.size)}" role="radio" aria-checked="${i === 0}">${esc(v.size)}</button>`)
+                ? `<div class="sizes" role="radiogroup" aria-label="${t("Size")}">${p.variants
+                    .map((v, i) => `<button class="chip${i === 0 ? " active" : ""}" data-size="${esc(v.size)}" role="radio" aria-checked="${i === 0}">${esc(sizeLabel(v.size))}</button>`)
                     .join("")}</div>`
-                : `<p class="muted">${esc(p.variants[0].size)}</p>`
+                : `<p class="muted">${esc(sizeLabel(p.variants[0].size))}</p>`
             }
             <div class="buy-row">
               <div class="qty">
-                <button type="button" data-step="-1" aria-label="Меньше">−</button>
-                <input type="number" id="qty" value="1" min="1" max="99" aria-label="Количество">
-                <button type="button" data-step="1" aria-label="Больше">+</button>
+                <button type="button" data-step="-1" aria-label="${t("Less")}">−</button>
+                <input type="number" id="qty" value="1" min="1" max="99" aria-label="${t("Quantity")}">
+                <button type="button" data-step="1" aria-label="${t("More")}">+</button>
               </div>
-              <button class="btn" id="buy"${p.soldOut ? " disabled" : ""}>${p.soldOut ? "Нет в наличии" : "Добавить в корзину"}</button>
+              <button class="btn" id="buy"${p.soldOut ? " disabled" : ""}>${p.soldOut ? t("Out of stock") : t("Add to cart")}</button>
               ${favButton(p.id, " fav-big")}
             </div>
             <dl class="specs">
-              <div><dt>Для волос</dt><dd>${esc(p.hair)}</dd></div>
+              <div><dt>${t("For hair")}</dt><dd>${esc(p.hair)}</dd></div>
               ${p.ph ? `<div><dt>pH</dt><dd>${esc(p.ph)}</dd></div>` : ""}
-              <div><dt>Формула</dt><dd>${esc(p.formula)}</dd></div>
+              <div><dt>${t("Formula")}</dt><dd>${esc(p.formula)}</dd></div>
             </dl>
             <ul class="benefits">${p.benefits.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>
           </div>
         </div>
         <section class="product-details">
           <div class="details-text">
-            <h2>Описание</h2>
+            <h2>${t("Description")}</h2>
             ${p.description.map((t) => `<p>${esc(t)}</p>`).join("")}
-            <h3>Основные активные ингредиенты</h3>
+            <h3>${t("Key active ingredients")}</h3>
             <div class="keys">${p.actives.map((k) => `<span class="key">${esc(k)}</span>`).join("")}</div>
           </div>
           ${posterCard(p)}
         </section>
         <section class="section">
-          <h2>С этим товаром смотрят</h2>
+          <h2>${t("You may also like")}</h2>
           <div class="grid">${PRODUCTS.filter((x) => x.id !== p.id && x.category === p.category)
             .concat(PRODUCTS.filter((x) => x.id !== p.id && x.category !== p.category))
             .slice(0, 4)
@@ -524,7 +550,7 @@
       function draw() {
         const { items, allPriced, total } = cartTotals();
         if (!items.length) {
-          root.innerHTML = `<div class="empty"><p>Ваша корзина пуста.</p><a class="btn" href="catalog.html">Перейти в каталог</a></div>`;
+          root.innerHTML = `<div class="empty"><p>${t("Your cart is empty.")}</p><a class="btn" href="catalog.html">${t("Go to catalog")}</a></div>`;
           return;
         }
         root.innerHTML = `
@@ -537,27 +563,27 @@
                   <a href="product.html?id=${p.id}" class="cart-thumb"><img src="${img(p)}" alt=""></a>
                   <div class="cart-name">
                     <a href="product.html?id=${p.id}"><strong>${esc(p.name)}</strong></a>
-                    <span class="muted small">${esc(v.size)} · ${typeof v.price === "number" ? money(v.price) : "цена по запросу"}</span>
+                    <span class="muted small">${esc(sizeLabel(v.size))} · ${typeof v.price === "number" ? money(v.price) : t("price on request")}</span>
                   </div>
                   <div class="qty">
-                    <button data-key="${esc(key)}" data-delta="-1" aria-label="Меньше">−</button>
+                    <button data-key="${esc(key)}" data-delta="-1" aria-label="${t("Less")}">−</button>
                     <span>${qty}</span>
-                    <button data-key="${esc(key)}" data-delta="1" aria-label="Больше">+</button>
+                    <button data-key="${esc(key)}" data-delta="1" aria-label="${t("More")}">+</button>
                   </div>
                   <strong class="cart-sum">${typeof v.price === "number" ? money(v.price * qty) : "—"}</strong>
-                  <button class="remove" data-remove="${esc(key)}" aria-label="Удалить">×</button>
+                  <button class="remove" data-remove="${esc(key)}" aria-label="${t("Remove")}">×</button>
                 </div>`
                 )
                 .join("")}
             </div>
             <aside class="summary">
-              <h3>Итого</h3>
+              <h3>${t("Total")}</h3>
               ${
                 allPriced
-                  ? `<div class="row total"><span>К оплате</span><span>${money(total)}</span></div><p class="vat-note">Цены включают НДС</p>`
-                  : `<p class="muted small">Точную стоимость заказа и доставки менеджер сообщит после оформления.</p>`
+                  ? `<div class="row total"><span>${t("To pay")}</span><span>${money(total)}</span></div><p class="vat-note">${t("Prices include VAT")}</p>`
+                  : `<p class="muted small">${t("The manager will tell you the exact cost of the order and delivery after checkout.")}</p>`
               }
-              <a href="checkout.html" class="btn btn-block">Оформить заказ</a>
+              <a href="checkout.html" class="btn btn-block">${t("Checkout")}</a>
             </aside>
           </div>`;
       }
@@ -577,21 +603,21 @@
       if (qs.get("paid") || qs.get("pay")) return paymentReturn(root, qs);
       const { items, allPriced, total } = cartTotals();
       if (!items.length) {
-        root.innerHTML = `<div class="empty"><p>В корзине нет товаров.</p><a class="btn" href="catalog.html">Перейти в каталог</a></div>`;
+        root.innerHTML = `<div class="empty"><p>${t("There are no products in your cart.")}</p><a class="btn" href="catalog.html">${t("Go to catalog")}</a></div>`;
         return;
       }
       $("#order-summary").innerHTML = `
-        <h3>Ваш заказ</h3>
+        <h3>${t("Your order")}</h3>
         ${items
           .map(
             ({ product: p, variant: v, qty }) =>
-              `<div class="row"><span>${esc(p.name)}, ${esc(v.size)} × ${qty}</span><span>${typeof v.price === "number" ? money(v.price * qty) : "—"}</span></div>`
+              `<div class="row"><span>${esc(p.name)}, ${esc(sizeLabel(v.size))} × ${qty}</span><span>${typeof v.price === "number" ? money(v.price * qty) : "—"}</span></div>`
           )
           .join("")}
         ${
           allPriced
-            ? `<div class="row total"><span>К оплате</span><span>${money(total)}</span></div><p class="vat-note">Цены включают НДС</p>`
-            : `<p class="muted small">Стоимость заказа и доставки сообщит менеджер.</p>`
+            ? `<div class="row total"><span>${t("To pay")}</span><span>${money(total)}</span></div><p class="vat-note">${t("Prices include VAT")}</p>`
+            : `<p class="muted small">${t("The manager will tell you the cost of the order and delivery.")}</p>`
         }`;
 
       const form = $("#checkout-form");
@@ -659,16 +685,16 @@
         submitBtn.disabled = true;
       };
       if (!allPriced) {
-        payOff("У некоторых товаров в корзине нет цены, поэтому оплатить заказ онлайн пока нельзя. Свяжитесь с нами.");
+        payOff(t("Some products in your cart have no price, so the order cannot be paid online yet. Please contact us."));
       } else if (!auth || !auth.enabled) {
-        payOff("Онлайн-оплата сейчас недоступна. Попробуйте позже.");
+        payOff(t("Online payment is currently unavailable. Please try again later."));
       } else {
         auth
           .pay("config")
           .then((cfg) => {
             if (cfg.paypal) $("#pay-paypal").hidden = false;
             if (cfg.test) $("#pay-test").hidden = false;
-            if (!cfg.stripe && !cfg.paypal) payOff("Онлайн-оплата сейчас недоступна. Попробуйте позже.");
+            if (!cfg.stripe && !cfg.paypal) payOff(t("Online payment is currently unavailable. Please try again later."));
           })
           .catch((err) => console.warn("payments:", err));
       }
@@ -677,21 +703,21 @@
         if (!form.reportValidity()) return;
         const data = Object.fromEntries(new FormData(form));
         const number = "K-" + Date.now().toString().slice(-6);
-        const orderItems = items.map(({ product: p, variant: v, qty }) => ({ id: p.id, name: p.name, size: v.size, price: v.price, qty }));
+        const orderItems = items.map(({ product: p, variant: v, qty }) => ({ id: p.id, name: p.baseName || p.name, size: v.size, price: v.price, qty }));
         const submit = form.querySelector('[type="submit"]');
         const online = data.payment === "card" || data.payment === "paypal";
         const payToken = crypto.randomUUID ? crypto.randomUUID() : "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (c) => (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16));
         // Отправляем заказ в базу (Supabase), если она подключена
         if (auth && auth.enabled) {
           submit.disabled = true;
-          submit.textContent = "Отправляем…";
+          submit.textContent = t("Sending…");
           try {
             await auth.saveOrder({ number, customer: data, items: orderItems, total: allPriced ? total : null, pay_token: payToken });
           } catch (err) {
             console.error(err);
             submit.disabled = false;
-            submit.textContent = "Перейти к оплате";
-            toast("Не удалось отправить заказ. Попробуйте ещё раз или позвоните нам.");
+            submit.textContent = t("Proceed to payment");
+            toast(t("Could not send the order. Please try again or call us."));
             return;
           }
         }
@@ -714,9 +740,9 @@
         } catch (e) {}
         if (online && auth && auth.enabled) {
           if (data.payment === "card") {
-            submit.textContent = "Переходим к оплате…";
+            submit.textContent = t("Opening payment…");
             try {
-              const { url } = await auth.pay("stripe-session", { token: payToken });
+              const { url } = await auth.pay("stripe-session", { token: payToken, lang: I18N.lang });
               location.href = url;
               return;
             } catch (err) {
@@ -730,10 +756,10 @@
         root.innerHTML = `
           <div class="empty success">
             <div class="success-icon">✓</div>
-            <h1>Спасибо за заказ!</h1>
-            <p>Номер заказа: <strong>${number}</strong></p>
-            <p class="muted">Мы свяжемся с вами по телефону ${esc(data.phone)}, чтобы подтвердить заказ, стоимость и доставку.</p>
-            <a class="btn" href="${auth && auth.user ? "account.html#orders" : "index.html"}">${auth && auth.user ? "Мои заказы" : "На главную"}</a>
+            <h1>${t("Thank you for your order!")}</h1>
+            <p>${t("Order number:")} <strong>${number}</strong></p>
+            <p class="muted">${t("We will call you at {phone} to confirm the order, cost and delivery.", { phone: esc(data.phone) })}</p>
+            <a class="btn" href="${auth && auth.user ? "account.html#orders" : "index.html"}">${auth && auth.user ? t("My orders") : t("Back to home")}</a>
           </div>`;
         window.scrollTo(0, 0);
       });
@@ -759,7 +785,7 @@
           ini.hidden = !u;
           ini.textContent = u ? name.trim().charAt(0).toUpperCase() : "";
           a.classList.toggle("logged", !!u);
-          a.setAttribute("aria-label", u ? "Личный кабинет: " + name : "Войти в личный кабинет");
+          a.setAttribute("aria-label", u ? t("My account") + ": " + name : t("Sign in to your account"));
         });
       });
     }

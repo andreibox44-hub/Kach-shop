@@ -27,17 +27,18 @@
 
   // Понятные сообщения об ошибках
   function errorText(e) {
+    const t = window.KACH_I18N ? window.KACH_I18N.t : (x) => x;
     const m = String((e && (e.message || e.error_description)) || e || "").toLowerCase();
-    if (m.includes("invalid login credentials")) return "Неверная почта или пароль.";
-    if (m.includes("email not confirmed")) return "Почта не подтверждена. Откройте письмо от нас и нажмите ссылку.";
-    if (m.includes("already registered") || m.includes("already been registered")) return "Эта почта уже зарегистрирована. Войдите или восстановите пароль.";
-    if (m.includes("password should be at least") || m.includes("weak")) return "Пароль слишком простой: нужно минимум 6 символов.";
-    if (m.includes("invalid email") || m.includes("unable to validate email")) return "Неверный формат почты.";
-    if (m.includes("rate limit") || m.includes("too many")) return "Слишком много попыток. Попробуйте через несколько минут.";
-    if (m.includes("provider is not enabled")) return "Вход через Google пока не включён в настройках Supabase.";
-    if (m.includes("failed to fetch") || m.includes("network")) return "Нет соединения с сервером. Проверьте интернет.";
-    if (m.includes("row-level security") || m.includes("permission")) return "Нет доступа к данным. Проверьте, что выполнен файл supabase/schema.sql.";
-    return "Что-то пошло не так. Попробуйте ещё раз.";
+    if (m.includes("invalid login credentials")) return t("Wrong e-mail or password.");
+    if (m.includes("email not confirmed")) return t("Your e-mail is not confirmed. Open our e-mail and click the link.");
+    if (m.includes("already registered") || m.includes("already been registered")) return t("This e-mail is already registered. Sign in or reset your password.");
+    if (m.includes("password should be at least") || m.includes("weak")) return t("The password is too simple: it needs at least 6 characters.");
+    if (m.includes("invalid email") || m.includes("unable to validate email")) return t("Invalid e-mail format.");
+    if (m.includes("rate limit") || m.includes("too many")) return t("Too many attempts. Please try again in a few minutes.");
+    if (m.includes("provider is not enabled")) return t("Google sign-in is not enabled yet.");
+    if (m.includes("failed to fetch") || m.includes("network")) return t("No connection to the server. Check your internet connection.");
+    if (m.includes("row-level security") || m.includes("permission")) return t("No access to the data. Please try again later.");
+    return t("Something went wrong. Please try again.");
   }
 
   const pageUrl = (name) => new URL(name, location.href).href.split("#")[0].split("?")[0];

@@ -1,258 +1,270 @@
-// Каталог товаров KACH Hair Organic Solutions.
-// Чтобы поставить цену, впишите число вместо null в нужный объём, например { size: "250 мл", price: 1990 }.
-// Пока цена равна null, на сайте показывается «Цена по запросу».
+// KACH Hair Organic Solutions catalog (English, the main site language).
+// Translations of names and descriptions are in js/lang/*.js under "products".
+// Sizes stay as "250 мл" / "Набор": the payment table product_prices uses exactly these values.
+// On the site they are shown as "250 ml" / "Kit". To change a price, change it here and in product_prices.
 window.KACH_PRODUCTS = [
   {
     id: "bhx-kit",
-    name: "Набор BHX Botohair Effect",
-    subtitle: "Профессиональный набор для ухода за волосами",
+    name: "BHX Botohair Effect Kit",
+    subtitle: "Professional hair care kit",
     category: "pro",
-    tag: "Набор",
+    tag: "Kit",
     variants: [{ size: "Набор", price: 349 }],
     ph: "",
-    hair: "Все типы волос",
-    formula: "Без парабенов, сульфатов и формальдегида",
-    short: "Увлажнение, реконструкция и восстановление в одном наборе.",
+    hair: "All hair types",
+    formula: "Free from parabens, sulphates and formaldehyde",
+    short: "Hydration, reconstruction and repair in one kit.",
     description: [
-      "Интенсивный профессиональный уход для более здоровых, сильных и блестящих волос. Набор вдохновлён эффектом ботокса для волос и создан на основе натуральных ингредиентов и передовых биотехнологий.",
-      "Восстанавливает волосы изнутри, возвращает им увлажнение, силу, объём и необыкновенный блеск. Заметный результат уже после первого применения.",
-      "В наборе: 15 ампул BHX (интенсивный увлажняющий уход с эффектом ботокса), шампунь Shampoo DC (глубокое очищение и подготовка волос к процедуре), Aminoplasma AP (интенсивная реконструкция) и сыворотка Serum SSN (блеск, шелковистость, питание)."
+      "Intensive professional care for healthier, stronger and shinier hair. The kit is inspired by the hair botox effect and made with natural ingredients and advanced biotechnology.",
+      "It repairs hair from within and restores moisture, strength, volume and extraordinary shine. Visible results from the very first use.",
+      "The kit contains: 15 BHX ampoules (intensive moisturising treatment with a botox effect), Shampoo DC (deep cleansing that prepares hair for the treatment), Aminoplasma AP (intensive reconstruction) and Serum SSN (shine, silkiness, nourishment)."
     ],
-    actives: ["Кератин", "Гиалуроновая кислота", "Масло арганы", "Аминокислоты", "Керамиды"],
-    benefits: ["Глубокое увлажнение", "Реконструкция", "Объём и блеск", "Профессиональный результат"]
+    actives: ["Keratin", "Hyaluronic acid", "Argan oil", "Amino acids", "Ceramides"],
+    benefits: ["Deep hydration", "Reconstruction", "Volume and shine", "Professional results"]
   },
   {
     id: "shampoo-rh",
     name: "Shampoo RH",
-    subtitle: "Шампунь быстрого увлажнения",
+    subtitle: "Rapid hydration shampoo",
     category: "shampoo",
     tag: "",
     variants: [{ size: "250 мл", price: 23 }, { size: "450 мл", price: 32 }],
     ph: "5.5",
-    hair: "Нормальные, жёсткие волосы и волосы, повреждённые химическими процедурами",
-    formula: "30% восстановление · 70% увлажнение",
-    short: "Мягко очищает и глубоко увлажняет сухие и окрашенные волосы.",
+    hair: "Normal and coarse hair, and hair damaged by chemical treatments",
+    formula: "30% repair · 70% hydration",
+    short: "Gently cleanses and deeply moisturises dry and coloured hair.",
     description: [
-      "Сочетание активных компонентов растительного происхождения бережно и эффективно очищает, не повреждая волосяное волокно. Идеален для сухих волос и волос после химических процедур.",
-      "Увлажняющая и восстанавливающая формула уменьшает пушистость: волосы становятся мягче, шелковистее и живее.",
-      "Фруктовые экстракты, зелёный чай, женьшень, черника и зародыши пшеницы вместе с гиалуроновой кислотой, коллагеном и кератином придают волосам плотность, предотвращают сечение кончиков и поддерживают оптимальный уровень увлажнения, сохраняя естественную структуру и цвет волос."
+      "A blend of plant-based active ingredients cleanses gently and effectively without damaging the hair fibre. Ideal for dry hair and hair after chemical treatments.",
+      "The moisturising and repairing formula reduces frizz: hair becomes softer, silkier and more lively.",
+      "Fruit extracts, green tea, ginseng, blueberry and wheat germ, together with hyaluronic acid, collagen and keratin, give hair body, prevent split ends and keep moisture at an optimal level while preserving the hair's natural structure and colour."
     ],
-    actives: ["Зелёный чай", "Женьшень", "Черника", "Зародыши пшеницы", "Гиалуроновая кислота", "Коллаген", "Кератин"],
-    benefits: ["Глубокое увлажнение", "Меньше пушистости", "Защита от сечения", "Мягкость и блеск"]
+    actives: ["Green tea", "Ginseng", "Blueberry", "Wheat germ", "Hyaluronic acid", "Collagen", "Keratin"],
+    benefits: ["Deep hydration", "Less frizz", "Protection against split ends", "Softness and shine"]
   },
   {
     id: "shampoo-rr",
     name: "Shampoo RR",
-    subtitle: "Шампунь быстрого восстановления",
+    subtitle: "Rapid repair shampoo",
     category: "shampoo",
     tag: "",
     variants: [{ size: "250 мл", price: 23 }, { size: "450 мл", price: 32 }],
     ph: "5.5",
-    hair: "Нормальные, тонкие волосы и волосы, повреждённые химическими процедурами",
-    formula: "30% восстановление · 70% увлажнение",
-    short: "Восстанавливающий шампунь для сухих и химически обработанных волос.",
+    hair: "Normal and fine hair, and hair damaged by chemical treatments",
+    formula: "30% repair · 70% hydration",
+    short: "Repairing shampoo for dry and chemically treated hair.",
     description: [
-      "Восстанавливающий шампунь с ингредиентами высочайшего качества, питательными маслами и ценными экстрактами. Идеален для сухих волос и волос после химических процедур.",
-      "Без парабенов и сульфатов: очищает мягко и неагрессивно, бережно относится к волосяному волокну.",
-      "Уменьшает пушистость и делает волосы сильнее, объёмнее и шелковистее. Предотвращает сечение кончиков и укрепляет волосы, сохраняя их естественную структуру."
+      "A repairing shampoo with top-quality ingredients, nourishing oils and precious extracts. Ideal for dry hair and hair after chemical treatments.",
+      "Free from parabens and sulphates: it cleanses gently and non-aggressively and respects the hair fibre.",
+      "It reduces frizz and makes hair stronger, fuller and silkier. Prevents split ends and strengthens hair while preserving its natural structure."
     ],
-    actives: ["Питательные масла", "Растительные экстракты"],
-    benefits: ["Глубокое восстановление", "Меньше пушистости", "Защита от сечения", "Сила и объём"]
+    actives: ["Nourishing oils", "Plant extracts"],
+    benefits: ["Deep repair", "Less frizz", "Protection against split ends", "Strength and volume"]
   },
   {
     id: "only1one",
     name: "Only 1 One Shampoo",
-    subtitle: "Разглаживающий шампунь против пушистости",
+    subtitle: "Anti-frizz smoothing shampoo",
     category: "shampoo",
-    tag: "Хит",
+    tag: "Bestseller",
     variants: [{ size: "80 мл", price: 29 }, { size: "400 мл", price: 149 }],
     ph: "0.5–1.5",
-    hair: "Волнистые, пушистые и кудрявые волосы",
-    formula: "Без SLS, SLES, парабенов, силиконов, ГМО и формальдегида",
-    short: "Разглаживает и дисциплинирует волосы, убирает пушистость.",
+    hair: "Wavy, frizzy and curly hair",
+    formula: "Free from SLS, SLES, parabens, silicones, GMOs and formaldehyde",
+    short: "Smooths and tames hair, eliminates frizz.",
     description: [
-      "Разглаживающий шампунь с уникальным сочетанием органических кислот и натуральных протеинов. Действует на связи кератиновых цепочек внутри волоса (в кортексе).",
-      "Инновационная формула активируется теплом и делает волосы гладкими, блестящими и без пушистости.",
-      "Экстракты тамаринда, яблока, сахарного тростника и молока вместе с гиалуроновой кислотой и керамидами с очень низкой молекулярной массой восстанавливают волосы и придают им шелковистость."
+      "A smoothing shampoo with a unique combination of organic acids and natural proteins. It acts on the bonds of the keratin chains inside the hair (in the cortex).",
+      "The innovative heat-activated formula makes hair smooth, shiny and frizz-free.",
+      "Tamarind, apple, sugar cane and milk extracts, together with hyaluronic acid and very low molecular weight ceramides, repair hair and make it silky."
     ],
-    actives: ["Тамаринд", "Яблоко", "Сахарный тростник", "Молоко", "Гиалуроновая кислота", "Керамиды"],
-    benefits: ["Разглаживает", "Убирает пушистость", "Экстра-блеск", "Увлажняет", "Укрепляет"]
+    actives: ["Tamarind", "Apple", "Sugar cane", "Milk", "Hyaluronic acid", "Ceramides"],
+    benefits: ["Smooths", "Eliminates frizz", "Extra shine", "Moisturises", "Strengthens"]
   },
   {
     id: "only1one-violet",
     name: "Only 1 One Violet Shampoo",
-    subtitle: "Разглаживающий шампунь для светлых волос",
+    subtitle: "Smoothing shampoo for blonde hair",
     category: "shampoo",
-    tag: "Для блонда",
+    tag: "For blondes",
     variants: [{ size: "80 мл", price: 29 }, { size: "400 мл", price: 111 }],
     ph: "0.5–1.5",
-    hair: "Светлые волнистые, пушистые и кудрявые волосы",
-    formula: "Без SLS, SLES, парабенов, силиконов, ГМО и формальдегида",
-    short: "Разглаживание и защита от пушистости для блондинок.",
+    hair: "Blonde wavy, frizzy and curly hair",
+    formula: "Free from SLS, SLES, parabens, silicones, GMOs and formaldehyde",
+    short: "Smoothing and frizz protection for blondes.",
     description: [
-      "Разглаживающий шампунь для светлых волос с уникальным сочетанием органических кислот и натуральных протеинов. Действует на связи кератиновых цепочек внутри волоса.",
-      "Формула активируется теплом и делает волосы гладкими, блестящими и без пушистости.",
-      "Экстракты тамаринда, яблока, сахарного тростника и молока вместе с гиалуроновой кислотой и керамидами восстанавливают волосы и придают им роскошную шелковистость."
+      "A smoothing shampoo for blonde hair with a unique combination of organic acids and natural proteins. It acts on the bonds of the keratin chains inside the hair.",
+      "The heat-activated formula makes hair smooth, shiny and frizz-free.",
+      "Tamarind, apple, sugar cane and milk extracts, together with hyaluronic acid and ceramides, repair hair and give it a luxurious silkiness."
     ],
-    actives: ["Тамаринд", "Яблоко", "Сахарный тростник", "Молоко", "Гиалуроновая кислота", "Керамиды"],
-    benefits: ["Разглаживает", "Убирает пушистость", "Экстра-блеск", "Увлажняет", "Укрепляет"]
+    actives: ["Tamarind", "Apple", "Sugar cane", "Milk", "Hyaluronic acid", "Ceramides"],
+    benefits: ["Smooths", "Eliminates frizz", "Extra shine", "Moisturises", "Strengthens"]
   },
   {
     id: "shampoo-ac",
     name: "Shampoo AC",
-    subtitle: "Кислотный шампунь глубокой очистки",
+    subtitle: "Acidic deep-cleansing shampoo",
     category: "shampoo",
     tag: "",
     variants: [{ size: "80 мл", price: 10 }, { size: "450 мл", price: 39 }],
     ph: "3.5–4.5",
-    hair: "Волосы после химических процедур",
-    formula: "Натуральная формула · без SLES и парабенов",
-    short: "Глубоко очищает и готовит волосы к процедурам.",
+    hair: "Hair after chemical treatments",
+    formula: "Natural formula · free from SLES and parabens",
+    short: "Deeply cleanses and prepares hair for treatments.",
     description: [
-      "Эксклюзивная формула с натуральными ингредиентами высокого качества: фруктовые экстракты, зелёный чай, черника и зародыши пшеницы, а также гиалуроновая кислота и керамиды для оптимального увлажнения.",
-      "Мягкий шампунь глубоко очищает все типы волос, бережно раскрывает кутикулу и удаляет загрязнения и остатки средств.",
-      "Идеален для подготовки волос к последующим процедурам: активные компоненты впитываются лучше."
+      "An exclusive formula with high-quality natural ingredients: fruit extracts, green tea, blueberry and wheat germ, plus hyaluronic acid and ceramides for optimal hydration.",
+      "This gentle shampoo deeply cleanses all hair types, gently opens the cuticle and removes impurities and product residue.",
+      "Ideal for preparing hair for the next treatments: the active ingredients are absorbed better."
     ],
-    actives: ["Зелёный чай", "Черника", "Зародыши пшеницы", "Гиалуроновая кислота", "Керамиды"],
-    benefits: ["Глубокая очистка", "Удаляет загрязнения", "Увлажнение", "Раскрывает кутикулу", "Готовит к процедурам"]
+    actives: ["Green tea", "Blueberry", "Wheat germ", "Hyaluronic acid", "Ceramides"],
+    benefits: ["Deep cleansing", "Removes impurities", "Hydration", "Opens the cuticle", "Prepares for treatments"]
   },
   {
     id: "shampoo-dc",
     name: "Shampoo DC",
-    subtitle: "Щелочной шампунь глубокой очистки",
+    subtitle: "Alkaline deep-cleansing shampoo",
     category: "shampoo",
     tag: "",
     variants: [{ size: "450 мл", price: 39 }, { size: "1000 мл", price: 69 }],
     ph: "8.5–9.0",
-    hair: "Все типы волос",
-    formula: "Натуральная формула",
-    short: "Глубокая очистка перед кератином и другими процедурами.",
+    hair: "All hair types",
+    formula: "Natural formula",
+    short: "Deep cleansing before keratin and other treatments.",
     description: [
-      "Эксклюзивная формула с натуральными ингредиентами высокого качества: фруктовые экстракты, зелёный чай, черника и зародыши пшеницы, а также гиалуроновая кислота и керамиды для оптимального увлажнения.",
-      "Мягкий шампунь глубоко очищает все типы волос, бережно раскрывает кутикулу и удаляет загрязнения и остатки средств.",
-      "Идеален для подготовки волос к последующим процедурам: активные компоненты впитываются лучше."
+      "An exclusive formula with high-quality natural ingredients: fruit extracts, green tea, blueberry and wheat germ, plus hyaluronic acid and ceramides for optimal hydration.",
+      "This gentle shampoo deeply cleanses all hair types, gently opens the cuticle and removes impurities and product residue.",
+      "Ideal for preparing hair for the next treatments: the active ingredients are absorbed better."
     ],
-    actives: ["Зелёный чай", "Черника", "Зародыши пшеницы", "Гиалуроновая кислота", "Керамиды"],
-    benefits: ["Глубокая очистка", "Удаляет загрязнения", "Увлажнение", "Раскрывает кутикулу", "Готовит к процедурам"]
+    actives: ["Green tea", "Blueberry", "Wheat germ", "Hyaluronic acid", "Ceramides"],
+    benefits: ["Deep cleansing", "Removes impurities", "Hydration", "Opens the cuticle", "Prepares for treatments"]
   },
   {
     id: "conditioner-rh",
     name: "Conditioner RH",
-    subtitle: "Кондиционер быстрого увлажнения",
+    subtitle: "Rapid hydration conditioner",
     category: "conditioner",
     tag: "",
     variants: [{ size: "250 мл", price: 23 }, { size: "450 мл", price: 32 }],
     ph: "4.5",
-    hair: "Нормальные, жёсткие волосы и волосы, повреждённые химическими процедурами",
-    formula: "30% восстановление · 70% увлажнение",
-    short: "Увлажняет, восстанавливает и защищает цвет.",
+    hair: "Normal and coarse hair, and hair damaged by chemical treatments",
+    formula: "30% repair · 70% hydration",
+    short: "Moisturises, repairs and protects colour.",
     description: [
-      "Сбалансированная формула с компонентами высокой и низкой молекулярной массы отлично кондиционирует волосы, увлажняет, восстанавливает, реконструирует и защищает цвет.",
-      "Придаёт волосам прочность, блеск и шелковистость, контролирует пушистость и объём, делает волосы плотнее."
+      "A balanced formula with high and low molecular weight components that conditions hair perfectly: it moisturises, repairs, reconstructs and protects colour.",
+      "It gives hair strength, shine and silkiness, controls frizz and volume and makes hair fuller."
     ],
-    actives: ["Компоненты высокой и низкой молекулярной массы"],
-    benefits: ["Глубокое увлажнение", "Восстановление", "Защита цвета", "Контроль пушистости"]
+    actives: ["High and low molecular weight components"],
+    benefits: ["Deep hydration", "Repair", "Colour protection", "Frizz control"]
   },
   {
     id: "conditioner-rr",
     name: "Conditioner RR",
-    subtitle: "Кондиционер быстрого восстановления",
+    subtitle: "Rapid repair conditioner",
     category: "conditioner",
     tag: "",
     variants: [{ size: "250 мл", price: 23 }, { size: "450 мл", price: 32 }],
     ph: "4.5",
-    hair: "Нормальные, тонкие волосы и волосы, повреждённые химическими процедурами",
-    formula: "30% восстановление · 70% увлажнение",
-    short: "Интенсивное восстановление и защита цвета.",
+    hair: "Normal and fine hair, and hair damaged by chemical treatments",
+    formula: "30% repair · 70% hydration",
+    short: "Intensive repair and colour protection.",
     description: [
-      "Сбалансированная формула с компонентами высокой и низкой молекулярной массы отлично кондиционирует волосы и обеспечивает интенсивное глубокое восстановление, реконструкцию, увлажнение и защиту цвета.",
-      "Придаёт волосам прочность, блеск, шелковистость и объём."
+      "A balanced formula with high and low molecular weight components that conditions hair perfectly and provides intensive deep repair, reconstruction, hydration and colour protection.",
+      "It gives hair strength, shine, silkiness and volume."
     ],
-    actives: ["Компоненты высокой и низкой молекулярной массы"],
-    benefits: ["Глубокое увлажнение", "Интенсивное восстановление", "Защита цвета", "Прочность и объём"]
+    actives: ["High and low molecular weight components"],
+    benefits: ["Deep hydration", "Intensive repair", "Colour protection", "Strength and volume"]
   },
   {
     id: "aminoplasma-ap",
     name: "Aminoplasma AP",
-    subtitle: "Интенсивная реконструкция волос",
+    subtitle: "Intensive hair reconstruction",
     category: "care",
     tag: "",
     variants: [{ size: "200 мл", price: 69 }],
     ph: "4.0–5.0",
-    hair: "Все типы волос",
-    formula: "Чистый концентрат аминокислот и кератина",
-    short: "Концентрат аминокислот и кератина для повреждённых волос.",
+    hair: "All hair types",
+    formula: "Pure concentrate of amino acids and keratin",
+    short: "Amino acid and keratin concentrate for damaged hair.",
     description: [
-      "Чистый концентрат аминокислот и кератина. Проникает глубоко в волосяное волокно, чтобы восстановить, реконструировать и укрепить повреждённые волосы.",
-      "Аминокислоты восстанавливают волокно изнутри, а кератин разной молекулярной массы укрепляет и защищает структуру волоса."
+      "A pure concentrate of amino acids and keratin. It penetrates deep into the hair fibre to repair, reconstruct and strengthen damaged hair.",
+      "Amino acids repair the fibre from within, while keratin of different molecular weights strengthens and protects the hair structure."
     ],
-    actives: ["Аминокислоты", "Кератин"],
-    benefits: ["Глубокая реконструкция", "Восстанавливает кутикулу", "Запечатывает кончики", "Укрепляет", "Блеск и эластичность"]
+    actives: ["Amino acids", "Keratin"],
+    benefits: ["Deep reconstruction", "Repairs the cuticle", "Seals the ends", "Strengthens", "Shine and elasticity"]
   },
   {
     id: "siero-ssn",
     name: "Siero SSN",
-    subtitle: "Сыворотка: блеск, шелковистость, питание",
+    subtitle: "Serum: shine, silkiness, nourishment",
     category: "care",
     tag: "",
     variants: [{ size: "100 мл", price: 49 }, { size: "250 мл", price: 99 }],
     ph: "",
-    hair: "Нормальные и жёсткие, густые волосы",
-    formula: "Без парабенов и сульфатов",
-    short: "Сыворотка с аргановым маслом и Омега-3 для сияния волос.",
+    hair: "Normal, coarse and thick hair",
+    formula: "Free from parabens and sulphates",
+    short: "Serum with argan oil and Omega-3 for radiant hair.",
     description: [
-      "Ценная сыворотка на основе арганового масла и Омега-3. Глубоко питает, интенсивно увлажняет и дарит волосам необыкновенное сияние.",
-      "Идеальна для нормальных и жёстких волос. Масло арганы, масло жожоба, экстракт цветка нарцисса и керамиды запечатывают и восстанавливают волосы, не утяжеляя их.",
-      "Волосы становятся шелковистыми, очень блестящими и послушными, а укладка держится безупречно."
+      "A precious serum based on argan oil and Omega-3. It deeply nourishes, intensely moisturises and gives hair an extraordinary radiance.",
+      "Ideal for normal and coarse hair. Argan oil, jojoba oil, narcissus flower extract and ceramides seal and repair hair without weighing it down.",
+      "Hair becomes silky, very shiny and manageable, and the style holds perfectly."
     ],
-    actives: ["Масло арганы", "Омега-3", "Масло жожоба", "Экстракт нарцисса", "Керамиды"],
-    benefits: ["Сияние", "Шелковистость", "Глубокое питание", "Без парабенов и сульфатов"]
+    actives: ["Argan oil", "Omega-3", "Jojoba oil", "Narcissus extract", "Ceramides"],
+    benefits: ["Radiance", "Silkiness", "Deep nourishment", "Free from parabens and sulphates"]
   },
   {
     id: "crema-csn",
     name: "Crema CSN",
-    subtitle: "Крем для объёма: блеск и питание",
+    subtitle: "Volume cream: shine and nourishment",
     category: "care",
     tag: "",
-    soldOut: true, // нет в наличии: убрать строку, когда товар появится
+    soldOut: true, // out of stock: remove this line when the product is back
     variants: [{ size: "100 мл", price: 30 }],
     ph: "",
-    hair: "Нормальные и тонкие волосы",
-    formula: "Без парабенов и сульфатов",
-    short: "Стайлинг-крем для объёма без утяжеления.",
+    hair: "Normal and fine hair",
+    formula: "Free from parabens and sulphates",
+    short: "Styling cream for volume without weighing hair down.",
     description: [
-      "Крем для укладки и объёма с натуральными ингредиентами: масло арганы, масло жожоба, гиалуроновая кислота, коллаген, кератин и Омега 3 и 6. Придаёт волосам плотность, глубокое увлажнение и блеск.",
-      "Идеален для нормальных и тонких волос: даёт объём и чёткую форму, не делая волосы жирными и тяжёлыми.",
-      "Без парабенов и сульфатов. Волосы становятся шелковистыми, блестящими и легко укладываются."
+      "A styling and volume cream with natural ingredients: argan oil, jojoba oil, hyaluronic acid, collagen, keratin and Omega 3 and 6. It gives hair body, deep hydration and shine.",
+      "Ideal for normal and fine hair: it gives volume and a defined shape without making hair greasy or heavy.",
+      "Free from parabens and sulphates. Hair becomes silky, shiny and easy to style."
     ],
-    actives: ["Масло арганы", "Масло жожоба", "Гиалуроновая кислота", "Коллаген", "Кератин", "Омега 3 и 6"],
-    benefits: ["Сияние", "Объём и форма", "Глубокое увлажнение", "Без парабенов и сульфатов"]
+    actives: ["Argan oil", "Jojoba oil", "Hyaluronic acid", "Collagen", "Keratin", "Omega 3 and 6"],
+    benefits: ["Radiance", "Volume and shape", "Deep hydration", "Free from parabens and sulphates"]
   },
   {
     id: "bhx-botohair",
     name: "BHX Botohair Effect",
-    subtitle: "Интенсивное увлажнение волос, ампулы",
+    subtitle: "Intensive hair hydration, ampoules",
     category: "pro",
     tag: "",
     variants: [{ size: "20 мл", price: 25 }],
     ph: "5.0–5.5",
-    hair: "Все типы волос",
-    formula: "Гиалуроновая кислота, керамиды и масла",
-    short: "Концентрат для глубокого увлажнения с эффектом до трёх недель.",
+    hair: "All hair types",
+    formula: "Hyaluronic acid, ceramides and oils",
+    short: "Deep hydration concentrate with an effect lasting up to three weeks.",
     description: [
-      "Высококонцентрированная формула с гиалуроновой кислотой, керамидами и смесью ценных масел арганы, жожоба и авокадо.",
-      "Процедура глубокого увлажнения с заметным эффектом до трёх недель. Помогает контролировать пушистость, запечатывает кутикулу и секущиеся кончики, дарит мягкость и сияние.",
-      "Подходит как уход после окрашивания или как запечатывающее средство после процедур вроде ботоплекса. Можно добавлять в красители, осветлители и составы для выпрямления, чтобы защитить и напитать волосы."
+      "A highly concentrated formula with hyaluronic acid, ceramides and a blend of precious argan, jojoba and avocado oils.",
+      "A deep hydration treatment with a visible effect lasting up to three weeks. It helps control frizz, seals the cuticle and split ends, and gives softness and radiance.",
+      "Suitable as an after-colour treatment or as a sealing product after treatments such as botoplex. It can be added to colours, bleaches and straightening products to protect and nourish hair."
     ],
-    actives: ["Гиалуроновая кислота", "Керамиды", "Масло арганы", "Масло жожоба", "Масло авокадо"],
-    benefits: ["Глубокое увлажнение", "Контроль пушистости", "Запечатывает кончики", "Мягкость и сияние"]
+    actives: ["Hyaluronic acid", "Ceramides", "Argan oil", "Jojoba oil", "Avocado oil"],
+    benefits: ["Deep hydration", "Frizz control", "Seals the ends", "Softness and radiance"]
   }
 ];
 
 window.KACH_CATEGORIES = {
-  all: "Все",
-  shampoo: "Шампуни",
-  conditioner: "Кондиционеры",
-  care: "Уход и стайлинг",
-  pro: "Процедуры BHX"
+  all: "All",
+  shampoo: "Shampoos",
+  conditioner: "Conditioners",
+  care: "Care and styling",
+  pro: "BHX treatments"
 };
+
+// Texts in the chosen language. baseName keeps the English name for orders and payments.
+(function () {
+  const I = window.KACH_I18N;
+  window.KACH_PRODUCTS.forEach((p) => {
+    p.baseName = p.name;
+    const tr = I && I.products && I.products[p.id];
+    if (tr) Object.assign(p, tr);
+  });
+  if (I) Object.keys(window.KACH_CATEGORIES).forEach((k) => (window.KACH_CATEGORIES[k] = I.t(window.KACH_CATEGORIES[k])));
+})();

@@ -1,20 +1,683 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://kachhair.com/</loc></url>
-  <url><loc>https://kachhair.com/catalog.html</loc></url>
-  <url><loc>https://kachhair.com/about.html</loc></url>
-  <url><loc>https://kachhair.com/info.html</loc></url>
-  <url><loc>https://kachhair.com/product.html?id=bhx-kit</loc></url>
-  <url><loc>https://kachhair.com/product.html?id=shampoo-rh</loc></url>
-  <url><loc>https://kachhair.com/product.html?id=shampoo-rr</loc></url>
-  <url><loc>https://kachhair.com/product.html?id=only1one</loc></url>
-  <url><loc>https://kachhair.com/product.html?id=only1one-violet</loc></url>
-  <url><loc>https://kachhair.com/product.html?id=shampoo-ac</loc></url>
-  <url><loc>https://kachhair.com/product.html?id=shampoo-dc</loc></url>
-  <url><loc>https://kachhair.com/product.html?id=conditioner-rh</loc></url>
-  <url><loc>https://kachhair.com/product.html?id=conditioner-rr</loc></url>
-  <url><loc>https://kachhair.com/product.html?id=aminoplasma-ap</loc></url>
-  <url><loc>https://kachhair.com/product.html?id=siero-ssn</loc></url>
-  <url><loc>https://kachhair.com/product.html?id=crema-csn</loc></url>
-  <url><loc>https://kachhair.com/product.html?id=bhx-botohair</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://kachhair.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/"/>
+  </url>
+  <url><loc>https://kachhair.com/?lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/"/>
+  </url>
+  <url><loc>https://kachhair.com/?lang=it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/"/>
+  </url>
+  <url><loc>https://kachhair.com/?lang=ro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/"/>
+  </url>
+  <url><loc>https://kachhair.com/?lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/"/>
+  </url>
+  <url><loc>https://kachhair.com/catalog.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/catalog.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/catalog.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/catalog.html?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/catalog.html?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/catalog.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/catalog.html"/>
+  </url>
+  <url><loc>https://kachhair.com/catalog.html?lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/catalog.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/catalog.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/catalog.html?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/catalog.html?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/catalog.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/catalog.html"/>
+  </url>
+  <url><loc>https://kachhair.com/catalog.html?lang=it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/catalog.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/catalog.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/catalog.html?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/catalog.html?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/catalog.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/catalog.html"/>
+  </url>
+  <url><loc>https://kachhair.com/catalog.html?lang=ro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/catalog.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/catalog.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/catalog.html?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/catalog.html?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/catalog.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/catalog.html"/>
+  </url>
+  <url><loc>https://kachhair.com/catalog.html?lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/catalog.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/catalog.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/catalog.html?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/catalog.html?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/catalog.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/catalog.html"/>
+  </url>
+  <url><loc>https://kachhair.com/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/about.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/about.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/about.html?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/about.html?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/about.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/about.html"/>
+  </url>
+  <url><loc>https://kachhair.com/about.html?lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/about.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/about.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/about.html?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/about.html?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/about.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/about.html"/>
+  </url>
+  <url><loc>https://kachhair.com/about.html?lang=it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/about.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/about.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/about.html?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/about.html?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/about.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/about.html"/>
+  </url>
+  <url><loc>https://kachhair.com/about.html?lang=ro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/about.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/about.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/about.html?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/about.html?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/about.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/about.html"/>
+  </url>
+  <url><loc>https://kachhair.com/about.html?lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/about.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/about.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/about.html?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/about.html?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/about.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/about.html"/>
+  </url>
+  <url><loc>https://kachhair.com/info.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/info.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/info.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/info.html?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/info.html?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/info.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/info.html"/>
+  </url>
+  <url><loc>https://kachhair.com/info.html?lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/info.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/info.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/info.html?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/info.html?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/info.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/info.html"/>
+  </url>
+  <url><loc>https://kachhair.com/info.html?lang=it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/info.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/info.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/info.html?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/info.html?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/info.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/info.html"/>
+  </url>
+  <url><loc>https://kachhair.com/info.html?lang=ro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/info.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/info.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/info.html?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/info.html?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/info.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/info.html"/>
+  </url>
+  <url><loc>https://kachhair.com/info.html?lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/info.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/info.html?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/info.html?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/info.html?lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/info.html?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/info.html"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=bhx-kit</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=bhx-kit"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=bhx-kit"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=bhx-kit&amp;lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=bhx-kit"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=bhx-kit"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=bhx-kit&amp;lang=it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=bhx-kit"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=bhx-kit"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=bhx-kit&amp;lang=ro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=bhx-kit"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=bhx-kit"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=bhx-kit&amp;lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=bhx-kit"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=bhx-kit&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=bhx-kit"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-rh</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-rh"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-rh"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-rh&amp;lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-rh"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-rh"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-rh&amp;lang=it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-rh"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-rh"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-rh&amp;lang=ro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-rh"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-rh"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-rh&amp;lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-rh"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-rh&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-rh"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-rr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-rr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-rr"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-rr&amp;lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-rr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-rr"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-rr&amp;lang=it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-rr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-rr"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-rr&amp;lang=ro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-rr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-rr"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-rr&amp;lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-rr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-rr&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-rr"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=only1one</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=only1one"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=only1one&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=only1one&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=only1one&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=only1one&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=only1one"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=only1one&amp;lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=only1one"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=only1one&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=only1one&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=only1one&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=only1one&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=only1one"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=only1one&amp;lang=it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=only1one"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=only1one&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=only1one&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=only1one&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=only1one&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=only1one"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=only1one&amp;lang=ro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=only1one"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=only1one&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=only1one&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=only1one&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=only1one&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=only1one"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=only1one&amp;lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=only1one"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=only1one&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=only1one&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=only1one&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=only1one&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=only1one"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=only1one-violet</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=only1one-violet"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=only1one-violet"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=only1one-violet&amp;lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=only1one-violet"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=only1one-violet"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=only1one-violet&amp;lang=it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=only1one-violet"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=only1one-violet"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=only1one-violet&amp;lang=ro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=only1one-violet"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=only1one-violet"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=only1one-violet&amp;lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=only1one-violet"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=only1one-violet&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=only1one-violet"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-ac</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-ac"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-ac"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-ac&amp;lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-ac"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-ac"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-ac&amp;lang=it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-ac"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-ac"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-ac&amp;lang=ro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-ac"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-ac"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-ac&amp;lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-ac"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-ac&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-ac"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-dc</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-dc"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-dc"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-dc&amp;lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-dc"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-dc"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-dc&amp;lang=it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-dc"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-dc"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-dc&amp;lang=ro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-dc"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-dc"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=shampoo-dc&amp;lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=shampoo-dc"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=shampoo-dc&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=shampoo-dc"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=conditioner-rh</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=conditioner-rh"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=conditioner-rh"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=conditioner-rh&amp;lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=conditioner-rh"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=conditioner-rh"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=conditioner-rh&amp;lang=it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=conditioner-rh"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=conditioner-rh"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=conditioner-rh&amp;lang=ro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=conditioner-rh"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=conditioner-rh"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=conditioner-rh&amp;lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=conditioner-rh"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=conditioner-rh&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=conditioner-rh"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=conditioner-rr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=conditioner-rr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=conditioner-rr"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=conditioner-rr&amp;lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=conditioner-rr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=conditioner-rr"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=conditioner-rr&amp;lang=it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=conditioner-rr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=conditioner-rr"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=conditioner-rr&amp;lang=ro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=conditioner-rr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=conditioner-rr"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=conditioner-rr&amp;lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=conditioner-rr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=conditioner-rr&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=conditioner-rr"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=aminoplasma-ap</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=aminoplasma-ap"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=aminoplasma-ap"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=aminoplasma-ap"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=aminoplasma-ap"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=aminoplasma-ap"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=aminoplasma-ap"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=ro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=aminoplasma-ap"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=aminoplasma-ap"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=aminoplasma-ap"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=aminoplasma-ap&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=aminoplasma-ap"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=siero-ssn</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=siero-ssn"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=siero-ssn"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=siero-ssn&amp;lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=siero-ssn"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=siero-ssn"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=siero-ssn&amp;lang=it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=siero-ssn"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=siero-ssn"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=siero-ssn&amp;lang=ro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=siero-ssn"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=siero-ssn"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=siero-ssn&amp;lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=siero-ssn"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=siero-ssn&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=siero-ssn"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=crema-csn</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=crema-csn"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=crema-csn"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=crema-csn&amp;lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=crema-csn"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=crema-csn"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=crema-csn&amp;lang=it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=crema-csn"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=crema-csn"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=crema-csn&amp;lang=ro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=crema-csn"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=crema-csn"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=crema-csn&amp;lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=crema-csn"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=crema-csn&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=crema-csn"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=bhx-botohair</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=bhx-botohair"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=bhx-botohair"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=bhx-botohair&amp;lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=bhx-botohair"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=bhx-botohair"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=bhx-botohair&amp;lang=it</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=bhx-botohair"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=bhx-botohair"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=bhx-botohair&amp;lang=ro</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=bhx-botohair"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=bhx-botohair"/>
+  </url>
+  <url><loc>https://kachhair.com/product.html?id=bhx-botohair&amp;lang=fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kachhair.com/product.html?id=bhx-botohair"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=it"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=ro"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kachhair.com/product.html?id=bhx-botohair&amp;lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kachhair.com/product.html?id=bhx-botohair"/>
+  </url>
 </urlset>

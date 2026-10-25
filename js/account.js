@@ -4,9 +4,11 @@
   const ui = () => window.KACH_UI;
   const auth = () => window.KACH_AUTH;
   const esc = (s) => ui().esc(s == null ? "" : s);
+  const I18N = window.KACH_I18N;
+  const t = I18N.t;
   const GOOGLE =
     '<svg viewBox="0 0 48 48" width="20" height="20" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.5z"/></svg>';
-  const STATUS = { new: "Новый", confirmed: "Подтверждён", paid: "Оплачен", shipped: "Отправлен", done: "Выполнен", cancelled: "Отменён" };
+  const STATUS = { new: "New", confirmed: "Confirmed", paid: "Paid", shipped: "Shipped", done: "Completed", cancelled: "Cancelled" };
 
   let root;
   let mode = "login"; // login | register | reset
@@ -19,7 +21,7 @@
   async function run(btn, msgEl, fn) {
     const label = btn.textContent;
     btn.disabled = true;
-    btn.textContent = "Подождите…";
+    btn.textContent = t("Please wait…");
     msg(msgEl, "");
     try {
       await fn();
@@ -34,49 +36,49 @@
 
   // ---------- Вход и регистрация ----------
   function renderAuth() {
-    const titles = { login: "Вход", register: "Регистрация", reset: "Восстановление пароля" };
+    const titles = { login: t("Sign in"), register: t("Register"), reset: t("Reset password") };
     root.innerHTML = `
       <div class="auth-wrap">
         <div class="auth-card">
           <div class="auth-tabs" role="tablist">
-            <button role="tab" data-mode="login" aria-selected="${mode === "login"}" class="${mode === "login" ? "active" : ""}">Вход</button>
-            <button role="tab" data-mode="register" aria-selected="${mode === "register"}" class="${mode === "register" ? "active" : ""}">Регистрация</button>
+            <button role="tab" data-mode="login" aria-selected="${mode === "login"}" class="${mode === "login" ? "active" : ""}">${t("Sign in")}</button>
+            <button role="tab" data-mode="register" aria-selected="${mode === "register"}" class="${mode === "register" ? "active" : ""}">${t("Register")}</button>
           </div>
           <h1 class="auth-title">${titles[mode]}</h1>
           ${
             mode !== "reset"
-              ? `<button class="btn-google" id="google">${GOOGLE}<span>${mode === "login" ? "Войти" : "Зарегистрироваться"} через Google</span></button>
-                 <div class="or"><span>или по почте</span></div>`
-              : `<p class="muted">Введите почту, и мы пришлём ссылку для смены пароля.</p>`
+              ? `<button class="btn-google" id="google">${GOOGLE}<span>${mode === "login" ? t("Sign in with Google") : t("Sign up with Google")}</span></button>
+                 <div class="or"><span>${t("or with e-mail")}</span></div>`
+              : `<p class="muted">${t("Enter your e-mail and we will send you a link to change your password.")}</p>`
           }
           <form id="auth-form" class="auth-form" novalidate>
-            ${mode === "register" ? `<div class="field"><label for="a-name">Имя</label><input id="a-name" name="name" required autocomplete="name"></div>` : ""}
-            <div class="field"><label for="a-email">Почта</label><input id="a-email" name="email" type="email" required autocomplete="email"></div>
+            ${mode === "register" ? `<div class="field"><label for="a-name">${t("Name")}</label><input id="a-name" name="name" required autocomplete="name"></div>` : ""}
+            <div class="field"><label for="a-email">${t("E-mail")}</label><input id="a-email" name="email" type="email" required autocomplete="email"></div>
             ${
               mode !== "reset"
-                ? `<div class="field"><label for="a-pass">Пароль</label>
+                ? `<div class="field"><label for="a-pass">${t("Password")}</label>
                      <div class="pass-wrap"><input id="a-pass" name="password" type="password" required minlength="6" autocomplete="${mode === "login" ? "current-password" : "new-password"}">
-                     <button type="button" class="pass-toggle" aria-label="Показать пароль">Показать</button></div>
-                     ${mode === "register" ? `<small class="muted">Минимум 6 символов</small>` : ""}
+                     <button type="button" class="pass-toggle" aria-label="${t("Show password")}">${t("Show")}</button></div>
+                     ${mode === "register" ? `<small class="muted">${t("At least 6 characters")}</small>` : ""}
                    </div>`
                 : ""
             }
-            ${mode === "register" ? `<label class="small muted check"><input type="checkbox" required> Я согласен(на) на обработку <a href="info.html#privacy">персональных данных</a></label>` : ""}
+            ${mode === "register" ? `<label class="small muted check"><input type="checkbox" required> ${t("I agree to the processing of my <a href=\"info.html#privacy\">personal data</a>")}</label>` : ""}
             <p class="form-msg" id="auth-msg" role="alert"></p>
-            <button class="btn btn-block" type="submit">${mode === "login" ? "Войти" : mode === "register" ? "Создать аккаунт" : "Отправить ссылку"}</button>
+            <button class="btn btn-block" type="submit">${mode === "login" ? t("Sign in") : mode === "register" ? t("Create account") : t("Send link")}</button>
           </form>
           <p class="auth-foot">
-            ${mode === "login" ? `<button class="link" data-mode="reset">Забыли пароль?</button>` : ""}
-            ${mode === "reset" ? `<button class="link" data-mode="login">← Вернуться ко входу</button>` : ""}
+            ${mode === "login" ? `<button class="link" data-mode="reset">${t("Forgot your password?")}</button>` : ""}
+            ${mode === "reset" ? `<button class="link" data-mode="login">← ${t("Back to sign in")}</button>` : ""}
           </p>
         </div>
         <aside class="auth-perks">
-          <h2>Зачем нужен кабинет</h2>
+          <h2>${t("Why create an account")}</h2>
           <ul>
-            <li><strong>История заказов</strong><span>Все ваши заказы и их статусы в одном месте.</span></li>
-            <li><strong>Быстрое оформление</strong><span>Имя, телефон и адрес подставятся сами.</span></li>
-            <li><strong>Избранное</strong><span>Сохраняйте средства, чтобы вернуться к ним позже.</span></li>
-            <li><strong>Сохранённые адреса</strong><span>Дом, работа, салон — выберите нужный при заказе.</span></li>
+            <li><strong>${t("Order history")}</strong><span>${t("All your orders and their status in one place.")}</span></li>
+            <li><strong>${t("Faster checkout")}</strong><span>${t("Your name, phone and address are filled in automatically.")}</span></li>
+            <li><strong>${t("Favourites")}</strong><span>${t("Save products to come back to them later.")}</span></li>
+            <li><strong>${t("Saved addresses")}</strong><span>${t("Home, work, salon: choose the one you need when ordering.")}</span></li>
           </ul>
         </aside>
       </div>`;
@@ -93,7 +95,7 @@
         const inp = $("#a-pass");
         const show = inp.type === "password";
         inp.type = show ? "text" : "password";
-        passToggle.textContent = show ? "Скрыть" : "Показать";
+        passToggle.textContent = show ? t("Hide") : t("Show");
       });
     const m = $("#auth-msg");
     const g = $("#google");
@@ -109,14 +111,14 @@
         if (mode === "register") {
           const needConfirm = await auth().signUp(d.name.trim(), d.email.trim(), d.password);
           if (needConfirm) {
-            root.innerHTML = `<div class="empty"><div class="success-icon">✉</div><h1>Подтвердите почту</h1>
-              <p>Мы отправили письмо на <strong>${esc(d.email)}</strong>. Откройте его и нажмите ссылку, чтобы завершить регистрацию.</p>
-              <p class="muted small">Письма нет? Проверьте папку «Спам».</p></div>`;
+            root.innerHTML = `<div class="empty"><div class="success-icon">✉</div><h1>${t("Confirm your e-mail")}</h1>
+              <p>${t("We have sent an e-mail to {email}. Open it and click the link to complete your registration.", { email: `<strong>${esc(d.email)}</strong>` })}</p>
+              <p class="muted small">${t("No e-mail? Check your spam folder.")}</p></div>`;
           }
         }
         if (mode === "reset") {
           await auth().resetPassword(d.email.trim());
-          msg(m, "Готово! Проверьте почту: мы отправили ссылку для смены пароля.", true);
+          msg(m, t("Done! Check your e-mail: we have sent you a link to change your password."), true);
         }
       });
     });
@@ -125,11 +127,11 @@
   function renderNewPassword() {
     root.innerHTML = `
       <div class="auth-wrap single"><div class="auth-card">
-        <h1 class="auth-title">Новый пароль</h1>
+        <h1 class="auth-title">${t("New password")}</h1>
         <form id="np-form" class="auth-form" novalidate>
-          <div class="field"><label for="np">Новый пароль</label><input id="np" type="password" required minlength="6" autocomplete="new-password"></div>
+          <div class="field"><label for="np">${t("New password")}</label><input id="np" type="password" required minlength="6" autocomplete="new-password"></div>
           <p class="form-msg" id="np-msg" role="alert"></p>
-          <button class="btn btn-block" type="submit">Сохранить пароль</button>
+          <button class="btn btn-block" type="submit">${t("Save password")}</button>
         </form>
       </div></div>`;
     const f = $("#np-form");
@@ -140,7 +142,7 @@
         await auth().updatePassword($("#np").value);
         auth().recovery = false;
         history.replaceState(null, "", "account.html");
-        ui().toast("Пароль изменён");
+        ui().toast(t("Password changed"));
         render();
       });
     });
@@ -148,10 +150,10 @@
 
   // ---------- Кабинет ----------
   const TABS = [
-    ["orders", "Мои заказы"],
-    ["favorites", "Избранное"],
-    ["profile", "Личные данные"],
-    ["addresses", "Адреса доставки"]
+    ["orders", "My orders"],
+    ["favorites", "Favourites"],
+    ["profile", "Personal details"],
+    ["addresses", "Delivery addresses"]
   ];
   const currentTab = () => {
     const h = location.hash.replace("#", "");
@@ -179,18 +181,18 @@
     root.innerHTML = `
       <div class="cab-head">
         <div class="avatar" aria-hidden="true">${esc(name.trim().charAt(0).toUpperCase() || "K")}</div>
-        <div><p class="muted small">Личный кабинет</p><h1>Здравствуйте${pr.name ? ", " + esc(pr.name.split(" ")[0]) : ""}!</h1></div>
+        <div><p class="muted small">${t("My account")}</p><h1>${pr.name ? t("Hello, {name}!", { name: esc(pr.name.split(" ")[0]) }) : t("Hello!")}</h1></div>
       </div>
       <div class="cab-layout">
-        <nav class="cab-nav" aria-label="Разделы кабинета">
-          ${TABS.map(([k, v]) => `<a href="#${k}" class="${k === tab ? "active" : ""}" ${k === tab ? 'aria-current="page"' : ""}>${v}<span class="cab-count" data-count="${k}" hidden></span></a>`).join("")}
-          <button class="link logout" id="logout">Выйти</button>
+        <nav class="cab-nav" aria-label="${t("Account sections")}">
+          ${TABS.map(([k, v]) => `<a href="#${k}" class="${k === tab ? "active" : ""}" ${k === tab ? 'aria-current="page"' : ""}>${t(v)}<span class="cab-count" data-count="${k}" hidden></span></a>`).join("")}
+          <button class="link logout" id="logout">${t("Sign out")}</button>
         </nav>
         <section class="cab-body" id="cab-body"></section>
       </div>`;
     $("#logout").addEventListener("click", async () => {
       await a.signOut();
-      ui().toast("Вы вышли из кабинета");
+      ui().toast(t("You have signed out"));
     });
     ({ orders, favorites, profile: profileTab, addresses })[tab]($("#cab-body"));
     updateCounts();
@@ -202,30 +204,30 @@
   }
 
   async function orders(box) {
-    box.innerHTML = `<h2>Мои заказы</h2><p class="muted">Загружаем…</p>`;
+    box.innerHTML = `<h2>${t("My orders")}</h2><p class="muted">${t("Loading…")}</p>`;
     let list = [];
     try {
       list = await auth().orders();
     } catch (e) {
-      box.innerHTML = `<h2>Мои заказы</h2><p class="form-msg err">${esc(auth().errorText(e))}</p>`;
+      box.innerHTML = `<h2>${t("My orders")}</h2><p class="form-msg err">${esc(auth().errorText(e))}</p>`;
       return;
     }
     if (!list.length) {
-      box.innerHTML = `<h2>Мои заказы</h2><div class="cab-empty"><p>У вас пока нет заказов.</p><a class="btn" href="catalog.html">Перейти в каталог</a></div>`;
+      box.innerHTML = `<h2>${t("My orders")}</h2><div class="cab-empty"><p>${t("You have no orders yet.")}</p><a class="btn" href="catalog.html">${t("Go to catalog")}</a></div>`;
       return;
     }
     box.innerHTML =
-      `<h2>Мои заказы</h2>` +
+      `<h2>${t("My orders")}</h2>` +
       list
         .map((o) => {
-          const d = o.created_at ? new Date(o.created_at).toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" }) : "";
+          const d = o.created_at ? new Date(o.created_at).toLocaleDateString(I18N.locale, { day: "numeric", month: "long", year: "numeric" }) : "";
           const items = Array.isArray(o.items) ? o.items : [];
           return `<article class="order">
-            <header><div><strong>Заказ ${esc(o.number)}</strong><span class="muted small"> · ${esc(d)}</span></div>
-            <span>${o.payment_status === "paid" ? `<span class="status status-paid">Оплачен</span> ` : ""}<span class="status status-${esc(o.status)}">${esc(STATUS[o.status] || o.status)}</span></span></header>
-            <ul>${items.map((i) => `<li><span>${esc(i.name)}, ${esc(i.size)} × ${esc(i.qty)}</span><span>${typeof i.price === "number" ? ui().money(i.price * i.qty) : "по запросу"}</span></li>`).join("")}</ul>
+            <header><div><strong>${t("Order {n}", { n: esc(o.number) })}</strong><span class="muted small"> · ${esc(d)}</span></div>
+            <span>${o.payment_status === "paid" ? `<span class="status status-paid">${t("Paid")}</span> ` : ""}<span class="status status-${esc(o.status)}">${esc(STATUS[o.status] ? t(STATUS[o.status]) : o.status)}</span></span></header>
+            <ul>${items.map((i) => `<li><span>${esc((ui().findProduct(i.id) || i).name)}, ${esc(ui().sizeLabel(i.size))} × ${esc(i.qty)}</span><span>${typeof i.price === "number" ? ui().money(i.price * i.qty) : t("on request")}</span></li>`).join("")}</ul>
             <footer><span class="muted small">${esc((o.customer && (window.KACH_ADDR ? window.KACH_ADDR.format(o.customer) : [o.customer.city, o.customer.address].filter(Boolean).join(", "))) || "")}</span>
-            <strong>${o.total ? ui().money(Number(o.total)) : "Сумму сообщит менеджер"}</strong></footer>
+            <strong>${o.total ? ui().money(Number(o.total)) : t("The manager will tell you the total")}</strong></footer>
           </article>`;
         })
         .join("");
@@ -235,28 +237,28 @@
     const ids = auth().favorites();
     const list = ids.map((id) => ui().findProduct(id)).filter(Boolean);
     box.innerHTML =
-      `<h2>Избранное</h2>` +
+      `<h2>${t("Favourites")}</h2>` +
       (list.length
         ? `<div class="grid grid-3">${list.map(ui().productCard).join("")}</div>`
-        : `<div class="cab-empty"><p>Нажимайте ♡ на товарах, чтобы сохранить их здесь.</p><a class="btn" href="catalog.html">Перейти в каталог</a></div>`);
+        : `<div class="cab-empty"><p>${t("Tap ♡ on products to save them here.")}</p><a class="btn" href="catalog.html">${t("Go to catalog")}</a></div>`);
   }
 
   function profileTab(box) {
     const a = auth();
     const pr = a.profile || {};
     box.innerHTML = `
-      <h2>Личные данные</h2>
+      <h2>${t("Personal details")}</h2>
       <form id="pf" class="cab-form" novalidate>
-        <div class="field"><label for="pf-name">Имя и фамилия</label><input id="pf-name" name="name" value="${esc(pr.name)}" autocomplete="name"></div>
-        <div class="field"><label for="pf-phone">Телефон</label><input id="pf-phone" name="phone" type="tel" value="${esc(pr.phone)}" placeholder="+40 700 000 000" autocomplete="tel"></div>
-        <div class="field"><label for="pf-email">Почта</label><input id="pf-email" value="${esc(a.user.email)}" disabled></div>
+        <div class="field"><label for="pf-name">${t("Full name")}</label><input id="pf-name" name="name" value="${esc(pr.name)}" autocomplete="name"></div>
+        <div class="field"><label for="pf-phone">${t("Phone")}</label><input id="pf-phone" name="phone" type="tel" value="${esc(pr.phone)}" placeholder="+40 700 000 000" autocomplete="tel"></div>
+        <div class="field"><label for="pf-email">${t("E-mail")}</label><input id="pf-email" value="${esc(a.user.email)}" disabled></div>
         <p class="form-msg" id="pf-msg" role="alert"></p>
-        <button class="btn" type="submit">Сохранить</button>
+        <button class="btn" type="submit">${t("Save")}</button>
       </form>
       <div class="cab-sub">
-        <h3>Пароль</h3>
-        <p class="muted small">Мы отправим на почту ссылку для смены пароля.</p>
-        <button class="btn btn-outline btn-small" id="pf-reset">Сменить пароль</button>
+        <h3>${t("Password")}</h3>
+        <p class="muted small">${t("We will e-mail you a link to change your password.")}</p>
+        <button class="btn btn-outline btn-small" id="pf-reset">${t("Change password")}</button>
         <p class="form-msg" id="pr-msg" role="alert"></p>
       </div>`;
     const f = $("#pf");
@@ -265,14 +267,14 @@
       const d = Object.fromEntries(new FormData(f));
       run(f.querySelector("button"), $("#pf-msg"), async () => {
         await a.saveProfile({ name: d.name.trim(), phone: d.phone.trim() });
-        msg($("#pf-msg"), "Сохранено", true);
+        msg($("#pf-msg"), t("Saved"), true);
       });
     });
     const rb = $("#pf-reset");
     rb.addEventListener("click", () =>
       run(rb, $("#pr-msg"), async () => {
         await a.resetPassword(a.user.email);
-        msg($("#pr-msg"), "Ссылка отправлена на " + a.user.email, true);
+        msg($("#pr-msg"), t("Link sent to {email}", { email: a.user.email }), true);
       })
     );
   }
@@ -281,29 +283,29 @@
     const a = auth();
     const list = (a.profile && a.profile.addresses) || [];
     box.innerHTML = `
-      <h2>Адреса доставки</h2>
+      <h2>${t("Delivery addresses")}</h2>
       ${
         list.length
           ? `<div class="addr-list">${list
               .map(
                 (ad, i) => `<div class="addr">
-                  <div><strong>${esc(ad.title || "Адрес " + (i + 1))}</strong>${i === 0 ? ' <span class="pill">Основной</span>' : ""}
+                  <div><strong>${esc(ad.title || t("Address {n}", { n: i + 1 }))}</strong>${i === 0 ? ' <span class="pill">${t("Main")}</span>' : ""}
                   <p class="muted small">${esc(window.KACH_ADDR ? window.KACH_ADDR.format(ad) : [ad.zip, ad.city, ad.address].filter(Boolean).join(", "))}</p></div>
                   <div class="addr-actions">
-                    ${i > 0 ? `<button class="link" data-main="${i}">Сделать основным</button>` : ""}
-                    <button class="link danger" data-del="${i}">Удалить</button>
+                    ${i > 0 ? `<button class="link" data-main="${i}">${t("Make main")}</button>` : ""}
+                    <button class="link danger" data-del="${i}">${t("Remove")}</button>
                   </div></div>`
               )
               .join("")}</div>`
-          : `<p class="muted">Сохранённых адресов пока нет. Основной адрес подставится при оформлении заказа.</p>`
+          : `<p class="muted">${t("No saved addresses yet. Your main address will be filled in at checkout.")}</p>`
       }
       <form id="ad" class="cab-form" novalidate>
-        <h3>Добавить адрес</h3>
-        <div class="field"><label for="ad-title">Название</label><input id="ad-title" name="title" placeholder="Дом, работа, салон"></div>
-        <div class="field"><label for="ad-country">Страна *</label><select id="ad-country" name="country" required autocomplete="country"></select></div>
+        <h3>${t("Add address")}</h3>
+        <div class="field"><label for="ad-title">${t("Label")}</label><input id="ad-title" name="title" placeholder="${t("Home, work, salon")}"></div>
+        <div class="field"><label for="ad-country">${t("Country")} *</label><select id="ad-country" name="country" required autocomplete="country"></select></div>
         <div id="ad-fields"></div>
         <p class="form-msg" id="ad-msg" role="alert"></p>
-        <button class="btn" type="submit">Добавить адрес</button>
+        <button class="btn" type="submit">${t("Add address")}</button>
       </form>`;
     const save = (next) => a.saveProfile({ addresses: next }).then(() => addresses(box));
     box.querySelectorAll("[data-del]").forEach((b) =>
@@ -350,7 +352,7 @@
           } catch (e) {}
           throw err;
         }
-        ui().toast("Адрес сохранён");
+        ui().toast(t("Address saved"));
       });
     });
   }
@@ -359,15 +361,15 @@
   function renderDisabled() {
     root.innerHTML = `
       <div class="auth-wrap single"><div class="auth-card center">
-        <h1 class="auth-title">Личный кабинет</h1>
-        <p>Регистрация и вход скоро будут доступны.</p>
-        <p class="muted small">А пока вы можете оформить заказ без регистрации: менеджер свяжется с вами по телефону.</p>
-        <a class="btn" href="catalog.html">Перейти в каталог</a>
+        <h1 class="auth-title">${t("My account")}</h1>
+        <p>${t("Registration and sign-in will be available soon.")}</p>
+        <p class="muted small">${t("Meanwhile, you can order without registering: the manager will contact you by phone.")}</p>
+        <a class="btn" href="catalog.html">${t("Go to catalog")}</a>
       </div></div>
       <section class="section"><div id="fav-local"></div></section>`;
     const ids = auth().favorites();
     if (ids.length) {
-      $("#fav-local").innerHTML = `<h2>Избранное</h2><div class="grid">${ids
+      $("#fav-local").innerHTML = `<h2>${t("Favourites")}</h2><div class="grid">${ids
         .map((id) => ui().findProduct(id))
         .filter(Boolean)
         .map(ui().productCard)

@@ -37,6 +37,11 @@ async function loadOrder(token: string): Promise<Order> {
   return data as Order;
 }
 
+// Объём хранится как "250 мл" / "Набор" (так в product_prices); покупателю показываем "250 ml" / "Kit"
+const showSize = (s: string) => (s === "Набор" ? "Kit" : String(s).replace(/\s*мл$/, " ml"));
+// Языки сайта → язык страницы оплаты Stripe
+const LOCALES = ["en", "de", "it", "ro", "fr"];
+
 // Позиции заказа с ценами из базы; сумма в центах
 async function priceOrder(order: Order) {
   const { data, error } = await db.from("product_prices").select("product_id, size, price");
@@ -46,7 +51,7 @@ async function priceOrder(order: Order) {
     const cents = map.get(i.id + "|" + i.size);
     const qty = Math.max(1, Math.min(99, Math.floor(Number(i.qty) || 1)));
     if (!cents) throw new Fail("no price for " + i.id + " " + i.size);
-    return { name: `${i.name}, ${i.size}`, cents, qty };
+    return { name: `${i.name}, ${showSize(i.size)}`, cents, qty };
   });
   if (!lines.length) throw new Fail("empty order");
   return { lines, total: lines.reduce((s, l) => s + l.cents * l.qty, 0) };
@@ -81,7 +86,7 @@ async function stripe(path: string, params?: Record<string, string>) {
   return data;
 }
 
-async function stripeSession(token: string) {
+async function stripeSession(token: string, lang?: string) {
   const order = await loadOrder(token);
   if (order.payment_status === "paid") throw new Fail("already paid", 409);
   const { lines } = await priceOrder(order);
@@ -96,6 +101,7 @@ async function stripeSession(token: string) {
     cancel_url: `${SITE}/checkout.html?pay=${token}`
   };
   if (order.customer?.email) p.customer_email = order.customer.email;
+  if (lang && LOCALES.includes(lang)) p.locale = lang;
   lines.forEach((l, i) => {
     p[`line_items[${i}][quantity]`] = String(l.qty);
     p[`line_items[${i}][price_data][currency]`] = CURRENCY;
@@ -233,7 +239,7 @@ Deno.serve(async (req) => {
             (!!env("PAYPAL_CLIENT_ID") && env("PAYPAL_ENV", "sandbox") !== "live")
         });
       case "stripe-session":
-        return json(await stripeSession(b.token));
+        return json(await stripeSession(b.token, b.lang));
       case "stripe-verify":
         return json(await stripeVerify(b.token, b.session));
       case "paypal-create":
