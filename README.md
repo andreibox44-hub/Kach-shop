@@ -8,7 +8,9 @@
 
 ## Где сайт в интернете
 
-Сайт опубликован через GitHub Pages из ветки `gh-pages`: https://andreibox44-hub.github.io/Kach-shop/
+Сайт опубликован через GitHub Pages из ветки `gh-pages` на домене https://kachhair.com/
+
+Файл `CNAME` (в нём `kachhair.com`) должен лежать в корне сайта: без него GitHub Pages отключит домен. Не удаляйте его и публикуйте в `gh-pages` всю ветку целиком, вместе с ним.
 
 Чтобы обновить сайт, загрузите изменения в ветку `gh-pages`.
 
@@ -27,7 +29,7 @@
 
 ## Выручка по неделям (только для владельца)
 
-Страница `revenue.html` (ссылки на неё на сайте нет). Войдите в кабинет под почтой владельца и откройте `…/Kach-shop/revenue.html`. Кто видит страницу — список почт в Supabase → Table Editor → `app_settings` → `admin_emails` (через запятую). С какой даты считать — `revenue_from`. Данные отдаёт функция базы `admin_paid_orders`.
+Страница `revenue.html` (ссылки на неё на сайте нет). Войдите в кабинет под почтой владельца и откройте https://kachhair.com/revenue.html. Кто видит страницу — список почт в Supabase → Table Editor → `app_settings` → `admin_emails` (через запятую). С какой даты считать — `revenue_from`. Данные отдаёт функция базы `admin_paid_orders`.
 
 ## Онлайн-оплата (Stripe и PayPal)
 

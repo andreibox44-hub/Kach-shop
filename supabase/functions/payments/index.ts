@@ -4,13 +4,13 @@
 //   STRIPE_WEBHOOK_SECRET  — whsec_... (необязательно, для надёжной отметки «оплачен»)
 //   PAYPAL_CLIENT_ID, PAYPAL_SECRET — из PayPal Developer → Apps & Credentials
 //   PAYPAL_ENV             — "sandbox" (тест, по умолчанию) или "live"
-//   SITE_URL               — адрес сайта (по умолчанию GitHub Pages)
+//   SITE_URL               — адрес сайта (по умолчанию https://kachhair.com)
 // Суммы считаются только здесь, по таблице product_prices, — цене из браузера мы не верим.
 import { createClient } from "npm:@supabase/supabase-js@2.45.4";
 
 const env = (k: string, d = "") => (Deno.env.get(k) ?? d).trim();
 const CURRENCY = "eur";
-const SITE = env("SITE_URL", "https://andreibox44-hub.github.io/Kach-shop").replace(/\/$/, "");
+const SITE = env("SITE_URL", "https://kachhair.com").replace(/\/$/, "");
 const db = createClient(env("SUPABASE_URL"), env("SUPABASE_SERVICE_ROLE_KEY"), { auth: { persistSession: false } });
 
 const cors = {

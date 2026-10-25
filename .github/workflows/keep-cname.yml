@@ -1,0 +1,27 @@
+# Следит, чтобы в ветке gh-pages всегда был файл CNAME с доменом kachhair.com.
+# Если при публикации его удалили или изменили — возвращает его обратно.
+name: Keep CNAME
+on:
+  push:
+    branches: [gh-pages]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  cname:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+      - name: Restore CNAME if missing
+        run: |
+          if [ "$(tr -d '[:space:]' < CNAME 2>/dev/null)" = "kachhair.com" ]; then
+            echo "CNAME в порядке"; exit 0
+          fi
+          echo "kachhair.com" > CNAME
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add CNAME
+          git commit -m "Вернуть CNAME (kachhair.com)"
+          git push origin HEAD:gh-pages
