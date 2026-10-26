@@ -174,7 +174,7 @@
 
   // Подключает выбор страны к блоку адреса
   function bind(select, box, values = {}, prefix = "", onChange) {
-    const start = COUNTRIES[values.country] ? values.country : DEFAULT;
+    const start = COUNTRIES[values.country] ? values.country : COUNTRIES[window.KACH_PRICE_COUNTRY] ? window.KACH_PRICE_COUNTRY : DEFAULT;
     select.innerHTML = countryOptions(start);
     render(box, start, values, prefix);
     select.addEventListener("change", () => {

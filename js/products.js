@@ -258,6 +258,30 @@ window.KACH_CATEGORIES = {
   pro: "BHX treatments"
 };
 
+// Prices above are for Italy, Germany and France. For Romania 21% VAT is added on top
+// (the same rule is in supabase/functions/payments/index.ts, RO_VAT).
+// Delivery country: ?country=RO, else the one chosen at checkout, else by site language (it/de/fr, otherwise RO).
+(function () {
+  const ok = ["RO", "IT", "DE", "FR"];
+  let c = "";
+  try {
+    c = (new URLSearchParams(location.search).get("country") || "").toUpperCase();
+    if (ok.includes(c)) localStorage.setItem("kach-country", c);
+    else c = localStorage.getItem("kach-country") || "";
+  } catch (e) {}
+  if (!ok.includes(c)) {
+    const lang = window.KACH_I18N && window.KACH_I18N.lang;
+    c = { it: "IT", de: "DE", fr: "FR" }[lang] || "RO";
+  }
+  window.KACH_PRICE_COUNTRY = c;
+  if (c === "RO")
+    window.KACH_PRODUCTS.forEach((p) =>
+      p.variants.forEach((v) => {
+        if (typeof v.price === "number") v.price = Math.round(v.price * 121) / 100; // + 21% VAT
+      })
+    );
+})();
+
 // Texts in the chosen language. baseName keeps the English name for orders and payments.
 (function () {
   const I = window.KACH_I18N;

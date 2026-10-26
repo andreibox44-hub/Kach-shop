@@ -59,13 +59,17 @@ function shippingCents(order: Order, itemsCents: number) {
   return Math.round((order.customer?.delivery === "post" ? r.post : r.courier) * 100);
 }
 
+// Цены в product_prices — для Италии, Германии, Франции. Для Румынии сверху +21% НДС (как в js/products.js)
+const RO_VAT = 121;
+
 // Позиции заказа с ценами из базы; сумма в центах (товары + доставка)
 async function priceOrder(order: Order) {
   const { data, error } = await db.from("product_prices").select("product_id, size, price");
   if (error) throw error;
   const map = new Map((data || []).map((r) => [r.product_id + "|" + r.size, Math.round(Number(r.price) * 100)]));
   const lines = (order.items || []).map((i) => {
-    const cents = map.get(i.id + "|" + i.size);
+    const base = map.get(i.id + "|" + i.size);
+    const cents = base && order.customer?.country === "RO" ? Math.round((base * RO_VAT) / 100) : base;
     const qty = Math.max(1, Math.min(99, Math.floor(Number(i.qty) || 1)));
     if (!cents) throw new Fail("no price for " + i.id + " " + i.size);
     return { name: `${i.name}, ${showSize(i.size)}`, cents, qty };

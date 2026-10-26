@@ -684,6 +684,18 @@
         const method = (form.querySelector('input[name="delivery"]:checked') || {}).value || "courier";
         return SHIP.cost(country, method, total);
       };
+      // Prices depend on the delivery country (Romania: + VAT): reload when it changes the prices
+      const watchCountry = () => {
+        const c = ($("#country") || {}).value;
+        if (!c) return;
+        try {
+          localStorage.setItem("kach-country", c);
+        } catch (e) {}
+        if ((c === "RO") !== (window.KACH_PRICE_COUNTRY === "RO")) location.reload();
+      };
+      form.addEventListener("change", (e) => {
+        if (e.target && e.target.id === "country") watchCountry();
+      });
       const drawSummary = () => {
         const ship = shipNow();
         $("#order-summary").innerHTML = `
@@ -717,6 +729,7 @@
         draft = JSON.parse(localStorage.getItem(DRAFT_KEY) || "{}") || {};
       } catch (e) {}
       bindAddr(draft);
+      watchCountry();
       drawSummary();
       ["name", "phone", "email", "comment"].forEach((k) => {
         const el = $("#" + k);
@@ -757,6 +770,7 @@
             const fresh = $("#country").cloneNode(false);
             $("#country").replaceWith(fresh);
             bindAddr(addr);
+            watchCountry();
             drawSummary();
           }
         });
