@@ -3,7 +3,7 @@
 // then run `node scripts/make-feeds.js` so Google Shopping shows the same prices.
 window.KACH_SHIPPING = (function () {
   const RATES = {
-    RO: { courier: 4.84, post: 3.63, freeFrom: 40 },
+    RO: { courier: 4, post: 3, freeFrom: 40 },
     IT: { courier: 12, post: 12, freeFrom: 80 },
     DE: { courier: 12, post: 12, freeFrom: 80 },
     FR: { courier: 12, post: 12, freeFrom: 80 }
