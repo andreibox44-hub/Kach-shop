@@ -271,7 +271,7 @@ Object.assign(window.KACH_I18N.dict, {
  "info.del2": "<strong>Con corriere</strong> fino a casa.",
  "info.del3": "<strong>Per posta</strong> al tuo ufficio postale.",
  "info.del4": "Dopo il pagamento dell'ordine, il nostro addetto ti contatterà per concordare la consegna.",
- "info.del5": "<strong>Costi di spedizione.</strong> Romania: 4 € con corriere, 3 € per posta, gratuita per ordini da 40 €. Italia, Germania e Francia: 12 €, gratuita per ordini da 80 €. Il costo esatto lo vedi al momento dell'ordine.",
+ "info.del5": "<strong>Costi di spedizione.</strong> Romania: 4,84 € con corriere, 3,63 € per posta, gratuita per ordini da 40 €. Italia, Germania e Francia: 12 €, gratuita per ordini da 80 €. Il costo esatto lo vedi al momento dell'ordine.",
  "info.pay1": "Tutti i prezzi sul sito sono in euro e includono l'IVA.",
  "info.pay2": "Solo online, con carta bancaria al momento dell'ordine:",
  "info.pay3": "Il pagamento avviene su una pagina sicura di Stripe. I dati della carta non arrivano al nostro sito.",

@@ -271,7 +271,7 @@ Object.assign(window.KACH_I18N.dict, {
  "info.del2": "<strong>Per Kurier</strong> bis an die Haustür.",
  "info.del3": "<strong>Per Post</strong> in Ihre Postfiliale.",
  "info.del4": "Nach der Bezahlung meldet sich unser Mitarbeiter bei Ihnen, um die Lieferung abzustimmen.",
- "info.del5": "<strong>Versandkosten.</strong> Rumänien: 4 € per Kurier, 3 € per Post, kostenlos ab 40 € Bestellwert. Italien, Deutschland und Frankreich: 12 €, kostenlos ab 80 € Bestellwert. Die genauen Kosten sehen Sie an der Kasse.",
+ "info.del5": "<strong>Versandkosten.</strong> Rumänien: 4,84 € per Kurier, 3,63 € per Post, kostenlos ab 40 € Bestellwert. Italien, Deutschland und Frankreich: 12 €, kostenlos ab 80 € Bestellwert. Die genauen Kosten sehen Sie an der Kasse.",
  "info.pay1": "Alle Preise auf der Website sind in Euro angegeben und enthalten die MwSt.",
  "info.pay2": "Nur online, per Bankkarte bei der Bestellung:",
  "info.pay3": "Die Zahlung erfolgt über eine sichere Stripe-Seite. Ihre Kartendaten gelangen nicht auf unsere Website.",

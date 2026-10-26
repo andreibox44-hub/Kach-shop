@@ -271,7 +271,7 @@ Object.assign(window.KACH_I18N.dict, {
  "info.del2": "<strong>Prin curier</strong> până la ușă.",
  "info.del3": "<strong>Prin poștă</strong> la oficiul poștal.",
  "info.del4": "După plata comenzii, managerul vă va contacta pentru a stabili livrarea.",
- "info.del5": "<strong>Costul livrării.</strong> România: 4 € prin curier, 3 € prin poștă, gratuită pentru comenzi de la 40 €. Italia, Germania și Franța: 12 €, gratuită pentru comenzi de la 80 €. Costul exact îl vedeți la finalizarea comenzii.",
+ "info.del5": "<strong>Costul livrării.</strong> România: 4,84 € prin curier, 3,63 € prin poștă, gratuită pentru comenzi de la 40 €. Italia, Germania și Franța: 12 €, gratuită pentru comenzi de la 80 €. Costul exact îl vedeți la finalizarea comenzii.",
  "info.pay1": "Toate prețurile de pe site sunt în euro și includ TVA.",
  "info.pay2": "Doar online, cu cardul bancar la plasarea comenzii:",
  "info.pay3": "Plata se face printr-o pagină securizată Stripe. Datele cardului nu ajung pe site-ul nostru.",

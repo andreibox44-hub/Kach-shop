@@ -45,7 +45,7 @@ const LOCALES = ["en", "de", "it", "ro", "fr"];
 // Доставка, евро: цена по стране и способу, и сумма товаров, от которой доставка бесплатна.
 // Та же таблица в js/shipping.js (сайт и фиды Google) — меняйте вместе.
 const SHIPPING: Record<string, { courier: number; post: number; freeFrom: number }> = {
-  RO: { courier: 4, post: 3, freeFrom: 40 },
+  RO: { courier: 4.84, post: 3.63, freeFrom: 40 },
   IT: { courier: 12, post: 12, freeFrom: 80 },
   DE: { courier: 12, post: 12, freeFrom: 80 },
   FR: { courier: 12, post: 12, freeFrom: 80 }
