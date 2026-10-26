@@ -423,6 +423,39 @@
         <p class="muted">${t("Thank you! We will contact you to arrange delivery.")}</p>
         <a class="btn" href="${AUTH() && AUTH().user ? "account.html#orders" : "index.html"}">${AUTH() && AUTH().user ? t("My orders") : t("Back to home")}</a>
       </div>`;
+    reviewOptIn(number);
+  }
+
+  // Опрос «Отзывы клиентов Google»: после оплаты Google предлагает покупателю
+  // оценить магазин. Из оценок складываются звёзды рейтинга продавца в Google.
+  const GOOGLE_MERCHANT_ID = 5888095541;
+  function reviewOptIn(number) {
+    let order;
+    try {
+      const orders = JSON.parse(localStorage.getItem("kach-orders") || "[]");
+      order = (number && orders.find((o) => o.number === number)) || orders[orders.length - 1];
+    } catch (e) {}
+    const c = (order && order.customer) || {};
+    if (!c.email || !/^(RO|IT|DE|FR)$/.test(c.country || "")) return;
+    const days = c.country === "RO" ? 5 : 9;
+    const date = new Date(Date.now() + days * 864e5).toISOString().slice(0, 10);
+    const langs = { en: "en_GB", de: "de", it: "it", fr: "fr", ro: "ro" };
+    window.___gcfg = { lang: langs[I18N.lang] || "en_GB" };
+    window.renderOptIn = () =>
+      window.gapi.load("surveyoptin", () =>
+        window.gapi.surveyoptin.render({
+          merchant_id: GOOGLE_MERCHANT_ID,
+          order_id: order.number,
+          email: c.email,
+          delivery_country: c.country,
+          estimated_delivery_date: date,
+          opt_in_style: "CENTER_DIALOG"
+        })
+      );
+    const sc = document.createElement("script");
+    sc.src = "https://apis.google.com/js/platform.js?onload=renderOptIn";
+    sc.async = true;
+    document.head.appendChild(sc);
   }
 
   // Экран «оплатите заказ»: кнопка Stripe и/или кнопки PayPal
@@ -867,6 +900,7 @@
             <p class="muted">${t("We will call you at {phone} to confirm the order, cost and delivery.", { phone: esc(data.phone) })}</p>
             <a class="btn" href="${auth && auth.user ? "account.html#orders" : "index.html"}">${auth && auth.user ? t("My orders") : t("Back to home")}</a>
           </div>`;
+        reviewOptIn(number);
         window.scrollTo(0, 0);
       });
     },
