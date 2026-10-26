@@ -36,10 +36,10 @@
       <g:product_type>KACH &gt; Șampoane</g:product_type>
       <g:unit_pricing_measure>250ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
-      <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>DE</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>FR</g:country><g:price>0.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>RO</g:country><g:price>3.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>IT</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>DE</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>FR</g:country><g:price>12.00 EUR</g:price></g:shipping>
     </item>
     <item>
       <g:id>shampoo-rh-450ml</g:id>
@@ -56,10 +56,10 @@
       <g:product_type>KACH &gt; Șampoane</g:product_type>
       <g:unit_pricing_measure>450ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
-      <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>DE</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>FR</g:country><g:price>0.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>RO</g:country><g:price>3.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>IT</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>DE</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>FR</g:country><g:price>12.00 EUR</g:price></g:shipping>
     </item>
     <item>
       <g:id>shampoo-rr-250ml</g:id>
@@ -76,10 +76,10 @@
       <g:product_type>KACH &gt; Șampoane</g:product_type>
       <g:unit_pricing_measure>250ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
-      <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>DE</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>FR</g:country><g:price>0.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>RO</g:country><g:price>3.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>IT</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>DE</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>FR</g:country><g:price>12.00 EUR</g:price></g:shipping>
     </item>
     <item>
       <g:id>shampoo-rr-450ml</g:id>
@@ -96,10 +96,10 @@
       <g:product_type>KACH &gt; Șampoane</g:product_type>
       <g:unit_pricing_measure>450ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
-      <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>DE</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>FR</g:country><g:price>0.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>RO</g:country><g:price>3.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>IT</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>DE</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>FR</g:country><g:price>12.00 EUR</g:price></g:shipping>
     </item>
     <item>
       <g:id>only1one-80ml</g:id>
@@ -116,10 +116,10 @@
       <g:product_type>KACH &gt; Șampoane</g:product_type>
       <g:unit_pricing_measure>80ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
-      <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>DE</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>FR</g:country><g:price>0.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>RO</g:country><g:price>3.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>IT</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>DE</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>FR</g:country><g:price>12.00 EUR</g:price></g:shipping>
     </item>
     <item>
       <g:id>only1one-400ml</g:id>
@@ -156,10 +156,10 @@
       <g:product_type>KACH &gt; Șampoane</g:product_type>
       <g:unit_pricing_measure>80ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
-      <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>DE</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>FR</g:country><g:price>0.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>RO</g:country><g:price>3.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>IT</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>DE</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>FR</g:country><g:price>12.00 EUR</g:price></g:shipping>
     </item>
     <item>
       <g:id>only1one-violet-400ml</g:id>
@@ -196,10 +196,10 @@
       <g:product_type>KACH &gt; Șampoane</g:product_type>
       <g:unit_pricing_measure>80ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
-      <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>DE</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>FR</g:country><g:price>0.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>RO</g:country><g:price>3.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>IT</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>DE</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>FR</g:country><g:price>12.00 EUR</g:price></g:shipping>
     </item>
     <item>
       <g:id>shampoo-ac-450ml</g:id>
@@ -216,10 +216,10 @@
       <g:product_type>KACH &gt; Șampoane</g:product_type>
       <g:unit_pricing_measure>450ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
-      <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>DE</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>FR</g:country><g:price>0.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>RO</g:country><g:price>3.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>IT</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>DE</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>FR</g:country><g:price>12.00 EUR</g:price></g:shipping>
     </item>
     <item>
       <g:id>shampoo-dc-450ml</g:id>
@@ -236,10 +236,10 @@
       <g:product_type>KACH &gt; Șampoane</g:product_type>
       <g:unit_pricing_measure>450ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
-      <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>DE</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>FR</g:country><g:price>0.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>RO</g:country><g:price>3.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>IT</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>DE</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>FR</g:country><g:price>12.00 EUR</g:price></g:shipping>
     </item>
     <item>
       <g:id>shampoo-dc-1000ml</g:id>
@@ -257,9 +257,9 @@
       <g:unit_pricing_measure>1000ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
       <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>DE</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>FR</g:country><g:price>0.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>IT</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>DE</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>FR</g:country><g:price>12.00 EUR</g:price></g:shipping>
     </item>
     <item>
       <g:id>conditioner-rh-250ml</g:id>
@@ -276,10 +276,10 @@
       <g:product_type>KACH &gt; Balsamuri</g:product_type>
       <g:unit_pricing_measure>250ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
-      <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>DE</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>FR</g:country><g:price>0.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>RO</g:country><g:price>3.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>IT</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>DE</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>FR</g:country><g:price>12.00 EUR</g:price></g:shipping>
     </item>
     <item>
       <g:id>conditioner-rh-450ml</g:id>
@@ -296,10 +296,10 @@
       <g:product_type>KACH &gt; Balsamuri</g:product_type>
       <g:unit_pricing_measure>450ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
-      <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>DE</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>FR</g:country><g:price>0.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>RO</g:country><g:price>3.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>IT</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>DE</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>FR</g:country><g:price>12.00 EUR</g:price></g:shipping>
     </item>
     <item>
       <g:id>conditioner-rr-250ml</g:id>
@@ -316,10 +316,10 @@
       <g:product_type>KACH &gt; Balsamuri</g:product_type>
       <g:unit_pricing_measure>250ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
-      <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>DE</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>FR</g:country><g:price>0.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>RO</g:country><g:price>3.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>IT</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>DE</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>FR</g:country><g:price>12.00 EUR</g:price></g:shipping>
     </item>
     <item>
       <g:id>conditioner-rr-450ml</g:id>
@@ -336,10 +336,10 @@
       <g:product_type>KACH &gt; Balsamuri</g:product_type>
       <g:unit_pricing_measure>450ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
-      <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>DE</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>FR</g:country><g:price>0.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>RO</g:country><g:price>3.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>IT</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>DE</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>FR</g:country><g:price>12.00 EUR</g:price></g:shipping>
     </item>
     <item>
       <g:id>aminoplasma-ap</g:id>
@@ -356,9 +356,9 @@
       <g:unit_pricing_measure>200ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
       <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>DE</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>FR</g:country><g:price>0.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>IT</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>DE</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>FR</g:country><g:price>12.00 EUR</g:price></g:shipping>
     </item>
     <item>
       <g:id>siero-ssn-100ml</g:id>
@@ -376,9 +376,9 @@
       <g:unit_pricing_measure>100ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
       <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>DE</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>FR</g:country><g:price>0.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>IT</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>DE</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>FR</g:country><g:price>12.00 EUR</g:price></g:shipping>
     </item>
     <item>
       <g:id>siero-ssn-250ml</g:id>
@@ -414,10 +414,10 @@
       <g:product_type>KACH &gt; Îngrijire și styling</g:product_type>
       <g:unit_pricing_measure>100ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
-      <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>DE</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>FR</g:country><g:price>0.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>RO</g:country><g:price>3.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>IT</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>DE</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>FR</g:country><g:price>12.00 EUR</g:price></g:shipping>
     </item>
     <item>
       <g:id>bhx-botohair</g:id>
@@ -433,10 +433,10 @@
       <g:product_type>KACH &gt; Tratamente BHX</g:product_type>
       <g:unit_pricing_measure>20ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
-      <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>DE</g:country><g:price>0.00 EUR</g:price></g:shipping>
-      <g:shipping><g:country>FR</g:country><g:price>0.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>RO</g:country><g:price>3.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>IT</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>DE</g:country><g:price>12.00 EUR</g:price></g:shipping>
+      <g:shipping><g:country>FR</g:country><g:price>12.00 EUR</g:price></g:shipping>
     </item>
   </channel>
 </rss>

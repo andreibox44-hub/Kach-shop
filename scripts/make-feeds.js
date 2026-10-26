@@ -9,7 +9,6 @@ const vm = require("vm");
 
 const ROOT = path.join(__dirname, "..");
 const SITE = "https://kachhair.com";
-const COUNTRIES = ["RO", "IT", "DE", "FR"]; // free delivery to these countries
 const LANGS = ["en", "it", "de", "fr", "ro"];
 
 function load(lang) {
@@ -25,14 +24,15 @@ function load(lang) {
   vm.createContext(ctx);
   if (lang !== "en") vm.runInContext(fs.readFileSync(path.join(ROOT, "js/lang", lang + ".js"), "utf8"), ctx);
   vm.runInContext(fs.readFileSync(path.join(ROOT, "js/products.js"), "utf8"), ctx);
-  return { products: ctx.window.KACH_PRODUCTS, cats: ctx.window.KACH_CATEGORIES, I: ctx.window.KACH_I18N };
+  vm.runInContext(fs.readFileSync(path.join(ROOT, "js/shipping.js"), "utf8"), ctx);
+  return { products: ctx.window.KACH_PRODUCTS, cats: ctx.window.KACH_CATEGORIES, I: ctx.window.KACH_I18N, SHIP: ctx.window.KACH_SHIPPING };
 }
 
 const sizeSlug = (s) => (String(s) === "Набор" ? "kit" : String(s).replace(/\D/g, "") + "ml");
 const xml = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&apos;" }[c]));
 
 function feed(lang) {
-  const { products, cats, I } = load(lang);
+  const { products, cats, I, SHIP } = load(lang);
   const items = [];
   for (const p of products) {
     const multi = p.variants.length > 1;
@@ -62,8 +62,11 @@ function feed(lang) {
         ["g:unit_pricing_base_measure", ml ? "100ml" : ""]
       ];
       const lines = f.filter(([, val]) => val !== "").map(([k, val]) => `      <${k}>${xml(val)}</${k}>`);
-      for (const c of COUNTRIES)
-        lines.push(`      <g:shipping><g:country>${c}</g:country><g:price>0.00 EUR</g:price></g:shipping>`);
+      // Cheapest delivery of one item to each country (js/shipping.js)
+      for (const c of Object.keys(SHIP.RATES)) {
+        const ship = Math.min(SHIP.cost(c, "courier", v.price), SHIP.cost(c, "post", v.price));
+        lines.push(`      <g:shipping><g:country>${c}</g:country><g:price>${ship.toFixed(2)} EUR</g:price></g:shipping>`);
+      }
       items.push(`    <item>\n${lines.join("\n")}\n    </item>`);
     }
   }

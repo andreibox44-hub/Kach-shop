@@ -49,6 +49,7 @@ function newOrderText(o: Order) {
     const sum = i.price ? " — " + money(i.price * i.qty) : "";
     return `• ${esc(i.name)}, ${esc(i.size)} × ${i.qty}${sum}`;
   });
+  if (c.shipping != null && c.shipping !== "") items.push(`• Доставка — ${Number(c.shipping) ? money(Number(c.shipping)) : "бесплатно"}`);
   const city = [c.zip, c.city].filter(Boolean).join(" ") + (c.region ? ` (${c.region})` : "");
   const addr = [c.address, c.address2, city.trim(), COUNTRY[c.country] || c.country].filter(Boolean).join(", ");
   const paid = o.payment_status === "paid";

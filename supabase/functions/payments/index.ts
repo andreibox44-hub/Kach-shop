@@ -42,7 +42,24 @@ const showSize = (s: string) => (s === "Набор" ? "Kit" : String(s).replace(
 // Языки сайта → язык страницы оплаты Stripe
 const LOCALES = ["en", "de", "it", "ro", "fr"];
 
-// Позиции заказа с ценами из базы; сумма в центах
+// Доставка, евро: цена по стране и способу, и сумма товаров, от которой доставка бесплатна.
+// Та же таблица в js/shipping.js (сайт и фиды Google) — меняйте вместе.
+const SHIPPING: Record<string, { courier: number; post: number; freeFrom: number }> = {
+  RO: { courier: 4, post: 3, freeFrom: 40 },
+  IT: { courier: 12, post: 12, freeFrom: 80 },
+  DE: { courier: 12, post: 12, freeFrom: 80 },
+  FR: { courier: 12, post: 12, freeFrom: 80 }
+};
+const DELIVERY_NAME: Record<string, string> = { en: "Delivery", de: "Versand", it: "Spedizione", ro: "Livrare", fr: "Livraison" };
+
+function shippingCents(order: Order, itemsCents: number) {
+  const r = SHIPPING[order.customer?.country || ""];
+  if (!r) throw new Fail("no delivery to " + (order.customer?.country || "?"));
+  if (itemsCents >= r.freeFrom * 100) return 0;
+  return Math.round((order.customer?.delivery === "post" ? r.post : r.courier) * 100);
+}
+
+// Позиции заказа с ценами из базы; сумма в центах (товары + доставка)
 async function priceOrder(order: Order) {
   const { data, error } = await db.from("product_prices").select("product_id, size, price");
   if (error) throw error;
@@ -54,7 +71,9 @@ async function priceOrder(order: Order) {
     return { name: `${i.name}, ${showSize(i.size)}`, cents, qty };
   });
   if (!lines.length) throw new Fail("empty order");
-  return { lines, total: lines.reduce((s, l) => s + l.cents * l.qty, 0) };
+  const items = lines.reduce((s, l) => s + l.cents * l.qty, 0);
+  const shipping = shippingCents(order, items);
+  return { lines, items, shipping, total: items + shipping };
 }
 
 async function markPaid(token: string, provider: string, ref: string, cents: number, currency: string) {
@@ -89,7 +108,7 @@ async function stripe(path: string, params?: Record<string, string>) {
 async function stripeSession(token: string, lang?: string) {
   const order = await loadOrder(token);
   if (order.payment_status === "paid") throw new Fail("already paid", 409);
-  const { lines } = await priceOrder(order);
+  const { lines, shipping } = await priceOrder(order);
   const p: Record<string, string> = {
     mode: "payment",
     client_reference_id: token,
@@ -108,6 +127,13 @@ async function stripeSession(token: string, lang?: string) {
     p[`line_items[${i}][price_data][unit_amount]`] = String(l.cents);
     p[`line_items[${i}][price_data][product_data][name]`] = l.name;
   });
+  if (shipping > 0) {
+    const i = lines.length;
+    p[`line_items[${i}][quantity]`] = "1";
+    p[`line_items[${i}][price_data][currency]`] = CURRENCY;
+    p[`line_items[${i}][price_data][unit_amount]`] = String(shipping);
+    p[`line_items[${i}][price_data][product_data][name]`] = DELIVERY_NAME[lang && LOCALES.includes(lang) ? lang : "en"];
+  }
   const s = await stripe("checkout/sessions", p);
   return { url: s.url };
 }
@@ -179,7 +205,7 @@ const eur = (cents: number) => (cents / 100).toFixed(2);
 async function paypalCreate(token: string) {
   const order = await loadOrder(token);
   if (order.payment_status === "paid") throw new Fail("already paid", 409);
-  const { lines, total } = await priceOrder(order);
+  const { lines, items, shipping, total } = await priceOrder(order);
   const cur = CURRENCY.toUpperCase();
   const pp = await paypal("/v2/checkout/orders", {
     intent: "CAPTURE",
@@ -188,7 +214,7 @@ async function paypalCreate(token: string) {
         reference_id: token,
         custom_id: order.number,
         description: "KACH " + order.number,
-        amount: { currency_code: cur, value: eur(total), breakdown: { item_total: { currency_code: cur, value: eur(total) } } },
+        amount: { currency_code: cur, value: eur(total), breakdown: { item_total: { currency_code: cur, value: eur(items) }, shipping: { currency_code: cur, value: eur(shipping) } } },
         items: lines.map((l) => ({ name: l.name.slice(0, 127), quantity: String(l.qty), unit_amount: { currency_code: cur, value: eur(l.cents) } }))
       }
     ],

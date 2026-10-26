@@ -24,6 +24,7 @@
 | Цвета сайта | `css/style.css`, в начале файла |
 | Тексты на английском (основной язык) | `*.html`, `js/*.js`, `js/products.js` |
 | Фиды товаров для Google Покупок (Merchant Center) | `feeds/google-*.xml`, создаются командой `node scripts/make-feeds.js` — запускайте после любой смены цен или товаров |
+| Цены доставки и порог бесплатной доставки | `js/shipping.js` и таблица `SHIPPING` в `supabase/functions/payments/index.ts` (менять вместе), текст в `info.html` (`info.del5`) и `js/lang/*.js`, затем `node scripts/make-feeds.js` |
 | Переводы: немецкий, итальянский, румынский, французский | `js/lang/de.js`, `it.js`, `ro.js`, `fr.js` (подключает `js/i18n.js`) |
 
 ## Важно про заказы

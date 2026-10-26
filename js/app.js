@@ -56,6 +56,14 @@
   const poster = (p) => `images/posters/${p.id}.jpg`;
   const pageName = () => (document.querySelector("[data-page]") || document.body).dataset.page;
 
+  const SHIP = window.KACH_SHIPPING;
+  // "Free delivery from 40 € in Romania, from 80 € to Italy, Germany and France"
+  const freeDeliveryNote = () =>
+    t("Free delivery from {ro} in Romania, from {eu} to Italy, Germany and France", {
+      ro: money(SHIP.RATES.RO.freeFrom).replace(".00", ""),
+      eu: money(SHIP.RATES.IT.freeFrom).replace(".00", "")
+    });
+
   // Size for addresses: "250 мл" -> "250ml", "Набор" -> "kit"
   const sizeSlug = (s) => (String(s) === "Набор" ? "kit" : String(s).replace(/\D/g, "") + "ml");
 
@@ -66,12 +74,15 @@
     const lang = I18N.lang;
     const url = (v) =>
       `${SITE}/product.html?id=${p.id}` + (p.variants.length > 1 ? `&size=${sizeSlug(v.size)}` : "") + (lang !== "en" ? `&lang=${lang}` : "");
-    const countries = ["RO", "IT", "DE", "FR"];
-    const shipping = {
-      "@type": "OfferShippingDetails",
-      shippingRate: { "@type": "MonetaryAmount", value: 0, currency: "EUR" },
-      shippingDestination: countries.map((c) => ({ "@type": "DefinedRegion", addressCountry: c }))
-    };
+    const RATES = SHIP.RATES;
+    const countries = Object.keys(RATES);
+    // Cheapest delivery of one item to each country
+    const shipping = (price) =>
+      countries.map((c) => ({
+        "@type": "OfferShippingDetails",
+        shippingRate: { "@type": "MonetaryAmount", value: Math.min(SHIP.cost(c, "courier", price), SHIP.cost(c, "post", price)), currency: "EUR" },
+        shippingDestination: { "@type": "DefinedRegion", addressCountry: c }
+      }));
     const returns = {
       "@type": "MerchantReturnPolicy",
       applicableCountry: countries,
@@ -92,7 +103,7 @@
         availability: p.soldOut ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
         itemCondition: "https://schema.org/NewCondition",
         seller: { "@type": "Organization", name: "KACH Hair Organic Solutions" },
-        shippingDetails: shipping,
+        shippingDetails: shipping(v.price),
         hasMerchantReturnPolicy: returns
       }));
     const data = {
@@ -544,7 +555,7 @@
             <h1>${esc(p.name)}</h1>
             <p class="product-sub">${esc(p.subtitle)}</p>
             <p class="price big" id="price">${priceOf(size)}</p>
-            ${p.soldOut ? "" : `<p class="vat-note">${t("Price incl. VAT")} · ${t("Free delivery")}</p>`}
+            ${p.soldOut ? "" : `<p class="vat-note">${t("Price incl. VAT")} · <a href="info.html#delivery">${freeDeliveryNote()}</a></p>`}
             ${
               p.variants.length > 1
                 ? `<div class="sizes" role="radiogroup" aria-label="${t("Size")}">${p.variants
@@ -666,7 +677,16 @@
         root.innerHTML = `<div class="empty"><p>${t("There are no products in your cart.")}</p><a class="btn" href="catalog.html">${t("Go to catalog")}</a></div>`;
         return;
       }
-      $("#order-summary").innerHTML = `
+      const form = $("#checkout-form");
+      // Delivery cost for the chosen country and method
+      const shipNow = () => {
+        const country = ($("#country") || {}).value;
+        const method = (form.querySelector('input[name="delivery"]:checked') || {}).value || "courier";
+        return SHIP.cost(country, method, total);
+      };
+      const drawSummary = () => {
+        const ship = shipNow();
+        $("#order-summary").innerHTML = `
         <h3>${t("Your order")}</h3>
         ${items
           .map(
@@ -676,11 +696,13 @@
           .join("")}
         ${
           allPriced
-            ? `<div class="row total"><span>${t("To pay")}</span><span>${money(total)}</span></div><p class="vat-note">${t("Prices include VAT")}</p>`
+            ? `<div class="row"><span>${t("Delivery")}</span><span>${ship == null ? "—" : ship === 0 ? t("Free") : money(ship)}</span></div>
+               <div class="row total"><span>${t("To pay")}</span><span>${money(total + (ship || 0))}</span></div><p class="vat-note">${t("Prices include VAT")}</p>
+               <p class="muted small"><a href="info.html#delivery">${freeDeliveryNote()}</a></p>`
             : `<p class="muted small">${t("The manager will tell you the cost of the order and delivery.")}</p>`
         }`;
-
-      const form = $("#checkout-form");
+      };
+      form.addEventListener("change", drawSummary);
       const auth = AUTH();
       // Страна и адрес в формате выбранной страны
       const ADDR = window.KACH_ADDR;
@@ -695,6 +717,7 @@
         draft = JSON.parse(localStorage.getItem(DRAFT_KEY) || "{}") || {};
       } catch (e) {}
       bindAddr(draft);
+      drawSummary();
       ["name", "phone", "email", "comment"].forEach((k) => {
         const el = $("#" + k);
         if (el && draft[k]) el.value = draft[k];
@@ -703,6 +726,7 @@
         const el = draft[k] && form.querySelector(`input[name="${k}"][value="${draft[k]}"]`);
         if (el && !el.closest("[hidden]")) el.checked = true;
       });
+      drawSummary();
       const saveDraft = () => {
         try {
           const d = Object.fromEntries(new FormData(form));
@@ -733,6 +757,7 @@
             const fresh = $("#country").cloneNode(false);
             $("#country").replaceWith(fresh);
             bindAddr(addr);
+            drawSummary();
           }
         });
       }
@@ -762,6 +787,8 @@
         e.preventDefault();
         if (!form.reportValidity()) return;
         const data = Object.fromEntries(new FormData(form));
+        const ship = shipNow() || 0;
+        data.shipping = String(ship);
         const number = "K-" + Date.now().toString().slice(-6);
         const orderItems = items.map(({ product: p, variant: v, qty }) => ({ id: p.id, name: p.baseName || p.name, size: v.size, price: v.price, qty }));
         const submit = form.querySelector('[type="submit"]');
@@ -772,7 +799,7 @@
           submit.disabled = true;
           submit.textContent = t("Sending…");
           try {
-            await auth.saveOrder({ number, customer: data, items: orderItems, total: allPriced ? total : null, pay_token: payToken });
+            await auth.saveOrder({ number, customer: data, items: orderItems, total: allPriced ? total + ship : null, pay_token: payToken });
           } catch (err) {
             console.error(err);
             submit.disabled = false;
