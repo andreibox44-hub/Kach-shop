@@ -57,6 +57,11 @@
   const pageName = () => (document.querySelector("[data-page]") || document.body).dataset.page;
 
   const SHIP = window.KACH_SHIPPING;
+  // Romania: prices include 21% VAT; other countries: without VAT
+  const vatNote = (many) =>
+    window.KACH_PRICE_COUNTRY === "RO"
+      ? t(many ? "Prices include VAT" : "Price incl. VAT")
+      : t(many ? "Prices excl. VAT (Romania: +21% VAT)" : "Price excl. VAT (Romania: +21% VAT)");
   // "Free delivery from 40 € in Romania, from 80 € to Italy, Germany and France"
   const freeDeliveryNote = () =>
     t("Free delivery from {ro} in Romania, from {eu} to Italy, Germany and France", {
@@ -73,7 +78,7 @@
     const SITE = "https://kachhair.com";
     const lang = I18N.lang;
     const url = (v) =>
-      `${SITE}/product.html?id=${p.id}` + (p.variants.length > 1 ? `&size=${sizeSlug(v.size)}` : "") + (lang !== "en" ? `&lang=${lang}` : "");
+      `${SITE}/product.html?id=${p.id}` + (p.variants.length > 1 ? `&size=${sizeSlug(v.size)}` : "") + (lang !== "en" ? `&lang=${lang}` : "") + (window.KACH_PRICE_COUNTRY === "RO" ? "&country=RO" : "");
     const RATES = SHIP.RATES;
     const countries = Object.keys(RATES);
     // Cheapest delivery of one item to each country
@@ -555,7 +560,7 @@
             <h1>${esc(p.name)}</h1>
             <p class="product-sub">${esc(p.subtitle)}</p>
             <p class="price big" id="price">${priceOf(size)}</p>
-            ${p.soldOut ? "" : `<p class="vat-note">${t("Price incl. VAT")} · <a href="info.html#delivery">${freeDeliveryNote()}</a></p>`}
+            ${p.soldOut ? "" : `<p class="vat-note">${vatNote(false)} · <a href="info.html#delivery">${freeDeliveryNote()}</a></p>`}
             ${
               p.variants.length > 1
                 ? `<div class="sizes" role="radiogroup" aria-label="${t("Size")}">${p.variants
@@ -651,7 +656,7 @@
               <h3>${t("Total")}</h3>
               ${
                 allPriced
-                  ? `<div class="row total"><span>${t("To pay")}</span><span>${money(total)}</span></div><p class="vat-note">${t("Prices include VAT")}</p>`
+                  ? `<div class="row total"><span>${t("To pay")}</span><span>${money(total)}</span></div><p class="vat-note">${vatNote(true)}</p>`
                   : `<p class="muted small">${t("The manager will tell you the exact cost of the order and delivery after checkout.")}</p>`
               }
               <a href="checkout.html" class="btn btn-block">${t("Checkout")}</a>
@@ -709,7 +714,7 @@
         ${
           allPriced
             ? `<div class="row"><span>${t("Delivery")}</span><span>${ship == null ? "—" : ship === 0 ? t("Free") : money(ship)}</span></div>
-               <div class="row total"><span>${t("To pay")}</span><span>${money(total + (ship || 0))}</span></div><p class="vat-note">${t("Prices include VAT")}</p>
+               <div class="row total"><span>${t("To pay")}</span><span>${money(total + (ship || 0))}</span></div><p class="vat-note">${vatNote(true)}</p>
                <p class="muted small"><a href="info.html#delivery">${freeDeliveryNote()}</a></p>`
             : `<p class="muted small">${t("The manager will tell you the cost of the order and delivery.")}</p>`
         }`;

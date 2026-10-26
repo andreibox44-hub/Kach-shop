@@ -12,7 +12,8 @@ const SITE = "https://kachhair.com";
 const LANGS = ["en", "it", "de", "fr", "ro"];
 
 function load(lang) {
-  const ctx = { window: {}, console };
+  // The Romanian feed uses prices for Romania (+21% VAT), as the page opened with &country=RO shows them
+  const ctx = { window: {}, console, URLSearchParams, location: { search: lang === "ro" ? "?country=RO" : "" } };
   const dict = {};
   ctx.window.KACH_I18N = {
     lang,
@@ -41,7 +42,7 @@ function feed(lang) {
       const slug = sizeSlug(v.size);
       const ml = slug === "kit" ? 0 : parseInt(slug, 10);
       const link =
-        `${SITE}/product.html?id=${p.id}` + (multi ? `&size=${slug}` : "") + (lang !== "en" ? `&lang=${lang}` : "");
+        `${SITE}/product.html?id=${p.id}` + (multi ? `&size=${slug}` : "") + (lang !== "en" ? `&lang=${lang}` : "") + (lang === "ro" ? "&country=RO" : "");
       const sizeText = slug === "kit" ? "" : " " + I.size(v.size);
       const title = `KACH ${p.name}${sizeText} – ${p.subtitle}`.slice(0, 150);
       const desc = [p.short].concat(p.description, p.benefits.length ? [p.benefits.join(", ") + "."] : []).join(" ").slice(0, 5000);

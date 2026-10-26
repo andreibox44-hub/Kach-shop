@@ -260,7 +260,7 @@ window.KACH_CATEGORIES = {
 
 // Prices above are for Italy, Germany and France. For Romania 21% VAT is added on top
 // (the same rule is in supabase/functions/payments/index.ts, RO_VAT).
-// Delivery country: ?country=RO, else the one chosen at checkout, else by site language (it/de/fr, otherwise RO).
+// Delivery country: ?country=RO, else the one chosen at checkout; until then prices are shown without VAT.
 (function () {
   const ok = ["RO", "IT", "DE", "FR"];
   let c = "";
@@ -269,11 +269,7 @@ window.KACH_CATEGORIES = {
     if (ok.includes(c)) localStorage.setItem("kach-country", c);
     else c = localStorage.getItem("kach-country") || "";
   } catch (e) {}
-  if (!ok.includes(c)) {
-    const lang = window.KACH_I18N && window.KACH_I18N.lang;
-    c = { it: "IT", de: "DE", fr: "FR" }[lang] || "RO";
-  }
-  window.KACH_PRICE_COUNTRY = c;
+  window.KACH_PRICE_COUNTRY = ok.includes(c) ? c : "";
   if (c === "RO")
     window.KACH_PRODUCTS.forEach((p) =>
       p.variants.forEach((v) => {
