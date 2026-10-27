@@ -57,11 +57,11 @@
   const pageName = () => (document.querySelector("[data-page]") || document.body).dataset.page;
 
   const SHIP = window.KACH_SHIPPING;
-  // Romania: prices include 21% VAT; other countries: without VAT
+  // Romania: prices with Romanian 21% VAT; other countries: prices include their VAT
   const vatNote = (many) =>
     window.KACH_PRICE_COUNTRY === "RO"
       ? t(many ? "Prices include VAT" : "Price incl. VAT")
-      : t(many ? "Prices excl. VAT (Romania: +21% VAT)" : "Price excl. VAT (Romania: +21% VAT)");
+      : t(many ? "Prices incl. VAT (Italy, Germany, France)" : "Price incl. VAT (Italy, Germany, France)");
   // "Free delivery from 40 € in Romania, from 80 € to Italy, Germany and France"
   const freeDeliveryNote = () =>
     t("Free delivery from {ro} in Romania, from {eu} to Italy, Germany and France", {
