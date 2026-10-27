@@ -14,7 +14,7 @@
       <g:price>422.29 EUR</g:price>
       <g:brand>KACH</g:brand>
       <g:condition>new</g:condition>
-      <g:identifier_exists>no</g:identifier_exists>
+      <g:gtin>7508304272398</g:gtin>
       <g:product_type>KACH &gt; Tratamente BHX</g:product_type>
       <g:shipping><g:country>RO</g:country><g:price>0.00 EUR</g:price></g:shipping>
       <g:shipping><g:country>IT</g:country><g:price>0.00 EUR</g:price></g:shipping>
@@ -32,7 +32,7 @@
       <g:price>27.83 EUR</g:price>
       <g:brand>KACH</g:brand>
       <g:condition>new</g:condition>
-      <g:identifier_exists>no</g:identifier_exists>
+      <g:gtin>7508304272930</g:gtin>
       <g:product_type>KACH &gt; Șampoane</g:product_type>
       <g:unit_pricing_measure>250ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
@@ -72,7 +72,7 @@
       <g:price>27.83 EUR</g:price>
       <g:brand>KACH</g:brand>
       <g:condition>new</g:condition>
-      <g:identifier_exists>no</g:identifier_exists>
+      <g:gtin>7508304272961</g:gtin>
       <g:product_type>KACH &gt; Șampoane</g:product_type>
       <g:unit_pricing_measure>250ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
@@ -92,7 +92,7 @@
       <g:price>38.72 EUR</g:price>
       <g:brand>KACH</g:brand>
       <g:condition>new</g:condition>
-      <g:identifier_exists>no</g:identifier_exists>
+      <g:gtin>7508304272954</g:gtin>
       <g:product_type>KACH &gt; Șampoane</g:product_type>
       <g:unit_pricing_measure>450ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
@@ -112,7 +112,7 @@
       <g:price>35.09 EUR</g:price>
       <g:brand>KACH</g:brand>
       <g:condition>new</g:condition>
-      <g:identifier_exists>no</g:identifier_exists>
+      <g:gtin>7508304272817</g:gtin>
       <g:product_type>KACH &gt; Șampoane</g:product_type>
       <g:unit_pricing_measure>80ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
@@ -132,7 +132,7 @@
       <g:price>180.29 EUR</g:price>
       <g:brand>KACH</g:brand>
       <g:condition>new</g:condition>
-      <g:identifier_exists>no</g:identifier_exists>
+      <g:gtin>7508304272800</g:gtin>
       <g:product_type>KACH &gt; Șampoane</g:product_type>
       <g:unit_pricing_measure>400ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
@@ -172,7 +172,7 @@
       <g:price>134.31 EUR</g:price>
       <g:brand>KACH</g:brand>
       <g:condition>new</g:condition>
-      <g:identifier_exists>no</g:identifier_exists>
+      <g:gtin>7508304272824</g:gtin>
       <g:product_type>KACH &gt; Șampoane</g:product_type>
       <g:unit_pricing_measure>400ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
@@ -232,7 +232,7 @@
       <g:price>47.19 EUR</g:price>
       <g:brand>KACH</g:brand>
       <g:condition>new</g:condition>
-      <g:identifier_exists>no</g:identifier_exists>
+      <g:gtin>7508304272862</g:gtin>
       <g:product_type>KACH &gt; Șampoane</g:product_type>
       <g:unit_pricing_measure>450ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
@@ -252,7 +252,7 @@
       <g:price>83.49 EUR</g:price>
       <g:brand>KACH</g:brand>
       <g:condition>new</g:condition>
-      <g:identifier_exists>no</g:identifier_exists>
+      <g:gtin>7508304272855</g:gtin>
       <g:product_type>KACH &gt; Șampoane</g:product_type>
       <g:unit_pricing_measure>1000ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
@@ -272,7 +272,7 @@
       <g:price>27.83 EUR</g:price>
       <g:brand>KACH</g:brand>
       <g:condition>new</g:condition>
-      <g:identifier_exists>no</g:identifier_exists>
+      <g:gtin>7508304272992</g:gtin>
       <g:product_type>KACH &gt; Balsamuri</g:product_type>
       <g:unit_pricing_measure>250ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
@@ -312,7 +312,7 @@
       <g:price>27.83 EUR</g:price>
       <g:brand>KACH</g:brand>
       <g:condition>new</g:condition>
-      <g:identifier_exists>no</g:identifier_exists>
+      <g:gtin>7508304273029</g:gtin>
       <g:product_type>KACH &gt; Balsamuri</g:product_type>
       <g:unit_pricing_measure>250ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
@@ -332,7 +332,7 @@
       <g:price>38.72 EUR</g:price>
       <g:brand>KACH</g:brand>
       <g:condition>new</g:condition>
-      <g:identifier_exists>no</g:identifier_exists>
+      <g:gtin>7508304273012</g:gtin>
       <g:product_type>KACH &gt; Balsamuri</g:product_type>
       <g:unit_pricing_measure>450ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
@@ -351,7 +351,7 @@
       <g:price>83.49 EUR</g:price>
       <g:brand>KACH</g:brand>
       <g:condition>new</g:condition>
-      <g:identifier_exists>no</g:identifier_exists>
+      <g:gtin>7508304273043</g:gtin>
       <g:product_type>KACH &gt; Îngrijire și styling</g:product_type>
       <g:unit_pricing_measure>200ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
@@ -371,7 +371,7 @@
       <g:price>59.29 EUR</g:price>
       <g:brand>KACH</g:brand>
       <g:condition>new</g:condition>
-      <g:identifier_exists>no</g:identifier_exists>
+      <g:gtin>7508304273067</g:gtin>
       <g:product_type>KACH &gt; Îngrijire și styling</g:product_type>
       <g:unit_pricing_measure>100ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>
@@ -391,7 +391,7 @@
       <g:price>119.79 EUR</g:price>
       <g:brand>KACH</g:brand>
       <g:condition>new</g:condition>
-      <g:identifier_exists>no</g:identifier_exists>
+      <g:gtin>7508304273050</g:gtin>
       <g:product_type>KACH &gt; Îngrijire și styling</g:product_type>
       <g:unit_pricing_measure>250ml</g:unit_pricing_measure>
       <g:unit_pricing_base_measure>100ml</g:unit_pricing_base_measure>

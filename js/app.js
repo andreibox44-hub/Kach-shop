@@ -101,6 +101,7 @@
       .map((v) => ({
         "@type": "Offer",
         sku: p.variants.length > 1 ? `${p.id}-${sizeSlug(v.size)}` : p.id,
+        ...(v.gtin ? { gtin13: v.gtin } : {}),
         name: `${p.name} ${sizeLabel(v.size)}`,
         url: url(v),
         price: v.price.toFixed(2),

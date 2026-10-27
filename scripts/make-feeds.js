@@ -57,7 +57,8 @@ function feed(lang) {
         ["g:price", `${v.price.toFixed(2)} EUR`],
         ["g:brand", "KACH"],
         ["g:condition", "new"],
-        ["g:identifier_exists", "no"],
+        ["g:gtin", v.gtin || ""],
+        ["g:identifier_exists", v.gtin ? "" : "no"],
         ["g:product_type", `KACH > ${cats[p.category]}`],
         ["g:unit_pricing_measure", ml ? `${ml}ml` : ""],
         ["g:unit_pricing_base_measure", ml ? "100ml" : ""]
