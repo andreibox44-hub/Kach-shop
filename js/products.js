@@ -2,6 +2,7 @@
 // Translations of names and descriptions are in js/lang/*.js under "products".
 // Sizes stay as "250 мл" / "Набор": the payment table product_prices uses exactly these values.
 // On the site they are shown as "250 ml" / "Kit". To change a price, change it here and in product_prices.
+// Discount: oldPrice = the old price, shown crossed out in red next to the new price (green).
 window.KACH_PRODUCTS = [
   {
     id: "bhx-kit",
@@ -9,7 +10,7 @@ window.KACH_PRODUCTS = [
     subtitle: "Professional hair care kit",
     category: "pro",
     tag: "Kit",
-    variants: [{ size: "Набор", price: 349, gtin: "7508304272398" }],
+    variants: [{ size: "Набор", price: 299, oldPrice: 349, gtin: "7508304272398" }],
     ph: "",
     hair: "All hair types",
     formula: "Free from parabens, sulphates and formaldehyde",
@@ -274,6 +275,7 @@ window.KACH_CATEGORIES = {
     window.KACH_PRODUCTS.forEach((p) =>
       p.variants.forEach((v) => {
         if (typeof v.price === "number") v.price = Math.round(v.price * 121) / 100; // + 21% VAT
+        if (typeof v.oldPrice === "number") v.oldPrice = Math.round(v.oldPrice * 121) / 100;
       })
     );
 })();

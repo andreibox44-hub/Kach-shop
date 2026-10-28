@@ -116,6 +116,8 @@ img { max-width: 100%; display: block; }
 .card-footer { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
 .price { font-weight: 700; font-size: 16px; }
 .price.big { font-size: 26px; margin: 4px 0 16px; }
+.price .old-price { color: #c0392b; font-weight: 600; font-size: .85em; text-decoration: line-through; margin-right: 4px; }
+.price .new-price { color: #2e8b3d; }
 @media (max-width: 480px) { .card-body { padding: 12px; } .card-footer .btn { width: 100%; text-align: center; } }
 
 /* Каталог */

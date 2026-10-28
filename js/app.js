@@ -129,11 +129,17 @@
     document.head.appendChild(el);
   }
 
+  // Price of one size; with a discount the old price is crossed out (red) and the new one is green
+  const priceHtml = (v) =>
+    typeof v.oldPrice === "number" && v.oldPrice > v.price
+      ? `<s class="old-price">${money(v.oldPrice)}</s> <span class="new-price">${money(v.price)}</span>`
+      : money(v.price);
+
   function priceLabel(p) {
-    const prices = p.variants.map((v) => v.price).filter((x) => typeof x === "number");
-    if (!prices.length) return t("Price on request");
-    const min = Math.min(...prices);
-    return (prices.length < p.variants.length || new Set(prices).size > 1 ? t("from") + " " : "") + money(min);
+    const priced = p.variants.filter((v) => typeof v.price === "number");
+    if (!priced.length) return t("Price on request");
+    const cheapest = priced.reduce((a, b) => (b.price < a.price ? b : a));
+    return (priced.length < p.variants.length || new Set(priced.map((v) => v.price)).size > 1 ? t("from") + " " : "") + priceHtml(cheapest);
   }
 
   // ---------- Корзина (хранится в браузере) ----------
@@ -583,7 +589,7 @@
       const priceOf = (s) => {
         if (p.soldOut) return t("Out of stock");
         const v = p.variants.find((x) => x.size === s);
-        return typeof v.price === "number" ? money(v.price) : t("Price on request");
+        return typeof v.price === "number" ? priceHtml(v) : t("Price on request");
       };
       root.innerHTML = `
         <nav class="breadcrumbs"><a href="catalog.html">${t("Catalog")}</a> / <a href="catalog.html?cat=${p.category}">${esc(CATS[p.category])}</a> / ${esc(p.name)}</nav>
@@ -643,7 +649,7 @@
             x.classList.toggle("active", x === b);
             x.setAttribute("aria-checked", x === b);
           });
-          $("#price").textContent = priceOf(size);
+          $("#price").innerHTML = priceOf(size);
         })
       );
       const qty = $("#qty");

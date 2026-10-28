@@ -54,7 +54,9 @@ function feed(lang) {
         ["g:link", link],
         ["g:image_link", `${SITE}/images/products/${p.id}.jpg`],
         ["g:availability", p.soldOut ? "out_of_stock" : "in_stock"],
-        ["g:price", `${v.price.toFixed(2)} EUR`],
+        // Discount: Google shows the old price crossed out and the sale price
+        ["g:price", `${(v.oldPrice > v.price ? v.oldPrice : v.price).toFixed(2)} EUR`],
+        ["g:sale_price", v.oldPrice > v.price ? `${v.price.toFixed(2)} EUR` : ""],
         ["g:brand", "KACH"],
         ["g:condition", "new"],
         ["g:gtin", v.gtin || ""],
