@@ -460,3 +460,8 @@ select { font: inherit; }
 .footer-langs { display: flex; flex-wrap: wrap; gap: 6px 18px; padding-bottom: 14px; font-size: 13px; }
 .footer-langs a { color: #9aa197; text-decoration: none; }
 .footer-langs a:hover, .footer-langs a[aria-current] { color: #fff; }
+
+/* Видео вместо фото на главной */
+.brand-video { background: #000; aspect-ratio: 688 / 784; box-shadow: var(--shadow); }
+.brand-video video { display: block; width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 960px) { .brand-video { aspect-ratio: 848 / 560; max-width: 640px; } }
