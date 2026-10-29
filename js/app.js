@@ -580,7 +580,7 @@
         root.innerHTML = `<div class="empty"><h1>${t("Product not found")}</h1><p><a class="btn" href="catalog.html">${t("Go to catalog")}</a></p></div>`;
         return;
       }
-      document.title = `${p.name} — KACH`;
+      document.title = `KACH ${p.name} — KACH Hair Organic Solutions`;
       // ?size=250ml opens the page with that size selected (links from Google Shopping)
       const wanted = new URLSearchParams(location.search).get("size");
       const pick = p.variants.find((v) => sizeSlug(v.size) === wanted);
